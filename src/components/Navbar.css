@@ -1,0 +1,33 @@
+
+
+  /* Navbar.css */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color:teal;
+  color: #fff;
+  height: 70px;
+}
+
+.navbar-brand .heading {
+  font-size: 280%; /* Adjust the size as needed */
+  color: #f1c40f; /* Adjust the color as needed */
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.nav-link:hover {
+  color: #022019; /* Optional hover effect */
+}

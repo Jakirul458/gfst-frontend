@@ -1,0 +1,33 @@
+/* Home.css */
+.container {
+    padding: 20px;
+    background-color: #bfc2c5;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(3, 0, 0, 0.1);
+  }
+  
+  .header {
+    color: #5a30e1;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .section {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    /* background-color: #b7adad; */
+    box-shadow: 0 2px 4px rgba(25, 187, 41, 0.1);
+  }
+  
+  .section-title {
+    font-weight: bold;
+    color: #080000;
+  }
+  
+  .section-content {
+    color: #f00e0e;
+  }
+  
