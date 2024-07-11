@@ -236,7 +236,7 @@ function AllAccounts() {
 
   return (
     <>
-      <h1 className="mb-4">All Savings Accounts</h1>
+      <h1 className="mb-4">List of Savings Accounts</h1>
       <div id="accounts-table">
         <table className="table table-bordered table-hover">
           <thead className="thead-dark">
