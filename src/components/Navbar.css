@@ -31,3 +31,19 @@
 .nav-link:hover {
   color: #022019; /* Optional hover effect */
 }
+
+.logout-button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.logout-button:hover {
+  text-decoration: underline;
+}
