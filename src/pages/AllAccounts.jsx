@@ -199,7 +199,7 @@ export default AllAccounts;
 
 
 
-
+// All accounts
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 // import './AllAccounts.css';
