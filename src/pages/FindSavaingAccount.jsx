@@ -233,7 +233,6 @@ const FindSavingAccount = () => {
 
 export default FindSavingAccount;
 */
-
 import React, { useState } from 'react';
 import './FindSavingAccount.css';
 
@@ -284,11 +283,11 @@ const FindSavingAccount = () => {
       {accountInfo && (
         <div className="account-info">
           <h2>Account Information</h2>
-          <p><strong>Account No:</strong> {accountInfo.account}</p>
+          <p><strong>Account :</strong> {accountInfo.account}</p>
           <p><strong>Name:</strong> {accountInfo.name}</p>
           <p><strong>Email:</strong> {accountInfo.email}</p>
-          <p><strong>Mobile No:</strong> {accountInfo.mobile}</p>
-          <p><strong>Aadhar No:</strong> {accountInfo.aadhar}</p>
+          <p><strong>Mobile :</strong> {accountInfo.mobile}</p>
+          <p><strong>Aadhar :</strong> {accountInfo.aadhar}</p>
           <p><strong>Address:</strong> {accountInfo.address}</p>
           <p><strong>Account Balance:</strong> ${accountInfo.balance}</p>
         </div>
@@ -298,3 +297,4 @@ const FindSavingAccount = () => {
 };
 
 export default FindSavingAccount;
+

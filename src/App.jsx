@@ -184,9 +184,8 @@ export default App
 
 // export default App;
 
-
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import SideBar from './components/SideBar';
 import './App.css';
@@ -214,7 +213,7 @@ function App() {
 
   if (isAuthenticated) {
     return (
-      <div className="main-content">
+      <div className="authenticated-container">
         <Navbar handleLogout={handleLogout} />
         <SideBar />
       </div>
@@ -225,10 +224,10 @@ function App() {
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
           <div>
-            <label>Username</label>
+            <label>User Name</label>
             <input
               type="text"
-              placeholder="Enter Username"
+              placeholder="Enter User Name"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -252,7 +251,6 @@ function App() {
 }
 
 export default App;
-
 
 
 
