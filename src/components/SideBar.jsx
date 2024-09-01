@@ -23,6 +23,7 @@ import Dashboard from '../pages/Dashboard';
 import About from '../pages/About';
 import Logout from '../pages/Logout';
 import Login from '../pages/Login';
+import Contact from '../pages/Contact';
 import './SideBar.css';
 
 
@@ -98,6 +99,8 @@ function SideBar() {
                     <Route path="/about" element={<About />} />
                     <Route path="/logout" element={<Logout />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/contact" element={<Contact />} />
+
                     
                 </Routes>
             </div>

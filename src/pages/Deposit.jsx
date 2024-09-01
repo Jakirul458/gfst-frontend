@@ -301,6 +301,7 @@ const Deposit = () => {
   const [error, setError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
+  const [remarks, setRemarks] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -310,7 +311,7 @@ const Deposit = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ account, date, transactionid, deposit }),
+        body: JSON.stringify({ account, date, transactionid, deposit, remarks }),
       });
       const result = await response.json();
       if (result.success) {
@@ -320,6 +321,7 @@ const Deposit = () => {
         setDate('');
         setTransactionid('');
         setDeposit('');
+        setRemarks('');
         setError(null);
         setIsVerified(false);
         setAccountName('');
@@ -398,6 +400,16 @@ const Deposit = () => {
                 onChange={(e) => setDeposit(e.target.value)}
               />
             </div>
+
+            <div className="form-group">
+              <label>Remarks</label>
+              <input
+                type="text"
+                value={remarks}
+                onChange={(e) => setRemarks(e.target.value)}
+              />
+            </div>
+
             <button type="submit" className="submit-btn">Submit</button>
           </>
         )}

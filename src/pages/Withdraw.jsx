@@ -181,37 +181,39 @@ const Withdraw = () => {
   const [account, setAccount] = useState('');
   const [date, setDate] = useState('');
   const [transactionid, setTransactionid] = useState('');
-  const [withdraw, setWithdraw] = useState('');
+  const [Withdraw, setWithdraw] = useState('');
   const [error, setError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
+  const [remarks, setRemarks] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://127.0.0.1:3001/withdraw', {
+      const response = await fetch('http://127.0.0.1:3001/Withdraw', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ account, date, transactionid, withdraw }),
+        body: JSON.stringify({ account, date, transactionid, Withdraw, remarks }),
       });
       const result = await response.json();
       if (result.success) {
-        alert('Withdrawal successful!');
+        alert('Withdraw successful!');
         // Clear form fields after successful submission
         setAccount('');
         setDate('');
         setTransactionid('');
         setWithdraw('');
+        setRemarks('');
         setError(null);
         setIsVerified(false);
         setAccountName('');
       } else {
-        setError('An error occurred while making the withdrawal.');
+        setError('An error occurred while making the Withdraw.');
       }
     } catch (err) {
-      setError('An error occurred while making the withdrawal.');
+      setError('An error occurred while making the Withdraw.');
     }
   };
 
@@ -254,8 +256,8 @@ const Withdraw = () => {
 
         {isVerified && (
           <>
-            <p>Consumer Name: {accountName}</p> {/* Display the account name */}
-            
+            <p>Consumer Name {accountName}</p> {/* Display the account name */}
+
             <div className="form-group">
               <label>Date</label>
               <input
@@ -278,10 +280,20 @@ const Withdraw = () => {
               <label>Withdraw Amount</label>
               <input
                 type="number"
-                value={withdraw}
+                value={Withdraw}
                 onChange={(e) => setWithdraw(e.target.value)}
               />
             </div>
+
+            <div className="form-group">
+              <label>Remarks</label>
+              <input
+                type="text"
+                value={remarks}
+                onChange={(e) => setRemarks(e.target.value)}
+              />
+            </div>
+
             <button type="submit" className="submit-btn">Submit</button>
           </>
         )}

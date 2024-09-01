@@ -86,15 +86,26 @@ function MonthlySavingAudit() {
   }, []);
 
   const handlePrint = () => {
+    const printWindow = window.open('', '_blank');
     const printContents = document.getElementById('accounts-table').outerHTML;
-    const originalContents = document.body.innerHTML;
-
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalContents;
-
-    // Reload the page to restore the original content
-    window.location.reload();
+    printWindow.document.write(`
+      <html>
+      <head>
+        <title> List of all savings accounts transactions </title>
+        <style>
+          table { width: 100%; border-collapse: collapse; }
+          th, td { border: 1px solid black; padding: 8px; text-align: left; }
+          th { background-color: #f2f2f2; }
+        </style>
+      </head>
+      <body>
+        ${printContents}
+      </body>
+      </html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
+    printWindow.close();
   };
 
   return (

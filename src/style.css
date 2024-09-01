@@ -1,0 +1,169 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+}
+
+/* body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #eff9ff 0%, #dceefb 100%);
+    padding: 0 20px;
+    font-family: "Poppins", sans-serif;
+}  */
+
+/* .authenticated-container {
+    width: 100%;
+    height: 100%;
+} */
+
+@media (min-width: 500px) {
+    body {
+        padding: 0;
+    }
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #eff9ff 0%, #dceefb 100%);
+    padding: 0 20px;
+    font-family: "Poppins", sans-serif;
+}
+.card {
+    position: relative;
+  
+    z-index: 3;
+    padding: 40px 30px;
+    border-radius: 16px;
+    background: #ffffff;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    max-width: 380px;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: -60%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: #216ce7;
+    opacity: 0.2;
+    z-index: -1;
+}
+
+.background {
+    position: fixed;
+    top: -50vmin;
+    left: -50vmin;
+    width: 100vmin;
+    height: 100vmin;
+    border-radius: 50%;
+    background: #65c8ff;
+}
+
+.background::after {
+    content: "";
+    position: inherit;
+    right: -50vmin;
+    bottom: -55vmin;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    background: #143d81;
+    opacity: 0.8;
+}
+
+.card .logo {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #ffffff;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card > h2 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 60px 0 20px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.form {
+    margin: 0 0 30px;
+    display: grid;
+    gap: 16px;
+}
+
+.form :is(input, button) {
+    width: 100%;
+    height: 48px;
+    border-radius: 24px;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.form > input {
+    border: 1px solid #ddd;
+    padding: 0 20px;
+    color: #333333;
+    background: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+.form > input:focus {
+    border-color: #226ce7;
+    outline: none;
+}
+
+.form > input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.form > button {
+    border: 0;
+    color: #ffffff;
+    background: #226ce7;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form > button:hover {
+    background-color: #1a56c7;
+}
+
+.card footer {
+    color: #666666;
+    font-size: 14px;
+}
+
+.card > footer > a {
+    color: #216ce7;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.card > footer > a:hover {
+    color: #1a56c7;
+}

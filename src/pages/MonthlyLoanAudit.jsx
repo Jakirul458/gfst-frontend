@@ -24,9 +24,11 @@ function MonthlyLoanAudit() {
     // Add more transactions here
   ];
 
+  
+
   return (
-   <>
-      <h1 className="mb-4">Moonthly Loan Instalment Transaction Records</h1>
+    <>
+      <h1 className="mb-4">Moonthly Investment Transaction Records</h1>
       <table className="table table-bordered table-hover">
         <thead className="thead-dark">
           <tr>
@@ -56,7 +58,7 @@ function MonthlyLoanAudit() {
       <div className='print-btn-container'>
         <button type="print" className="print-btn">Print</button>
         </div>
-    </>
+      </>
   );
 }
 
