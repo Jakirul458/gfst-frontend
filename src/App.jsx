@@ -95,8 +95,7 @@ function App() {
 
 export default App;
 
-*/
-import React, { useState } from 'react';
+*/import React, { useState } from 'react';
 import './style.css';
 import Navbar from './components/Navbar';
 import SideBar from './components/SideBar';
@@ -113,7 +112,7 @@ function App() {
     if (username === 'admin' && password === 'admin') {
       setIsAuthenticated(true);
     } else {
-      alert('Please enter Username & Password');
+      alert('Invalid Username & Password');
     }
   };
 
@@ -123,13 +122,33 @@ function App() {
     setPassword('');
   };
 
+  const handleSendCredentials = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      alert('Credentials sent successfully!');
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Failed to send credentials.');
+    }
+  };
+
   if (isAuthenticated) {
     return (
       <div className="authenticated-container">
         <Navbar handleLogout={handleLogout} />
         <div className="main-content">
           <SideBar />
-          {/* Main content goes here */}
         </div>
       </div>
     );
@@ -138,8 +157,8 @@ function App() {
       <div className="login-container">
         <div className="background"></div>
         <div className="card">
-          <img className="logo" src="logo.svg " alt="Logo" />
-          <h2>Welcome</h2>
+          <img className="logo" src={Logo} alt="Logo" />
+          <h2>Welcome🫡</h2>
 
           <form className="form" onSubmit={handleLogin}>
             <input
@@ -158,8 +177,8 @@ function App() {
             />
             <button type="submit">Sign In</button>
           </form>
-
           <footer>
+            Forget User ID & Password <a href="#" onClick={handleSendCredentials}>Click me</a><br /><br />
             Need an account? Sign up <a href="#">here</a>
           </footer>
         </div>

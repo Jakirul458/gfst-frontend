@@ -38,8 +38,12 @@ function Contact() {
     return (
         <div style={containerStyle}>
             <h2>Contact Information</h2>
-            <p>If you have any questions or need further information, feel free to contact me at:</p>
+            <p>If you have any questions or need further information, feel free to contact us at:</p>
             <div style={infoStyle}>
+            <a href="mailto:gfcsmsd@gmail.com" style={linkStyle}>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Gmail Logo" style={iconStyle} />
+                    gfcsmsd@gmail.com
+                </a>
                 <a href="mailto:jakirul458rimon@gmail.com" style={linkStyle}>
                     <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt="Gmail Logo" style={iconStyle} />
                     jakirul458rimon@gmail.com
