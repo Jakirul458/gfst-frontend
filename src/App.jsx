@@ -96,9 +96,11 @@ function App() {
 export default App;
 
 */import React, { useState } from 'react';
-import './style.css';
+// import './style.css';
+import './App.css';
 import Navbar from './components/Navbar';
 import SideBar from './components/SideBar';
+import Footer from './components/Footer';
 import Logo from './logo.svg';
 
 function App() {
@@ -149,6 +151,7 @@ function App() {
         <Navbar handleLogout={handleLogout} />
         <div className="main-content">
           <SideBar />
+          <Footer />
         </div>
       </div>
     );
