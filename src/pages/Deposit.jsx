@@ -289,7 +289,6 @@ export default Deposit;
 
 
 
-
 import React, { useState } from 'react';
 import './Deposit.css';
 
@@ -301,7 +300,7 @@ const Deposit = () => {
   const [error, setError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
-  const [remarks, setRemarks] = useState('');
+  const [remarks, setRemarks] = useState('Deposit'); // Default to 'Deposit'
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -315,21 +314,21 @@ const Deposit = () => {
       });
       const result = await response.json();
       if (result.success) {
-        alert('Deposit successful!');
+        alert('Transaction successful!');
         // Clear form fields after successful submission
         setAccount('');
         setDate('');
         setTransactionid('');
         setDeposit('');
-        setRemarks('');
+        setRemarks('Deposit');
         setError(null);
         setIsVerified(false);
         setAccountName('');
       } else {
-        setError('An error occurred while making the deposit.');
+        setError('An error occurred during the transaction.');
       }
     } catch (err) {
-      setError('An error occurred while making the deposit.');
+      setError('An error occurred during the transaction.');
     }
   };
 
@@ -372,7 +371,7 @@ const Deposit = () => {
 
         {isVerified && (
           <>
-            <p>Consumer Name {accountName}</p> {/* Display the account name */}
+            <p>Consumer Name: {accountName}</p> {/* Display the account name */}
 
             <div className="form-group">
               <label>Date</label>
@@ -403,11 +402,13 @@ const Deposit = () => {
 
             <div className="form-group">
               <label>Remarks</label>
-              <input
-                type="text"
+              <select
                 value={remarks}
                 onChange={(e) => setRemarks(e.target.value)}
-              />
+              >
+                <option value="Deposit">Deposit</option>
+                {/* <option value="Withdraw">Withdraw</option> */}
+              </select>
             </div>
 
             <button type="submit" className="submit-btn">Submit</button>
