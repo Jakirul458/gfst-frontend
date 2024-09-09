@@ -85,6 +85,9 @@ function MonthlySavingAudit() {
     fetchUsers();
   }, []);
 
+
+  
+
   const handlePrint = () => {
     const printWindow = window.open('', '_blank');
     const printContents = document.getElementById('accounts-table').outerHTML;
@@ -116,27 +119,47 @@ function MonthlySavingAudit() {
           <thead className="thead-dark">
             <tr>
               <th>Serial No</th>
-              <th>Date</th>
-              <th>Transaction ID</th>
               <th>Account No</th>
-              <th>Name</th>
+              <th>Transaction ID</th>
               <th>Deposit</th>
               <th>Withdraw</th>
+              <th>Remarks</th>
+              <th>Date</th>
             </tr>
           </thead>
-          <tbody>
+          {/* <tbody>
             {users.map((user, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
+                <td>{user.account}</td> 
+                <td>{user.transactionid}</td>  
+                <td>{user.deposit||0}</td>
+                <td>{user.withdraw ||0}</td> 
+                <td>{user.remarks}</td>
                 <td>{user.date}</td>
-                <td>{user.TransactionID}</td>
-                <td>{user.AccountNo}</td>
-                <td>{user.Name}</td>
-                <td>{user.Deposit}</td>
-                <td>{user.Withdraw}</td>
               </tr>
             ))}
-          </tbody>
+          </tbody> */}
+
+<tbody>
+  {users.map((user, index) => (
+    <tr key={index}>
+      <td>{index + 1}</td>
+      <td>{user.account}</td>
+      <td>{user.transactionid}</td>
+      {/* <td>{user.deposit || 0}</td>
+      <td>{user.withdraw || 0}</td>  */}
+      <td>{user.deposit || 0}</td>
+      <td>{user.withdraw || 0}</td>
+
+      <td>{user.remarks}</td>
+      <td>{user.date}</td>
+    </tr>
+  ))}
+</tbody>
+
+
+
         </table>
       </div>
 
