@@ -90,28 +90,21 @@ function App() {
 
 export default App;
 
-*/import React, { useState } from 'react';
+*/import React, { useEffect, useState } from 'react';
 // import './style.css';
 import './App.css';
 import Navbar from './components/Navbar';
 import SideBar from './components/SideBar';
 import Footer from './components/Footer';
 import Logo from './logo.svg';
+import axios from 'axios';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (event) => {
-    event.preventDefault();
-    // Placeholder for actual authentication logic
-    if (username === 'admin' && password === 'admin') {
-      setIsAuthenticated(true);
-    } else {
-      alert('Invalid Username & Password');
-    }
-  };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
@@ -158,7 +151,7 @@ function App() {
           <img className="logo" src={Logo} alt="Logo" />
           <h2>Welcome🫡</h2>
 
-          <form className="form" onSubmit={handleLogin}>
+          <form className="form" onSubmit={verifyAdmin}>
             <input
               type="text"
               placeholder="Enter Username"
@@ -173,7 +166,12 @@ function App() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <button type="submit">Sign In</button>
+            {
+              isLoading? <div>Loading ...</div> : (
+                <button type="submit">Sign In</button>
+              )
+            }
+            
           </form>
           <footer>
             Forget User ID & Password <a href="#" onClick={handleSendCredentials}>Click me</a><br /><br />
@@ -183,6 +181,25 @@ function App() {
       </div>
     );
   }
+
+  async function verifyAdmin(e) {
+    e.preventDefault()
+    setIsLoading(true);
+    
+    const res = await axios.post("http://localhost:3001/api/admin/login", {
+      username : username,
+      password : password
+    })
+
+    if(res.data.success){
+      setIsAuthenticated(true);
+    }else {
+      setIsAuthenticated(false);
+      alert('Invalid Username & Password');
+    }
+    setIsLoading(false);
+  }
+  
 }
 
 export default App;
