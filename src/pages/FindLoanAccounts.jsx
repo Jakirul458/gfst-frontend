@@ -1,18 +1,3 @@
-/*
-import React from 'react'
-
-function FindLoanAccounts() {
-  return (
-    <div>Find Loan Accounts</div>
-  )
-}
-
-export default FindLoanAccounts
-
-*/
-
-
-/* edit 1*/
 
 import React, { useState } from 'react';
 import './FindLoanAccounts.css';

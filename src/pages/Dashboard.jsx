@@ -1,28 +1,4 @@
-/*
-import React from 'react'
 
-function Home() {
-  return (
-    <>
-      <div><h1>Society Audit</h1></div>
-      <div>Society Total Balance</div>
-      <div>Society Available Balnce</div>
-      <div>Total Loan Balance</div>
-      <div>Remaing Total Balance</div>
-      <div>Total Investment Balance</div>
-      <div>Profit Balance</div>
-
-    </>
-
-  )
-}
-
-export default Home
-
-*/
-
-
-                                            /*edit 2*/
 
 import React from 'react';
 import './Dashboard.css';

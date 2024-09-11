@@ -41,26 +41,6 @@ const Deposit = () => {
     }
   };
 
-  // const handleVerify = async () => {
-  //   try {
-  //     const response = await fetch(`http://127.0.0.1:3001/verify-account?account=${account}`);
-  //     const result = await response.json();
-
-  //     if (result.exists) {
-  //       setIsVerified(true);
-  //       setAccountName(result.name); // Set the account name
-  //       setError(null);
-  //     } else {
-  //       setIsVerified(false);
-  //       setAccountName(''); // Clear the account name if verification fails
-  //       setError('Account does not exist.');
-  //     }
-  //   } catch (err) {
-  //     setIsVerified(false);
-  //     setAccountName(''); // Clear the account name on error
-  //     setError('Error verifying account. Please try again.');
-  //   }
-  // };
 
   const handleVerify = async () => {
     try {
