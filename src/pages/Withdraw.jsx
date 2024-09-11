@@ -2,7 +2,7 @@
 
 
 import React, { useState } from 'react';
-import './withdraw.css';
+// import './withdraw.css';
 
 const withdraw = () => {
   const [account, setAccount] = useState('');

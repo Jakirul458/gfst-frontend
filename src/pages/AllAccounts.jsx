@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function AllAccounts() {
   const [users, setUsers] = useState([]);
@@ -89,7 +90,7 @@ function AllAccounts() {
               <th>Balance</th>
             </tr>
           </thead>
-          <tbody>
+          {/* <tbody>
             {filteredUsers.map((user) => (
               <tr key={user.account}>
                 <td>{user.date}</td>
@@ -102,7 +103,24 @@ function AllAccounts() {
                 <td>{user.balance}</td>
               </tr>
             ))}
-          </tbody>
+          </tbody> */}
+
+<tbody>
+  {filteredUsers.map((user) => (
+    <tr key={user.account}>
+      <td>{user.date}</td>
+      <td>
+        <Link to={`/account/${user.account}`}>{user.account}</Link>
+      </td>
+      <td>{user.name}</td>
+      <td>{user.email}</td>
+      <td>{user.mobile}</td>
+      <td>{user.aadhar}</td>
+      <td>{user.address}</td>
+      <td>{user.balance}</td>
+    </tr>
+  ))}
+</tbody>
         </table>
       </div>
 

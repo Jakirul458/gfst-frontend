@@ -23,6 +23,7 @@ import About from '../pages/About';
 import Logout from '../pages/Logout';
 import Login from '../pages/Login';
 import Contact from '../pages/Contact';
+import AccountProfile from '../pages/AccountProfile';
 import './SideBar.css';
 
 
@@ -97,6 +98,8 @@ function SideBar() {
                             <Route path="/logout" element={<Logout />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/contact" element={<Contact />} />
+                            
+                            <Route path="/account/:account" element={<AccountProfile />} />
                         
                         </Routes>
                     </div>
