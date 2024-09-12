@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 
 function AccountProfile() {
-  const { account } = useParams();
+  const params= useParams();
   const [accountDetails, setAccountDetails] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState(null);
 
+  const location = useLocation();
+
   useEffect(() => {
     const fetchAccountDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/account-details/${account}`);
-        setAccountDetails(response.data.accountDetails);
-        setTransactions(response.data.transactions);
+        const response = await axios.get(`http://localhost:3001/api/savings/${location.pathname.split('/')[2]}`);
+        console.log(response,"hello")
+        setAccountDetails(response.data.data);
+        // setTransactions(response.data.data.transactions);
       } catch (err) {
         setError('Error fetching account details');
         console.error(err);
@@ -22,7 +25,7 @@ function AccountProfile() {
     };
 
     fetchAccountDetails();
-  }, [account]);
+  }, []);
 
   if (error) {
     return <p>{error}</p>;

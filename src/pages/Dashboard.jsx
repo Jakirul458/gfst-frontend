@@ -9,12 +9,12 @@ function Home() {
       <h1 className="header">Society Audit</h1>
 
       <div className="section">
-        <div className="section-title">Society Total Balance</div>
+        <div className="section-title">Total Savings Balance</div>
         <div className="section-content">$0</div>
       </div>
 
       <div className="section">
-        <div className="section-title">Society Available Balance</div>
+        <div className="section-title"> Available Savigns Balance</div>
         <div className="section-content">₹0</div>
       </div>
 
@@ -24,7 +24,7 @@ function Home() {
       </div>
 
       <div className="section">
-        <div className="section-title">Remaining Total Balance</div>
+        <div className="section-title">Remaining Loan Balance</div>
         <div className="section-content">₹0</div>
       </div>
 

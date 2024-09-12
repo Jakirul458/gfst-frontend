@@ -10,10 +10,10 @@ function AllAccounts() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/getSavingAccount');
+        const response = await axios.get('http://localhost:3001/api/savings');
         console.log('API Response:', response.data);
-        setUsers(response.data);
-        setFilteredUsers(response.data);
+        setUsers(response.data.data);
+        setFilteredUsers(response.data.data);
       } catch (err) {
         console.error('Error fetching users:', err);
       }
@@ -110,12 +110,12 @@ function AllAccounts() {
     <tr key={user.account}>
       <td>{user.date}</td>
       <td>
-        <Link to={`/account/${user.account}`}>{user.account}</Link>
+        <Link to={`/account/${user.accountNo}`}>{user.accountNo}</Link>
       </td>
       <td>{user.name}</td>
       <td>{user.email}</td>
-      <td>{user.mobile}</td>
-      <td>{user.aadhar}</td>
+      <td>{user.mobileNo}</td>
+      <td>{user.AadharNo}</td>
       <td>{user.address}</td>
       <td>{user.balance}</td>
     </tr>
