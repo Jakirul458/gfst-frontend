@@ -2,21 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function AccountProfile() {
+function InvestmentProfile() {
   const params = useParams();
-  const [accountDetails, setAccountDetails] = useState({});
+  const [accountDetails, setAccountDetails] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location.pathname.split('/')[3], "somelog")
-
   useEffect(() => {
     const fetchAccountDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/savings/${location.pathname.split('/')[3]}`);
+        const response = await axios.get(`http://localhost:3001/api/investment/${location.pathname.split('/')[3]}`);
         setAccountDetails(response.data.data);
+        // Optionally set transactions if available from API
+        // setTransactions(response.data.data.transactions);
       } catch (err) {
         setError('Error fetching account details');
         console.error(err);
@@ -26,28 +26,12 @@ function AccountProfile() {
     fetchAccountDetails();
   }, [location]);
 
-  useEffect(() => {
-    if(!accountDetails.accountNo) return;
-    const fetchTransactions = async() => {
-      try {
-        const response = await axios.get(`http://localhost:3001/api/transaction/${accountDetails.accountNo}`);
-        setTransactions(response.data.data);
-        
-      } catch (error) {
-        setError('Error fetching account details');
-        console.error(err);
-      }
-    }
-
-    fetchTransactions();
-  },[accountDetails])
-
   const handlePrint = () => {
     const printContents = document.getElementById('account-profile').outerHTML;
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
       <html>
-      <head><title>Print Account Profile</title></head>
+      <head><title>Investment Account Profile</title></head>
       <body>${printContents}</body>
       </html>
     `);
@@ -59,7 +43,7 @@ function AccountProfile() {
     const confirmDelete = window.confirm("Are you sure you want to delete this account?");
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:3001/api/savings/${accountDetails.AadharNo}`);
+        await axios.delete(`http://localhost:3001/api/investment/${accountDetails.AadharNo}`);
         alert('Account deleted successfully.');
         navigate('/all-accounts'); // Redirect to account list after deletion
       } catch (error) {
@@ -69,24 +53,28 @@ function AccountProfile() {
     }
   };
 
-  const handleUpdate = async () => {
-    navigate(`/savings/account/update/${accountDetails.accountNo}`);
-    
+  const handleUpdate = () => {
+    navigate(`/investment/account/update/${accountDetails.accountNo}`);
   };
 
- 
+  if (error) {
+    return <p>{error}</p>;
+  }
 
+  if (!accountDetails) {
+    return <p>Loading account details...</p>;
+  }
 
   return (
     <>
       <div id="account-profile">
-        <h1>Savings Account No : {accountDetails.accountNo}</h1>
+        <h1>Investment Account No : {accountDetails.accountNo}</h1>
         <p><strong>Name:</strong> {accountDetails.name}</p>
         <p><strong>Email:</strong> {accountDetails.email}</p>
         <p><strong>Mobile:</strong> {accountDetails.mobileNo}</p>
         <p><strong>Aadhar:</strong> {accountDetails.AadharNo}</p>
         <p><strong>Address:</strong> {accountDetails.Address}</p>
-        <p><strong>Balance:</strong> {accountDetails.balance}</p>
+        <p><strong>Investment Amount:</strong> {accountDetails.investmentAmount}</p>
 <br />
         <h2>Transaction History</h2>
         <table className="table table-bordered table-hover">
@@ -103,10 +91,9 @@ function AccountProfile() {
             {transactions.length > 0 ? transactions.map((transaction) => (
               <tr key={transaction._id}>
                 <td>{transaction.date}</td>
-                <td>{transaction.transactionId}</td>
+                <td>{transaction.transactionid}</td>
                 <td>{transaction.deposit}</td>
-                <td>{transaction.typeOfTransaction === 'deposit'? transaction.amount : 0}</td>
-                <td>{transaction.typeOfTransaction === 'widthdraw'? transaction.amount : 0}</td>
+                <td>{transaction.withdraw}</td>
                 <td>{transaction.remarks}</td>
               </tr>
             )) : <tr><td colSpan="5">No transactions available</td></tr>}
@@ -123,4 +110,4 @@ function AccountProfile() {
   );
 }
 
-export default AccountProfile;
+export default InvestmentProfile;

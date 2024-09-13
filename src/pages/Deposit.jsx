@@ -14,7 +14,7 @@ const Deposit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://127.0.0.1:3001/deposit', {
+      const response = await fetch('http://127.0.0.1:3001/api/transaction', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const Deposit = () => {
 
   const handleVerify = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:3001/verify-account?account=${account}`);
+      const response = await fetch(`http://127.0.0.1:3001/verify-account?account=${accountNo}`);
       const result = await response.json();
   
       if (result.exists) {
@@ -83,7 +83,7 @@ const Deposit = () => {
 
         {isVerified && (
           <>
-            <p>Consumer Name: {accountName}</p> {/* Display the account name */}
+            <p>Consumer Name: {name}</p> {/* Display the account name */}
 
             <div className="form-group">
               <label>Date</label>

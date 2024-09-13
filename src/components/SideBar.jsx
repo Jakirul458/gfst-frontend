@@ -24,6 +24,11 @@ import Logout from '../pages/Logout';
 import Login from '../pages/Login';
 import Contact from '../pages/Contact';
 import AccountProfile from '../pages/AccountProfile';
+import LoanAccProfile from '../pages/LoanAccProfile';
+import InvestmentProfile from '../pages/InvestmentProfile';
+import UpdateLoanAcc from '../pages/UpdateLoanAcc';
+import UpdateInvestmentAcc from '../pages/UpdateInvestmentAcc';
+import UpdateSavingsAcc from '../pages/UpdateSavingsAcc';
 import './SideBar.css';
 
 
@@ -99,7 +104,13 @@ function SideBar() {
                             <Route path="/login" element={<Login />} />
                             <Route path="/contact" element={<Contact />} />
                             
-                            <Route path="/account/:account" element={<AccountProfile />} />
+                            <Route path="/savings/account/:account" element={<AccountProfile />} />
+                            <Route path="/loan/account/:account" element={<LoanAccProfile />} />
+                            <Route path="/investment/account/:account" element={<InvestmentProfile />} />
+
+                            <Route path="/savings/account/update/:accountNo" element={<UpdateSavingsAcc />} />
+                            <Route path="/loan/account/update/:accountNo" element={<UpdateLoanAcc />} />
+                            <Route path="/investment/account/update/:accountNo" element={<UpdateInvestmentAcc />} />
                         
                         </Routes>
                     </div>

@@ -99,7 +99,7 @@ function LoanAccounts() {
               <tr key={user.accountNo}>
                 <td>{user.date}</td>
                 <td>
-                  <Link to={`/account/${user.accountNo}`}>{user.accountNo}</Link>
+                  <Link to={`/loan/account/${user.accountNo}`}>{user.accountNo}</Link>
                 </td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>

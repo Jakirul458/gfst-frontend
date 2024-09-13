@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 // import './withdraw.css';
 
@@ -14,15 +15,11 @@ const withdraw = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://127.0.0.1:3001/withdraw', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ account, date, transactionid, withdraw, remarks }),
-      });
-      const result = await response.json();
-      if (result.success) {
+      const response = await axios.post('http://127.0.0.1:3001/api/transaction/withdraw', {
+        accountNo : account, amount : withdraw, remarks },
+      );
+      console.log(response.data)
+      if (response.data.success) {
         alert('Transaction successful!');
         // Clear form fields after successful submission
         setAccount('');
@@ -34,7 +31,7 @@ const withdraw = () => {
         setIsVerified(false);
         setAccountName('');
       } else {
-        setError('An error occurred during the transaction.');
+        setError(response.data.message);
       }
     } catch (err) {
       setError('An error occurred during the transaction.');
@@ -43,19 +40,18 @@ const withdraw = () => {
 
   const handleVerify = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:3001/verify-account?account=${account}`);
-      const result = await response.json();
+      const response = await axios.get(`http://localhost:3001/api/savings/${account}`);
 
-      if (result.exists) {
+      if (response.data.success) {
         setIsVerified(true);
-        setAccountName(result.name); // Set the account name
+        setAccountName(response.data.data.name);
         setError(null);
       } else {
         setIsVerified(false);
         setAccountName(''); // Clear the account name if verification fails
         setError('Account does not exist.');
       }
-    } catch (err) {
+    }catch (err) {
       setIsVerified(false);
       setAccountName(''); // Clear the account name on error
       setError('Error verifying account. Please try again.');

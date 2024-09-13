@@ -98,7 +98,7 @@ function InvestmentAccounts() {
               <tr key={user.accountNo}>
                 <td>{user.date}</td>
                 <td>
-                  <Link to={`/account/${user.accountNo}`}>{user.accountNo}</Link>
+                  <Link to={`/investment/account/${user.accountNo}`}>{user.accountNo}</Link>
                 </td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>

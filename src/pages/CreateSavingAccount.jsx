@@ -25,7 +25,13 @@ const CreateSavingAccount = () => {
     axios.post('http://localhost:3001/api/savings/create-account', { date, name,email, mobileNo, AadharNo, Address,  balance })
       .then(result => {
         console.log(result);
-        alert('Account created successfully!');
+        
+
+        if(result.data.success) {
+          alert("account creaed succesfuly")
+        }else {
+          alert(result.data.data.message);
+        }
         // Clear form fields after successful submission
         setDate('');
         setName('');

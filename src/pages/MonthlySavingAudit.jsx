@@ -74,10 +74,10 @@ function MonthlySavingAudit() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/getSavingTransaction');
+        const response = await axios.get('http://localhost:3001/api/transaction');
         console.log('API Response:', response.data); // Log the API response
-        setUsers(response.data);
-        setFilteredUsers(response.data); // Initialize filtered users
+        setUsers(response.data.data);
+        // setFilteredUsers(response.data); // Initialize filtered users
       } catch (err) {
         console.error('Error fetching users:', err);
       }
@@ -157,15 +157,15 @@ function MonthlySavingAudit() {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((user, index) => (
+            {users.map((user, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{user.account}</td>
-                <td>{user.transactionid}</td>
-                <td>{user.deposit || 0}</td>
-                <td>{user.withdraw || 0}</td>
+                <td>{user.accountNo}</td>
+                <td>{user.transactionId}</td>
+                <td>{user.typeOfTransaction === 'deposit'? user.amount : 0}</td>
+                <td>{user.typeOfTransaction === 'widthdraw'? user.amount : 0}</td>
                 <td>{user.remarks}</td>
-                <td>{user.date}</td>
+                {/* <td>{user.date}</td> */}
               </tr>
             ))}
           </tbody>
