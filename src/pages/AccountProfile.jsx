@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-
 function AccountProfile() {
-  const params= useParams();
+  const params = useParams();
   const [accountDetails, setAccountDetails] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState(null);
-
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     const fetchAccountDetails = async () => {
       try {
         const response = await axios.get(`http://localhost:3001/api/savings/${location.pathname.split('/')[2]}`);
-        console.log(response,"hello")
         setAccountDetails(response.data.data);
+        // Optionally set transactions if available from API
         // setTransactions(response.data.data.transactions);
       } catch (err) {
         setError('Error fetching account details');
@@ -25,7 +24,38 @@ function AccountProfile() {
     };
 
     fetchAccountDetails();
-  }, []);
+  }, [location]);
+
+  const handlePrint = () => {
+    const printContents = document.getElementById('account-profile').outerHTML;
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <html>
+      <head><title>Print Account Profile</title></head>
+      <body>${printContents}</body>
+      </html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
+  };
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this account?");
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:3001/api/savings/delete/${accountDetails.account}`);
+        alert('Account deleted successfully.');
+        navigate('/all-accounts'); // Redirect to account list after deletion
+      } catch (error) {
+        console.error('Error deleting account:', error);
+        alert('Error deleting account.');
+      }
+    }
+  };
+
+  const handleUpdate = () => {
+    navigate(`/account/update/${accountDetails.account}`);
+  };
 
   if (error) {
     return <p>{error}</p>;
@@ -37,35 +67,45 @@ function AccountProfile() {
 
   return (
     <>
-      <h1>Account Profile for {accountDetails.account}</h1>
-      <p><strong>Name:</strong> {accountDetails.name}</p>
-      <p><strong>Email:</strong> {accountDetails.email}</p>
-      <p><strong>Mobile:</strong> {accountDetails.mobile}</p>
-      <p><strong>Aadhar:</strong> {accountDetails.aadhar}</p>
-      <p><strong>Address:</strong> {accountDetails.address}</p>
-      <p><strong>Balance:</strong> {accountDetails.balance}</p>
+      <div id="account-profile">
+        <h1>Account Profile for {accountDetails.account}</h1>
+        <p><strong>Name:</strong> {accountDetails.name}</p>
+        <p><strong>Email:</strong> {accountDetails.email}</p>
+        <p><strong>Mobile:</strong> {accountDetails.mobileNo}</p>
+        <p><strong>Aadhar:</strong> {accountDetails.AadharNo}</p>
+        <p><strong>Address:</strong> {accountDetails.Address}</p>
+        <p><strong>Balance:</strong> {accountDetails.balance}</p>
 
-      <h2>Transaction History</h2>
-      <table className="table table-bordered table-hover">
-        <thead className="thead-dark">
-          <tr>
-            <th>Date</th>
-            <th>Transaction ID</th>
-            <th>Deposit Amount</th>
-            <th>Remarks</th>
-          </tr>
-        </thead>
-        <tbody>
-          {transactions.map((transaction) => (
-            <tr key={transaction._id}>
-              <td>{transaction.date}</td>
-              <td>{transaction.transactionid}</td>
-              <td>{transaction.deposit}</td>
-              <td>{transaction.remarks}</td>
+        <h2>Transaction History</h2>
+        <table className="table table-bordered table-hover">
+          <thead className="thead-dark">
+            <tr>
+              <th>Date</th>
+              <th>Transaction ID</th>
+              <th>Deposit</th>
+              <th>Withdraw</th>
+              <th>Remarks</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {transactions.length > 0 ? transactions.map((transaction) => (
+              <tr key={transaction._id}>
+                <td>{transaction.date}</td>
+                <td>{transaction.transactionid}</td>
+                <td>{transaction.deposit}</td>
+                <td>{transaction.withdraw}</td>
+                <td>{transaction.remarks}</td>
+              </tr>
+            )) : <tr><td colSpan="5">No transactions available</td></tr>}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="action-buttons">
+        <button onClick={handlePrint} className="btn btn-primary">Print</button>
+        <button onClick={handleUpdate} className="btn btn-warning">Update</button>
+        <button onClick={handleDelete} className="btn btn-danger">Delete</button>
+      </div>
     </>
   );
 }

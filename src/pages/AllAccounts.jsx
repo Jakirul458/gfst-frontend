@@ -1,6 +1,9 @@
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+
+import './AllAcountsForm.css';
 
 function AllAccounts() {
   const [users, setUsers] = useState([]);
@@ -28,8 +31,8 @@ function AllAccounts() {
     } else {
       const filtered = users.filter((user) => {
         return (
-          user.account?.toString().includes(searchQuery) ||
-          user.aadhar?.toString().includes(searchQuery) ||
+          user.accountNo?.toString().includes(searchQuery) ||
+          user.AadharNo?.toString().includes(searchQuery) ||
           user.name?.toLowerCase().includes(searchQuery.toLowerCase())
         );
       });
@@ -90,37 +93,23 @@ function AllAccounts() {
               <th>Balance</th>
             </tr>
           </thead>
-          {/* <tbody>
+
+          <tbody>
             {filteredUsers.map((user) => (
-              <tr key={user.account}>
+              <tr key={user.accountNo}>
                 <td>{user.date}</td>
-                <td>{user.account}</td>
+                <td>
+                  <Link to={`/account/${user.accountNo}`}>{user.accountNo}</Link>
+                </td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.mobile}</td>
-                <td>{user.aadhar}</td>
-                <td>{user.address}</td>
+                <td>{user.mobileNo}</td>
+                <td>{user.AadharNo}</td>
+                <td>{user.Address}</td>
                 <td>{user.balance}</td>
               </tr>
             ))}
-          </tbody> */}
-
-<tbody>
-  {filteredUsers.map((user) => (
-    <tr key={user.account}>
-      <td>{user.date}</td>
-      <td>
-        <Link to={`/account/${user.accountNo}`}>{user.accountNo}</Link>
-      </td>
-      <td>{user.name}</td>
-      <td>{user.email}</td>
-      <td>{user.mobileNo}</td>
-      <td>{user.AadharNo}</td>
-      <td>{user.address}</td>
-      <td>{user.balance}</td>
-    </tr>
-  ))}
-</tbody>
+          </tbody>
         </table>
       </div>
 

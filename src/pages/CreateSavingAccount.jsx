@@ -6,30 +6,31 @@ import axios from 'axios';
 const CreateSavingAccount = () => {
   const [date, setDate] = useState('');
   const [name, setName] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [aadhar, setAadhar] = useState('');
-  const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
+  const [mobileNo, setMobileNo] = useState('');
+  const [AadharNo, setAadharNo] = useState('');
+  const [Address, setAddress] = useState('');
   const [balance, setBalance] = useState('');
   const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Form submitted");
 
-    if (!date || !name || !mobile || !aadhar || !address || !email || !balance) {
+    if (!date || !name || !email || !mobileNo || !AadharNo || !Address  || !balance) {
       setError('Please fill in all fields.');
       return;
     }
 
-    axios.post('http://127.0.0.1:3001/CreateAccount', { date, name, mobile, aadhar, address, email, balance })
+    axios.post('http://localhost:3001/api/savings/create-account', { date, name,email, mobileNo, AadharNo, Address,  balance })
       .then(result => {
         console.log(result);
         alert('Account created successfully!');
         // Clear form fields after successful submission
         setDate('');
         setName('');
-        setMobile('');
-        setAadhar('');
+        setMobileNo('');
+        setAadharNo('');
         setAddress('');
         setEmail('');
         setBalance('');
@@ -75,8 +76,8 @@ const CreateSavingAccount = () => {
         <input
           type="text"
           placeholder="Enter Consumer Mobile Number"
-          value={mobile}
-          onChange={(e) => setMobile(e.target.value)}
+          value={mobileNo}
+          onChange={(e) => setMobileNo(e.target.value)}
         />
       </div>
       <div className="form-group">
@@ -84,8 +85,8 @@ const CreateSavingAccount = () => {
         <input
           type="text"
           placeholder="Enter Consumer Aadhar Number"
-          value={aadhar}
-          onChange={(e) => setAadhar(e.target.value)}
+          value={AadharNo}
+          onChange={(e) => setAadharNo(e.target.value)}
         />
       </div>
       <div className="form-group">
@@ -93,7 +94,7 @@ const CreateSavingAccount = () => {
         <input
           type="text"
           placeholder="Enter Consumer Address"
-          value={address}
+          value={Address}
           onChange={(e) => setAddress(e.target.value)}
         />
       </div>

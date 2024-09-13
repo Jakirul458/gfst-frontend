@@ -1,39 +1,158 @@
 
 
+// import React, { useState } from 'react';
+// import './CreateLoanAccountForm.css';
+// import axios from 'axios';
+
+// const CreateLoanAccount = () => {
+//   const [date, setDate] = useState('');
+//   const [name, setName] = useState('');
+//   const [mobile, setMobile] = useState('');
+//   const [aadhar, setAadhar] = useState('');
+//   const [address, setAddress] = useState('');
+//   const [email, setEmail] = useState('');
+//   const [balance, setBalance] = useState('');
+//   const [error, setError] = useState(null);
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     if (!date || !name || !mobile || !aadhar || !address || !email || !balance) {
+//       setError('Please fill in all fields.');
+//       return;
+//     }
+
+//     axios.post('http://127.0.0.1:3001/CreateLoanAccount', { date, name, mobile, aadhar, address, email, balance })
+//       .then(result => {
+//         console.log(result);
+//         alert('Account created successfully!');
+//         // Clear form fields after successful submission
+//         setDate('');
+//         setName('');
+//         setMobile('');
+//         setAadhar('');
+//         setAddress('');
+//         setEmail('');
+//         setBalance('');
+//         setError(null);
+//       })
+//       .catch(error => {
+//         console.error(error);
+//         setError('An error occurred while creating the account.');
+//       });
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit} className="account-form">
+//       {error && <p className="error">{error}</p>}
+//       <div className="form-group">
+//         <label>Date</label>
+//         <input
+//           type="date"
+//           value={date}
+//           onChange={(e) => setDate(e.target.value)}
+//         />
+//       </div>
+//       <div className="form-group">
+//         <label>Name</label>
+//         <input
+//           type="text"
+//           placeholder="Enter Consumer Name"
+//           value={name}
+//           onChange={(e) => setName(e.target.value)}
+//         />
+//       </div>
+//       <div className="form-group">
+//         <label>Email</label>
+//         <input
+//           type="email"
+//           placeholder="Enter Consumer Email ID"
+//           value={email}
+//           onChange={(e) => setEmail(e.target.value)}
+//         />
+//       </div>
+//       <div className="form-group">
+//         <label>Mobile No</label>
+//         <input
+//           type="text"
+//           placeholder="Enter Consumer Mobile Number"
+//           value={mobile}
+//           onChange={(e) => setMobile(e.target.value)}
+//         />
+//       </div>
+//       <div className="form-group">
+//         <label>Aadhar No</label>
+//         <input
+//           type="text"
+//           placeholder="Enter Consumer Aadhar Number"
+//           value={aadhar}
+//           onChange={(e) => setAadhar(e.target.value)}
+//         />
+//       </div>
+//       <div className="form-group">
+//         <label>Address</label>
+//         <input
+//           type="text"
+//           placeholder="Enter Consumer Address"
+//           value={address}
+//           onChange={(e) => setAddress(e.target.value)}
+//         />
+//       </div>
+//       <div className="form-group">
+//         <label>Opening Balance</label>
+//         <input
+//           type="text"
+//           placeholder="Enter Opening Balance"
+//           value={balance}
+//           onChange={(e) => setBalance(e.target.value)}
+//         />
+//       </div>
+//       <button type="submit" className="submit-btn">Submit</button>
+//     </form>
+//   );
+// };
+
+// export default CreateLoanAccount;
+
+
+
+
+
 import React, { useState } from 'react';
-import './CreateLoanAccountForm.css';
+import './CreateSavingAccountForm.css';
 import axios from 'axios';
 
 const CreateLoanAccount = () => {
   const [date, setDate] = useState('');
   const [name, setName] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [aadhar, setAadhar] = useState('');
-  const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
-  const [balance, setBalance] = useState('');
+  const [mobileNo, setMobileNo] = useState('');
+  const [AadharNo, setAadharNo] = useState('');
+  const [Address, setAddress] = useState('');
+  const [loanAmount, setLoanAmount] = useState('');
   const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Form submitted");
 
-    if (!date || !name || !mobile || !aadhar || !address || !email || !balance) {
+    if (!date || !name || !email || !mobileNo || !AadharNo || !Address  || !loanAmount) {
       setError('Please fill in all fields.');
       return;
     }
 
-    axios.post('http://127.0.0.1:3001/CreateLoanAccount', { date, name, mobile, aadhar, address, email, balance })
+    axios.post('http://localhost:3001/api/loan/create-account', { date, name,email, mobileNo, AadharNo, Address,  loanAmount })
       .then(result => {
         console.log(result);
         alert('Account created successfully!');
         // Clear form fields after successful submission
         setDate('');
         setName('');
-        setMobile('');
-        setAadhar('');
+        setMobileNo('');
+        setAadharNo('');
         setAddress('');
         setEmail('');
-        setBalance('');
+        setLoanAmount('');
         setError(null);
       })
       .catch(error => {
@@ -76,8 +195,8 @@ const CreateLoanAccount = () => {
         <input
           type="text"
           placeholder="Enter Consumer Mobile Number"
-          value={mobile}
-          onChange={(e) => setMobile(e.target.value)}
+          value={mobileNo}
+          onChange={(e) => setMobileNo(e.target.value)}
         />
       </div>
       <div className="form-group">
@@ -85,8 +204,8 @@ const CreateLoanAccount = () => {
         <input
           type="text"
           placeholder="Enter Consumer Aadhar Number"
-          value={aadhar}
-          onChange={(e) => setAadhar(e.target.value)}
+          value={AadharNo}
+          onChange={(e) => setAadharNo(e.target.value)}
         />
       </div>
       <div className="form-group">
@@ -94,17 +213,17 @@ const CreateLoanAccount = () => {
         <input
           type="text"
           placeholder="Enter Consumer Address"
-          value={address}
+          value={Address}
           onChange={(e) => setAddress(e.target.value)}
         />
       </div>
       <div className="form-group">
-        <label>Opening Balance</label>
+        <label>Loan Amount</label>
         <input
           type="text"
           placeholder="Enter Opening Balance"
-          value={balance}
-          onChange={(e) => setBalance(e.target.value)}
+          value={loanAmount}
+          onChange={(e) => setLoanAmount(e.target.value)}
         />
       </div>
       <button type="submit" className="submit-btn">Submit</button>
