@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/index'
 
 function InvestmentProfile() {
   const params = useParams();
@@ -13,7 +13,7 @@ function InvestmentProfile() {
   useEffect(() => {
     const fetchAccountDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/investment/${location.pathname.split('/')[3]}`);
+        const response = await api.get(`/api/investment/${location.pathname.split('/')[3]}`);
         setAccountDetails(response.data.data);
         // Optionally set transactions if available from API
         // setTransactions(response.data.data.transactions);
@@ -43,7 +43,7 @@ function InvestmentProfile() {
     const confirmDelete = window.confirm("Are you sure you want to delete this account?");
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:3001/api/investment/${accountDetails.AadharNo}`);
+        await api.delete(`/api/investment/${accountDetails.AadharNo}`);
         alert('Account deleted successfully.');
         navigate('/all-accounts'); // Redirect to account list after deletion
       } catch (error) {

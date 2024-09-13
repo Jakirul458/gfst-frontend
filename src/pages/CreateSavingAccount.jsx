@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import './CreateSavingAccountForm.css';
-import axios from 'axios';
+import api from '../api/index'
 
 const CreateSavingAccount = () => {
   const [date, setDate] = useState('');
@@ -22,7 +22,7 @@ const CreateSavingAccount = () => {
       return;
     }
 
-    axios.post('http://localhost:3001/api/savings/create-account', { date, name,email, mobileNo, AadharNo, Address,  balance })
+    api.post('/api/savings/create-account', { date, name,email, mobileNo, AadharNo, Address,  balance })
       .then(result => {
         console.log(result);
         

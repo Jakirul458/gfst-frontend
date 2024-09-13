@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/index'
 
 function AccountProfile() {
   const params = useParams();
@@ -15,7 +15,7 @@ function AccountProfile() {
   useEffect(() => {
     const fetchAccountDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/savings/${location.pathname.split('/')[3]}`);
+        const response = await api.get(`/api/savings/${location.pathname.split('/')[3]}`);
         setAccountDetails(response.data.data);
       } catch (err) {
         setError('Error fetching account details');
@@ -30,7 +30,7 @@ function AccountProfile() {
     if(!accountDetails.accountNo) return;
     const fetchTransactions = async() => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/transaction/${accountDetails.accountNo}`);
+        const response = await api.get(`/api/transaction/${accountDetails.accountNo}`);
         setTransactions(response.data.data);
         
       } catch (error) {
@@ -59,7 +59,7 @@ function AccountProfile() {
     const confirmDelete = window.confirm("Are you sure you want to delete this account?");
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:3001/api/savings/${accountDetails.AadharNo}`);
+        await api.delete(`/api/savings/${accountDetails.AadharNo}`);
         alert('Account deleted successfully.');
         navigate('/all-accounts'); // Redirect to account list after deletion
       } catch (error) {

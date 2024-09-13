@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './CreateSavingAccountForm.css';
 import axios from 'axios';
+import api from '../api/index'
 
 const CreateLoanAccount = () => {
   const [date, setDate] = useState('');
@@ -22,7 +23,7 @@ const CreateLoanAccount = () => {
       return;
     }
 
-    axios.post('http://localhost:3001/api/loan/create-account', { date, name,email, mobileNo, AadharNo, Address,  loanAmount })
+    api.post('/api/loan/create-account', { date, name,email, mobileNo, AadharNo, Address,  loanAmount })
       .then(result => {
         console.log(result);
         alert('Account created successfully!');

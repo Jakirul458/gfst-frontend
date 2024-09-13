@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api/index'
 import { Link } from 'react-router-dom';
 
 function InvestmentAccounts() {
@@ -12,7 +12,7 @@ function InvestmentAccounts() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/investment');
+        const response = await api.get('/api/investment');
         console.log('API Response:', response.data);
         setUsers(response.data.data);
         setFilteredUsers(response.data.data);

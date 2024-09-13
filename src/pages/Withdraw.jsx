@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import api from '../api/index'
 // import './withdraw.css';
 
 const withdraw = () => {
@@ -15,7 +16,7 @@ const withdraw = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:3001/api/transaction/withdraw', {
+      const response = await api.post('/api/transaction/withdraw', {
         accountNo : account, amount : withdraw, remarks },
       );
       console.log(response.data)
@@ -40,7 +41,7 @@ const withdraw = () => {
 
   const handleVerify = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/api/savings/${account}`);
+      const response = await api.get(`/api/savings/${account}`);
 
       if (response.data.success) {
         setIsVerified(true);

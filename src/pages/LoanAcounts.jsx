@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api/index'
 import { Link } from 'react-router-dom';
 import './AllAcountsForm.css';
 
@@ -13,7 +13,7 @@ function LoanAccounts() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/loan');
+        const response = await api.get('/api/loan');
         console.log('API Response:', response.data);
         setUsers(response.data.data);
         setFilteredUsers(response.data.data);
