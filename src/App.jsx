@@ -21,7 +21,8 @@ function App() {
 
   const handleSendCredentials = async () => {
     try {
-      const response = await fetch('http://localhost:3001/send-email', {
+      // const response = await fetch('http://localhost:3001/send-email', {
+        const response = await api.fetch('api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +58,8 @@ function App() {
         <div className="card">
           <img className="logo" src={Logo} alt="Logo" />
           <h2>Welcome🫡</h2>
-
+          <h3>Youth Supportive Society</h3>
+          <br />
           <form className="form" onSubmit={verifyAdmin}>
             <input
               type="text"

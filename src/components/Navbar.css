@@ -1,11 +1,9 @@
-
-
-  /* Navbar.css */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Quicksand", sans-serif;
+/* Navbar.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
 }
 
 .navbar-container {
@@ -13,7 +11,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-  background-color:teal;
+  background-color: teal;
   color: #fff;
   height: 70px;
 }
@@ -33,24 +31,31 @@
   color: #fff;
   text-decoration: none;
   font-size: 20px;
+  padding: 10px; /* Add padding for a better clickable area */
+  transition: background-color 0.3s ease;
+  cursor: pointer; /* Add mouse cursor */
 }
 
 .nav-link:hover {
-  color: #022019; /* Optional hover effect */
+  background-color: rgb(17, 36, 36); /* Same hover effect as sidebar */
+  cursor: pointer; /* Mouse cursor on hover */
 }
 
 .logout-button {
   background: none;
   border: none;
   color: inherit;
-  cursor: pointer;
+  cursor: pointer; /* Add mouse cursor */
   font: inherit;
   margin: 0;
-  padding: 0;
+  padding: 10px; /* Add padding to match nav-links */
   text-decoration: none;
   font-size: 20px;
+  transition: background-color 0.3s ease;
 }
 
 .logout-button:hover {
-  text-decoration: underline;
+  background-color: rgb(17, 36, 36); /* Same hover effect as sidebar */
+  cursor: pointer; /* Mouse cursor on hover */
+  color: #fff;
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import api from '../api/index'
+import './Profile.css';
 
 function LoanAccProfile() {
   const params = useParams();
@@ -10,22 +11,36 @@ function LoanAccProfile() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  console.log(location.pathname.split('/')[3], "somelog")
+
   useEffect(() => {
     const fetchAccountDetails = async () => {
       try {
         const response = await api.get(`/api/loan/${location.pathname.split('/')[3]}`);
         setAccountDetails(response.data.data);
-        console.log(response);
-        // Optionally set transactions if available from API
-        // setTransactions(response.data.data.transactions);
       } catch (err) {
         setError('Error fetching account details');
         console.error(err);
       }
     };
-
     fetchAccountDetails();
   }, [location]);
+
+    useEffect(() => {
+      if(!accountDetails.accountNo) return;
+      const fetchTransactions = async() => {
+        try {
+          const response = await api.get(`/api/transaction/${accountDetails.accountNo}`);
+          setTransactions(response.data.data);
+          
+        } catch (error) {
+          setError('Error fetching account details');
+          console.error(err);
+        }
+      }
+
+      fetchTransactions();
+    },[accountDetails])
 
   const handlePrint = () => {
     const printContents = document.getElementById('account-profile').outerHTML;
@@ -33,6 +48,11 @@ function LoanAccProfile() {
     printWindow.document.write(`
       <html>
       <head><title>Print Account Profile</title></head>
+       <style>
+          table { width: 100%; border-collapse: collapse; }
+          th, td { border: 1px solid black; padding: 8px; text-align: left; }
+          th { background-color: #f2f2f2; }
+        </style>
       <body>${printContents}</body>
       </html>
     `);
@@ -41,17 +61,19 @@ function LoanAccProfile() {
   };
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this account?");
-    if (confirmDelete) {
-      try {
-        await api.delete(`/api/loan/${accountDetails.AadharNo}`);
-        alert('Account deleted successfully.');
-        navigate('/all-accounts'); // Redirect to account list after deletion
-      } catch (error) {
-        console.error('Error deleting account:', error);
-        alert('Error deleting account.');
-      }
-    }
+    navigate(`/loan/account/delete/${accountDetails.accountNo}`);
+
+    // const confirmDelete = window.confirm("Are you sure you want to delete this account?");
+    // if (confirmDelete) {
+    //   try {
+    //     await api.delete(`/api/loan/${accountDetails.AadharNo}`);
+    //     alert('Account deleted successfully.');
+    //     navigate('/loanaccounts'); // Redirect to account list after deletion
+    //   } catch (error) {
+    //     console.error('Error deleting account:', error);
+    //     alert('Error deleting account.');
+    //   }
+    // }
   };
 
   const handleUpdate = () => {
@@ -75,7 +97,7 @@ function LoanAccProfile() {
         <p><strong>Mobile:</strong> {accountDetails.mobileNo}</p>
         <p><strong>Aadhar:</strong> {accountDetails.AadharNo}</p>
         <p><strong>Address:</strong> {accountDetails.Address}</p>
-        <p><strong>Remaining Loan Amount:</strong> {accountDetails.loanAmount}</p>
+        <p><strong>Remaining Loan Amount: ₹</strong> {accountDetails.loanAmount}</p>
 <br />
         <h2>Transaction History</h2>
         <table className="table table-bordered table-hover">
@@ -93,8 +115,8 @@ function LoanAccProfile() {
               <tr key={transaction._id}>
                 <td>{transaction.date}</td>
                 <td>{transaction.transactionid}</td>
-                <td>{transaction.deposit}</td>
-                <td>{transaction.withdraw}</td>
+                <td>{transaction.typeOfTransaction === 'deposit'? transaction.amount : 0}</td>
+                <td>{transaction.typeOfTransaction === 'widthdraw'? transaction.amount : 0}</td>
                 <td>{transaction.remarks}</td>
               </tr>
             )) : <tr><td colSpan="5">No transactions available</td></tr>}

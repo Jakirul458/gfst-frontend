@@ -48,6 +48,7 @@ function AllAccounts() {
   const handlePrint = () => {
     const printWindow = window.open('', '_blank');
     const printContents = document.getElementById('accounts-table').outerHTML;
+    
     printWindow.document.write(`
       <html>
       <head>

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import api from '../api/index'
+import './Profile.css';
+
 
 function AccountProfile() {
   const params = useParams();
@@ -47,7 +49,12 @@ function AccountProfile() {
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
       <html>
-      <head><title>Print Account Profile</title></head>
+      <head><title> Loan Account Profile</title></head>
+       <style>
+          table { width: 100%; border-collapse: collapse; }
+          th, td { border: 1px solid black; padding: 8px; text-align: left; }
+          th { background-color: #f2f2f2; }
+        </style>
       <body>${printContents}</body>
       </html>
     `);
@@ -55,19 +62,37 @@ function AccountProfile() {
     printWindow.print();
   };
 
-  const handleDelete = async () => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this account?");
-    if (confirmDelete) {
-      try {
-        await api.delete(`/api/savings/${accountDetails.AadharNo}`);
-        alert('Account deleted successfully.');
-        navigate('/all-accounts'); // Redirect to account list after deletion
-      } catch (error) {
-        console.error('Error deleting account:', error);
-        alert('Error deleting account.');
-      }
-    }
+  // const handleDelete = async () => {
+  //   const confirmDelete = window.confirm("Are you sure you want to delete this account?");
+  //   if (confirmDelete) {
+  //     try {
+  //       await api.delete(`/api/savings/${accountDetails.AadharNo}`);
+  //       alert('Account deleted successfully.');
+  //       navigate('/all-accounts'); // Redirect to account list after deletion
+  //     } catch (error) {
+  //       console.error('Error deleting account:', error);
+  //       alert('Error deleting account.');
+  //     }
+  //   }
+  // };
+
+
+  const handleDelete = () => {
+    navigate(`/savings/account/delete/${accountDetails.accountNo}`);
+
+    // const confirmDelete = window.confirm("Are you sure you want to delete this account?");
+    // if (confirmDelete) {
+    //   try {
+    //     await api.delete(`/api/savings/${accountDetails.AadharNo}`);
+    //     alert('Account deleted successfully.');
+    //     navigate('/savingsaccounts'); // Redirect to account list after deletion
+    //   } catch (error) {
+    //     console.error('Error deleting account:', error);
+    //     alert('Error deleting account.');
+    //   }
+    // }
   };
+  
 
   const handleUpdate = async () => {
     navigate(`/savings/account/update/${accountDetails.accountNo}`);
@@ -86,7 +111,7 @@ function AccountProfile() {
         <p><strong>Mobile:</strong> {accountDetails.mobileNo}</p>
         <p><strong>Aadhar:</strong> {accountDetails.AadharNo}</p>
         <p><strong>Address:</strong> {accountDetails.Address}</p>
-        <p><strong>Balance:</strong> {accountDetails.balance}</p>
+        <p><strong> Available Balance: ₹</strong> {accountDetails.balance}</p>
 <br />
         <h2>Transaction History</h2>
         <table className="table table-bordered table-hover">
@@ -104,7 +129,6 @@ function AccountProfile() {
               <tr key={transaction._id}>
                 <td>{transaction.date}</td>
                 <td>{transaction.transactionId}</td>
-                <td>{transaction.deposit}</td>
                 <td>{transaction.typeOfTransaction === 'deposit'? transaction.amount : 0}</td>
                 <td>{transaction.typeOfTransaction === 'widthdraw'? transaction.amount : 0}</td>
                 <td>{transaction.remarks}</td>

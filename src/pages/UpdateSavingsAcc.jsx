@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../api/index'
 
 function UpdateSavingsAcc() {
   const { accountNo } = useParams(); // Get account number from URL
@@ -18,7 +19,7 @@ function UpdateSavingsAcc() {
   useEffect(() => {
     const fetchAccountDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/savings/${accountNo}`);
+        const response = await api.get(`/api/savings/${accountNo}`);
         setAccountDetails(response.data.data); // Populate form fields with existing data
       } catch (err) {
         setError('Error fetching account details');
@@ -40,7 +41,7 @@ function UpdateSavingsAcc() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3001/api/savings/${accountNo}`, accountDetails);
+      await api.put(`/api/savings/${accountNo}`, accountDetails);
       alert('Account updated successfully');
       navigate(`/account/${accountNo}`); // Redirect back to the profile page after update
     } catch (err) {

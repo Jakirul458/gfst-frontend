@@ -6,6 +6,10 @@
   box-sizing: border-box;
   font-family: "Quicksand", sans-serif;
 }
+h3 {
+  color: limegreen;
+}
+
 @media (min-width: 500px) {
   body {
       padding: 0;

@@ -1,12 +1,12 @@
 .footer {
     background-color: #808183;
-    padding: 10px; /* Smaller padding to reduce the footer size */
+    padding: 5px; 
     text-align: center;
     width: 100%;
     display: flex;
-    justify-content: center; /* Distribute About and Contact sections evenly */
+    justify-content: center; 
     align-items: center;
-    flex-wrap: wrap; /* Allow it to wrap if the screen is small */
+    flex-wrap: wrap; 
 }
 .footer-us{
    
@@ -14,22 +14,22 @@
 }
 
 .footer div {
-    margin: 5px; /* Less margin for a smaller footer */
-    padding: 0; /* Remove extra padding */
-    background-color: transparent; /* No background color */
-    box-shadow: none; /* Remove box shadow */
-    border-radius: 0; /* Remove rounded corners */
+    margin: 5px; 
+    padding: 0; 
+    background-color: transparent; 
+    box-shadow: none; 
+    border-radius: 0; 
 }
 
 .footer h4 {
-    margin-bottom: 5px; /* Reduce space between title and content */
-    font-size: 1.1em; /* Slightly smaller font size */
-    color: #06213d; /* Accent color for section titles */
+    margin-bottom: 5px; 
+    font-size: 1.1em; 
+    color: #06213d; 
 }
 
 .footer p {
     color: #151313;
-    font-size: 0.9em; /* Slightly smaller text for content */
+    font-size: 0.9em; 
 }
 
 @media (max-width: 768px) {

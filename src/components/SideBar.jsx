@@ -29,6 +29,9 @@ import InvestmentProfile from '../pages/InvestmentProfile';
 import UpdateLoanAcc from '../pages/UpdateLoanAcc';
 import UpdateInvestmentAcc from '../pages/UpdateInvestmentAcc';
 import UpdateSavingsAcc from '../pages/UpdateSavingsAcc';
+import DeleteSavingsAcc from '../pages/DeleteSavingsAcc';
+import DeleteLoanAcc from '../pages/DeleteLoanAcc';
+import DeleteInvestmentAcc from '../pages/DeleteInvestmentAcc';
 import './SideBar.css';
 
 
@@ -111,6 +114,10 @@ function SideBar() {
                             <Route path="/savings/account/update/:accountNo" element={<UpdateSavingsAcc />} />
                             <Route path="/loan/account/update/:accountNo" element={<UpdateLoanAcc />} />
                             <Route path="/investment/account/update/:accountNo" element={<UpdateInvestmentAcc />} />
+
+                            <Route path="/savings/account/delete/:accountNo" element={<DeleteSavingsAcc />} />
+                            <Route path="/loan/account/delete/:accountNo" element={<DeleteLoanAcc />} />
+                            <Route path="/investment/account/delete/:accountNo" element={<DeleteInvestmentAcc />} />
                         
                         </Routes>
                     </div>
