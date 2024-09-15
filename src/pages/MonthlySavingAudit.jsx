@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import api from '../api/index'
+import api from '../api/index';
 
 function MonthlySavingAudit() {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await api.get('/api/transaction');
-        console.log('API Response:', response.data); // Log the API response
+        console.log('API Response:', response.data);
         setUsers(response.data.data);
-        // setFilteredUsers(response.data); // Initialize filtered users
+        setFilteredUsers(response.data.data);
       } catch (err) {
         console.error('Error fetching users:', err);
       }
@@ -22,25 +23,39 @@ function MonthlySavingAudit() {
     fetchUsers();
   }, []);
 
-  // Update filtered users when search query or user data changes
   useEffect(() => {
-    if (searchQuery === '') {
-      setFilteredUsers(users); // If search is empty, show all users
-    } else {
-      const filtered = users.filter((user) => {
-        return (
-          user.account?.toString().includes(searchQuery) ||
-          user.transactionid?.toString().includes(searchQuery) ||
-          user.deposit?.toString().includes(searchQuery) ||
-          user.withdraw?.toString().includes(searchQuery)
-        );
-      });
-      setFilteredUsers(filtered);
+    let filtered = users;
+
+    // Filter by search query (accountNo, transactionId, remarks)
+    if (searchQuery) {
+      filtered = filtered.filter((user) =>
+        (user.accountNo && user.accountNo.toString().toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (user.transactionId && user.transactionId.toString().toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (user.remarks && user.remarks.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
     }
-  }, [searchQuery, users]);
+
+    // Filter by date range
+    if (startDate && endDate) {
+      filtered = filtered.filter((user) => {
+        const date = new Date(user.date);
+        return date >= new Date(startDate) && date <= new Date(endDate);
+      });
+    }
+
+    setFilteredUsers(filtered);
+  }, [searchQuery, startDate, endDate, users]);
 
   const handleSearch = (e) => {
-    setSearchQuery(e.target.value); // Update the search query
+    setSearchQuery(e.target.value);
+  };
+
+  const handleStartDateChange = (e) => {
+    setStartDate(e.target.value);
+  };
+
+  const handleEndDateChange = (e) => {
+    setEndDate(e.target.value);
   };
 
   const handlePrint = () => {
@@ -49,10 +64,10 @@ function MonthlySavingAudit() {
     printWindow.document.write(`
       <html>
       <head>
-        <title>List of all savings accounts transactions</title>
+        <title>List of All Savings Accounts Transactions</title>
         <style>
           table { width: 100%; border-collapse: collapse; }
-          th, td { border: 1px solid black; padding: 8px; text-align: left; }
+          th, td { border: 1px solid black; padding: 4px; text-align: left; }
           th { background-color: #f2f2f2; }
         </style>
       </head>
@@ -70,14 +85,32 @@ function MonthlySavingAudit() {
     <>
       <h1 className="mb-4">List of Savings Transactions</h1>
 
-      {/* Search input */}
+      {/* Combined Search input */}
       <input
         type="text"
-        placeholder="Search by Account No, Transaction ID, Deposit, or Withdraw"
+        placeholder="Search by Account No, Transaction ID, or Remarks"
         value={searchQuery}
         onChange={handleSearch}
         className="form-control mb-4 search-bar"
       />
+
+      {/* Date range inputs */}
+      <div className="mb-4">
+        <input
+          type="date"
+          value={startDate}
+          onChange={handleStartDateChange}
+          className="form-control mb-2"
+          placeholder="Start Date"
+        />
+        <input
+          type="date"
+          value={endDate}
+          onChange={handleEndDateChange}
+          className="form-control"
+          placeholder="End Date"
+        />
+      </div>
 
       <div id="accounts-table">
         <table className="table table-bordered table-hover">
@@ -93,15 +126,15 @@ function MonthlySavingAudit() {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {filteredUsers.map((user, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{user.accountNo}</td>
                 <td>{user.transactionId}</td>
-                <td>{user.typeOfTransaction === 'deposit'? user.amount : 0}</td>
-                <td>{user.typeOfTransaction === 'widthdraw'? user.amount : 0}</td>
+                <td>{user.typeOfTransaction === 'deposit' ? user.amount : 0}</td>
+                <td>{user.typeOfTransaction === 'withdraw' ? user.amount : 0}</td>
                 <td>{user.remarks}</td>
-                {/* <td>{user.date}</td> */}
+                <td>{user.date}</td>
               </tr>
             ))}
           </tbody>

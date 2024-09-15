@@ -1,9 +1,7 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import api from '../api/index'
-
+import api from '../api/index';
 import './AllAcountsForm.css';
 
 function AllAccounts() {
@@ -27,18 +25,14 @@ function AllAccounts() {
   }, []);
 
   useEffect(() => {
-    if (searchQuery === '') {
-      setFilteredUsers(users);
-    } else {
-      const filtered = users.filter((user) => {
-        return (
-          user.accountNo?.toString().includes(searchQuery) ||
-          user.AadharNo?.toString().includes(searchQuery) ||
-          user.name?.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      });
-      setFilteredUsers(filtered);
-    }
+    const filtered = users.filter((user) => {
+      return (
+        user.accountNo?.toString().includes(searchQuery) ||
+        user.AadharNo?.toString().includes(searchQuery) ||
+        user.name?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    });
+    setFilteredUsers(filtered);
   }, [searchQuery, users]);
 
   const handleSearch = (e) => {
@@ -52,7 +46,7 @@ function AllAccounts() {
     printWindow.document.write(`
       <html>
       <head>
-        <title> List of all savings Accounts </title>
+        <title>List of All Savings Accounts</title>
         <style>
           table { width: 100%; border-collapse: collapse; }
           th, td { border: 1px solid black; padding: 8px; text-align: left; }
@@ -75,7 +69,7 @@ function AllAccounts() {
 
       <input
         type="text"
-        placeholder="Search by Account Number or Aadhar Number or Name"
+        placeholder="Search by Account Number, Aadhar Number, or Name"
         value={searchQuery}
         onChange={handleSearch}
         className="form-control mb-4 search-bar"
@@ -102,7 +96,6 @@ function AllAccounts() {
                 <td>{user.date}</td>
                 <td>
                   <Link to={`/savings/account/${user.accountNo}`}>{user.accountNo}</Link>
-               
                 </td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>

@@ -37,3 +37,11 @@
         flex-direction: column;
     }
 }
+.email-link {
+    color: #1111e9; /* Blue color for the link */
+    text-decoration: none; /* Remove underline */
+}
+
+.email-link:hover {
+    text-decoration: underline; /* Underline on hover */
+}

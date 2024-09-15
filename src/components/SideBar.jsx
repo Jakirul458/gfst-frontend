@@ -11,12 +11,10 @@ import LoanInstallment from '../pages/LoanInstallment';
 import LoanAcounts from '../pages/LoanAcounts';
 import FindLoanAccounts from '../pages/FindLoanAccounts';
 import MonthlyLoanAudit from '../pages/MonthlyLoanAudit';
-import CloseLoanAccount from '../pages/CloseLoanAccount';
 import CreateInvestmentAccount from '../pages/CreateInvestmentAccount';
 import Profit from '../pages/Profit';
 import MonthlyInvestmentAudit from '../pages/MonthlyInvestmentAudit';
 import InvestmentAccounts from '../pages/InvestmentAccounts';
-import CloseInvestmentAccount from '../pages/CloseInvestmentAccount';
 import FindInvestmentAccount from '../pages/FindInvestmentAccount';
 import Dashboard from '../pages/Dashboard';
 import About from '../pages/About';
@@ -50,7 +48,7 @@ function SideBar() {
                                 <NavLink to='/withdraw'>Withdraw</NavLink>
                                 <NavLink to='/allaccounts'>All Accounts</NavLink>
                                 <NavLink to='/findsavingaccount'>Find Saving Accounts</NavLink>
-                                <NavLink to='/monthlysavingaudit'>Monthly Audit</NavLink>
+                                <NavLink to='/monthlysavingaudit'>Savings Transaction</NavLink>
                             </nav>
                         </div>
 
@@ -58,11 +56,11 @@ function SideBar() {
                             <h2>Loan Account</h2>
                             <nav>
                                 <NavLink to='/createloanaccount'>Create Account</NavLink>
-                                <NavLink to='/loaninstallment'>Loan Installment</NavLink>
+                                <NavLink to='/loaninstallment'>EMI</NavLink>
                                 <NavLink to='/loanaccounts'>Loan Accounts</NavLink>
                                 <NavLink to='/findloanaccount'>Find Loan Account</NavLink>
-                                <NavLink to='/monthlyloanaudit'>Monthly Audit</NavLink>
-                                <NavLink to='/closeloanaccount'>Close Account</NavLink>
+                                <NavLink to='/monthlyloanaudit'>Loan Transaction</NavLink>
+                                
                             </nav>
                         </div>
 
@@ -74,7 +72,7 @@ function SideBar() {
                                 <NavLink to='/findinvestmentaccount'>Find Investment Account</NavLink>
                                 <NavLink to='/investmentaccounts'>Investment Accounts</NavLink>
                                 <NavLink to='/monthlyinvestmentaudit'>Monthly Audit</NavLink>
-                                <NavLink to='/closeinvestmentaccount'>Close Accounts</NavLink>
+                                
                             </nav>
                         </div>
                        
@@ -94,12 +92,12 @@ function SideBar() {
                             <Route path="/loanaccounts" element={<LoanAcounts />} />
                             <Route path="/findloanaccount" element={<FindLoanAccounts />} />
                             <Route path="/monthlyloanaudit" element={<MonthlyLoanAudit />} />
-                            <Route path="/closeloanaccount" element={<CloseLoanAccount />} />
+    
                             <Route path="/createinvestmentaccount" element={<CreateInvestmentAccount />} />
                             <Route path="/profit" element={<Profit />} />
                             <Route path="/monthlyinvestmentaudit" element={<MonthlyInvestmentAudit />} />
                             <Route path="/investmentaccounts" element={<InvestmentAccounts />} />
-                            <Route path="/closeinvestmentaccount" element={<CloseInvestmentAccount />} />
+ 
                             <Route path="/findinvestmentaccount" element={<FindInvestmentAccount />} />
                             <Route path="/dashboard" element={<Dashboard />} />
                             <Route path="/about" element={<About />} />

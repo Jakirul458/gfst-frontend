@@ -65,10 +65,13 @@ const withdraw = () => {
         {error && <p className="error">{error}</p>}
 
         <div className="form-group">
-          <label>Account No</label>
+        <h2 style={{ textAlign: 'center' }}>For Withdraw</h2>
+
+
+        <br />
           <input
             type="text"
-            placeholder="Enter Consumer Account Number"
+            placeholder="Enter savings account number"
             value={account}
             onChange={(e) => setAccount(e.target.value)}
           />
