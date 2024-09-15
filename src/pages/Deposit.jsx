@@ -81,35 +81,15 @@ const deposit = () => {
 
         {isVerified && (
           <>
-            <p>Consumer Name: {accountName}</p> {/* Display the account name */}
-
-            <div className="form-group">
-              <label>Date</label>
-              <input
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Transaction ID</label>
-              <input
-                type="text"
-                value={transactionid}
-                onChange={(e) => setTransactionid(e.target.value)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>deposit Amount</label>
+            <p>Consumer Name: <strong>{accountName}</strong></p><br />      
+            <div className="form-group">      
               <input
                 type="number"
                 value={deposit}
                 onChange={(e) => setdeposit(e.target.value)}
               />
             </div>
-
+{/* 
             <div className="form-group">
               <label>Remarks</label>
               <select
@@ -117,9 +97,9 @@ const deposit = () => {
                 onChange={(e) => setRemarks(e.target.value)}
               >
                 <option value="deposit">deposit</option>
-                {/* <option value="deposit">deposit</option> */}
+         
               </select>
-            </div>
+            </div> */}
 
             <button type="submit" className="submit-btn">Submit</button>
           </>

@@ -18,7 +18,8 @@ const loantransaction = () => {
     e.preventDefault();
     try {
       const response = await api.post('/api/transaction/emi', {
-        accountNo : account, amount : deposit , remarks },
+        accountNo: account, amount: deposit, remarks
+      },
       );
       console.log(response.data)
       if (response.data.success) {
@@ -53,7 +54,7 @@ const loantransaction = () => {
         setAccountName(''); // Clear the account name if verification fails
         setError('Account does not exist.');
       }
-    }catch (err) {
+    } catch (err) {
       setIsVerified(false);
       setAccountName(''); // Clear the account name on error
       setError('Error verifying account. Please try again.');
@@ -66,7 +67,7 @@ const loantransaction = () => {
         {error && <p className="error">{error}</p>}
 
         <div className="form-group">
-        <h2 style={{ textAlign: 'center' }}>For EMI</h2>
+          <h2 style={{ textAlign: 'center' }}>For EMI</h2>
           <input
             type="text"
             placeholder="Enter loan account number"
@@ -78,45 +79,46 @@ const loantransaction = () => {
 
         {isVerified && (
           <>
-            <p>Consumer Name: {accountName}</p> {/* Display the account name */}
+            <p>Consumer Name: <strong>{accountName}</strong></p><br />
 
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>Date</label>
               <input
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
               />
-            </div>
+            </div> */}
 
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>Transaction ID</label>
               <input
                 type="text"
                 value={transactionid}
                 onChange={(e) => setTransactionid(e.target.value)}
               />
-            </div>
+            </div> */}
 
             <div className="form-group">
-              <label>Deposit</label>
+
               <input
                 type="number"
+                placeholder="Enter amount"
                 value={deposit}
                 onChange={(e) => setDeposit(e.target.value)}
               />
             </div>
 
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>Remarks</label>
               <select
                 value={remarks}
                 onChange={(e) => setRemarks(e.target.value)}
               >
                 <option value="loantransaction">loantransaction</option>
-                {/* <option value="loantransaction">loantransaction</option> */}
+                
               </select>
-            </div>
+            </div> */}
 
             <button type="submit" className="submit-btn">Submit</button>
           </>

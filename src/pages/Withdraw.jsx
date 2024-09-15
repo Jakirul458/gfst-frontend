@@ -80,45 +80,28 @@ const withdraw = () => {
 
         {isVerified && (
           <>
-            <p>Consumer Name: {accountName}</p> {/* Display the account name */}
+            <p>Consumer Name: <strong>{accountName}</strong></p><br />
 
             <div className="form-group">
-              <label>Date</label>
-              <input
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Transaction ID</label>
-              <input
-                type="text"
-                value={transactionid}
-                onChange={(e) => setTransactionid(e.target.value)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>withdraw Amount</label>
+              
               <input
                 type="number"
+                placeholder="Enter withdraw Amount "
                 value={withdraw}
                 onChange={(e) => setwithdraw(e.target.value)}
               />
             </div>
 
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>Remarks</label>
               <select
                 value={remarks}
                 onChange={(e) => setRemarks(e.target.value)}
               >
                 <option value="withdraw">withdraw</option>
-                {/* <option value="Withdraw">Withdraw</option> */}
+               
               </select>
-            </div>
+            </div> */}
 
             <button type="submit" className="submit-btn">Submit</button>
           </>

@@ -126,18 +126,21 @@ function MonthlySavingAudit() {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((user, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{user.accountNo}</td>
-                <td>{user.transactionId}</td>
-                <td>{user.typeOfTransaction === 'deposit' ? user.amount : 0}</td>
-                <td>{user.typeOfTransaction === 'withdraw' ? user.amount : 0}</td>
-                <td>{user.remarks}</td>
-                <td>{user.date}</td>
-              </tr>
-            ))}
-          </tbody>
+  {filteredUsers.map((user, index) => {
+    console.log(user);  // Debugging line to check API data
+    return (
+      <tr key={index}>
+        <td>{index + 1}</td>
+        <td>{user.accountNo}</td>
+        <td>{user.transactionId}</td>
+        <td>{user.typeOfTransaction === 'deposit' ? user.amount : 0}</td>
+        <td>{user.typeOfTransaction === 'withdraw' ? user.amount : 0}</td>
+        <td>{user.remarks}</td>
+        <td>{user.date}</td>
+      </tr>
+    );
+  })}
+</tbody>
         </table>
       </div>
 
