@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import './CreateSavingAccountForm.css';
 import api from '../api/index'
@@ -49,72 +48,75 @@ const CreateSavingAccount = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="account-form">
-      {error && <p className="error">{error}</p>}
-      <div className="form-group">
-        <label>Date</label>
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label>Name</label>
-        <input
-          type="text"
-          placeholder="Enter Consumer Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label>Email</label>
-        <input
-          type="email"
-          placeholder="Enter Consumer Email ID"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label>Mobile No</label>
-        <input
-          type="text"
-          placeholder="Enter Consumer Mobile Number"
-          value={mobileNo}
-          onChange={(e) => setMobileNo(e.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label>Aadhar No</label>
-        <input
-          type="text"
-          placeholder="Enter Consumer Aadhar Number"
-          value={AadharNo}
-          onChange={(e) => setAadharNo(e.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label>Address</label>
-        <input
-          type="text"
-          placeholder="Enter Consumer Address"
-          value={Address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label>Opening Balance</label>
-        <input
-          type="text"
-          placeholder="Enter Opening Balance"
-          value={balance}
-          onChange={(e) => setBalance(e.target.value)}
-        />
-      </div>
-      <button type="submit" className="submit-btn">Submit</button>
-    </form>
+    <div className='form__container'>
+      <form onSubmit={handleSubmit} className="account-form">
+        {error && <p className="error">{error}</p>}
+        <div className="form-group">
+          <label>Date</label>
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Name</label>
+          <input
+            type="text"
+            placeholder="Enter Consumer Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Email</label>
+          <input
+            type="email"
+            placeholder="Enter Consumer Email ID"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Mobile No</label>
+          <input
+            type="text"
+            placeholder="Enter Consumer Mobile Number"
+            value={mobileNo}
+            onChange={(e) => setMobileNo(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Aadhar No</label>
+          <input
+            type="text"
+            placeholder="Enter Consumer Aadhar Number"
+            value={AadharNo}
+            onChange={(e) => setAadharNo(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Address</label>
+          <input
+            type="text"
+            placeholder="Enter Consumer Address"
+            value={Address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label>Opening Balance</label>
+          <input
+            type="text"
+            placeholder="Enter Opening Balance"
+            value={balance}
+            onChange={(e) => setBalance(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="submit-btn">Submit</button>
+      </form>
+    </div>
+
   );
 };
 

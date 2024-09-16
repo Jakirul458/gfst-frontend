@@ -12,9 +12,9 @@ function Navbar({ handleLogout }) {
       </div>
 
       <div className="navbar-links">
-        <NavLink to='/dashboard' className="nav-link">Dashboard</NavLink>
-        <NavLink to='/about' className="nav-link">About</NavLink>
-        <NavLink to='/contact' className="nav-link">Contact</NavLink>
+        <NavLink to='/app/society/dashboard' className="nav-link">Dashboard</NavLink>
+        <NavLink to='/app/society/about' className="nav-link">About</NavLink>
+        <NavLink to='/app/society/contact' className="nav-link">Contact</NavLink>
         <button onClick={handleLogout} className="nav-link logout-button">Logout</button>
       </div>
     </div>

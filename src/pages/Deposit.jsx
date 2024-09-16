@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import api from '../api/index'
 // import './deposit.css';
 
-const deposit = () => {
+const Deposit = () => {
   const [account, setAccount] = useState('');
   const [date, setDate] = useState('');
   const [transactionid, setTransactionid] = useState('');
@@ -115,4 +115,4 @@ const deposit = () => {
   );
 };
 
-export default deposit;
+export default Deposit;

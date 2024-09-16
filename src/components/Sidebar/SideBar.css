@@ -1,22 +1,8 @@
-/*Sidebar.css*/
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.dashboard {
-  display: flex;
-  height: 100vh;
-  font-family: Arial, sans-serif;
-}
-
 .sidebar {
   display: flex;
   flex-direction: column;
   background-color: teal;
-  width: 30vh;
-  height: 100%; /* Full height of the viewport */
+  height: calc(100vh - 4rem);
   padding: 11px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   overflow-y: auto; /* Enable vertical scrolling */

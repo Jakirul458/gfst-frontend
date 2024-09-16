@@ -135,10 +135,7 @@ function MonthlyLoanAudit() {
             {filteredUsers.map((user, index) => (
               <tr key={index}>
                 <td>{index + 1}</td> 
-                <td>
-                  <Link to={`/loan/account/${user.accountNo}`}>{user.accountNo}</Link>
-                </td>  
-                <td>{user.accountNo}</td>            
+                <td><Link to={`/loan/account/${user.accountNo}`}>{user.accountNo}</Link></td>           
                 <td>{user.transactionId}</td>                           
                 <td>{user.deposit}</td>
                 <td>{user.withdraw}</td>

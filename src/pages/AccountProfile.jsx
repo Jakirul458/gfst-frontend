@@ -12,12 +12,12 @@ function AccountProfile() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location.pathname.split('/')[3], "somelog")
+  console.log(location.pathname.split('/')[4], "somelog")
 
   useEffect(() => {
     const fetchAccountDetails = async () => {
       try {
-        const response = await api.get(`/api/savings/${location.pathname.split('/')[3]}`);
+        const response = await api.get(`/api/savings/${location.pathname.split('/')[4]}`);
         setAccountDetails(response.data.data);
       } catch (err) {
         setError('Error fetching account details');
@@ -63,13 +63,13 @@ function AccountProfile() {
   };
 
   const handleDelete = () => {
-    navigate(`/savings/account/delete/${accountDetails.accountNo}`);
+    navigate(`/app/savings/account/delete/${accountDetails.accountNo}`);
 
   };
   
 
   const handleUpdate = async () => {
-    navigate(`/savings/account/update/${accountDetails.accountNo}`);
+    navigate(`/app/savings/account/update/${accountDetails.accountNo}`);
     
   };
 

@@ -23,7 +23,7 @@ function DeleteSavingsAcc() {
        
         await api.delete(`/api/savings/${AadharNo}`);
         alert('Account deleted successfully.');
-        navigate('/allaccounts');  
+        navigate('/app/savings/all');  
       } else {
         setError('Aadhar number does not match the account.');
       }

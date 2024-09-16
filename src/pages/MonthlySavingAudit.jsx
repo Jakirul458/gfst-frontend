@@ -12,7 +12,7 @@ function MonthlySavingAudit() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await api.get('/api/transaction');
+        const response = await api.get('/api/transaction/all/savings');
         console.log('API Response:', response.data);
         setUsers(response.data.data);
         setFilteredUsers(response.data.data);
@@ -131,11 +131,8 @@ function MonthlySavingAudit() {
     console.log(user);  // Debugging line to check API data
     return (
       <tr key={index}>
-        <td>{index + 1}</td>
-        <td>
-                  <Link to={`/savings/account/${user.accountNo}`}>{user.accountNo}</Link>
-                </td>
-        <td>{user.accountNo}</td>
+        <td>{index + 1}</td>       
+        <td> <Link to={`/savings/account/${user.accountNo}`}>{user.accountNo}</Link> </td>            
         <td>{user.transactionId}</td>
         <td>{user.typeOfTransaction === 'deposit' ? user.amount : 0}</td>
         <td>{user.typeOfTransaction === 'withdraw' ? user.amount : 0}</td>

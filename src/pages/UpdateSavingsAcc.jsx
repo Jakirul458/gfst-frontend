@@ -43,7 +43,7 @@ function UpdateSavingsAcc() {
     try {
       await api.put(`/api/savings/${accountNo}`, accountDetails);
       alert('Account updated successfully');
-      navigate(`/account/${accountNo}`); // Redirect back to the profile page after update
+      navigate(`/app/savings/account/${accountNo}`); // Redirect back to the profile page after update
     } catch (err) {
       console.error('Error updating account:', err);
       setError('Error updating account');
