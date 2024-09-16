@@ -16,7 +16,7 @@ function LoanAccProfile() {
   useEffect(() => {
     const fetchAccountDetails = async () => {
       try {
-        const response = await api.get(`/api/loan/${location.pathname.split('/')[3]}`);
+        const response = await api.get(`/api/loan/${location.pathname.split('/')[4]}`);
         setAccountDetails(response.data.data);
       } catch (err) {
         setError('Error fetching account details');
@@ -32,6 +32,7 @@ function LoanAccProfile() {
           if(!accountDetails)
             return;
           const response = await api.get(`/api/transaction/type/${accountDetails?.accountNo}`);
+          console.log(response, "responvkdfnvj")
           setTransactions(response.data.data);
 
           console.log(response.data.data, "dfkjvnkj")
@@ -119,7 +120,7 @@ function LoanAccProfile() {
                 <td>{transaction.date}</td>
                 <td>{transaction.transactionId}</td>
                 <td>{transaction.typeOfTransaction === 'emi'? transaction.amount : 0}</td>
-                <td>{transaction.typeOfTransaction === 'widthdraw'? transaction.amount : 0}</td>
+                <td>{transaction.typeOfTransaction === 'loan'? transaction.amount : 0}</td>
                 <td>{transaction.remarks}</td>
               </tr>
             )) : <tr><td colSpan="5">No transactions available</td></tr>}
