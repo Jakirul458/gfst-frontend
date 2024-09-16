@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import api from '../../../api/index'
 import './AccountProfile.css';
-
+import { formatMongoDate } from '../../../util/FormatDate';
 
 function AccountProfile() {
   const params = useParams();
@@ -18,6 +18,7 @@ function AccountProfile() {
     const fetchAccountDetails = async () => {
       try {
         const response = await api.get(`/api/savings/${location.pathname.split('/')[4]}`);
+
         setAccountDetails(response.data.data);
       } catch (err) {
         setError('Error fetching account details');
@@ -33,6 +34,17 @@ function AccountProfile() {
     const fetchTransactions = async() => {
       try {
         const response = await api.get(`/api/transaction/${accountDetails.accountNo}`);
+        console.log(response, "transaciton response")
+
+        const smdata = new Date(response.data.data.createdAt);
+        response.data.data.date = smdata.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',        
+        });
+        
         setTransactions(response.data.data);
         
       } catch (error) {
@@ -101,10 +113,10 @@ function AccountProfile() {
           <tbody>
             {transactions.length > 0 ? transactions.map((transaction) => (
               <tr key={transaction._id}>
-                <td>{transaction.date}</td>
+                <td>{formatMongoDate(transaction.createdAt)}</td>
                 <td>{transaction.transactionId}</td>
                 <td>{transaction.typeOfTransaction === 'deposit'? transaction.amount : 0}</td>
-                <td>{transaction.typeOfTransaction === 'widthdraw'? transaction.amount : 0}</td>
+                <td>{transaction.typeOfTransaction === 'withdraw'? transaction.amount : 0}</td>
                 <td>{transaction.remarks}</td>
               </tr>
             )) : <tr><td colSpan="5">No transactions available</td></tr>}

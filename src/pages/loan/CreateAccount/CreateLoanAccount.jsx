@@ -1,27 +1,28 @@
-import React, { useState } from 'react';
-import './CreateSavingAccountForm.css';
-import api from '../api/index'
 
-const CreateInvestmentAccount = () => {
+import React, { useState } from 'react';
+import './CreateLoanAccountForm.css';
+import api from '../../../api';
+
+const CreateLoanAccount = () => {
   const [date, setDate] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [mobileNo, setMobileNo] = useState('');
   const [AadharNo, setAadharNo] = useState('');
   const [Address, setAddress] = useState('');
-  const [investmentAmount, setInvestmentAmount] = useState('');
+  const [loanAmount, setLoanAmount] = useState('');
   const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted");
 
-    if (!date || !name || !email || !mobileNo || !AadharNo || !Address  || !investmentAmount) {
+    if (!date || !name || !email || !mobileNo || !AadharNo || !Address  || !loanAmount) {
       setError('Please fill in all fields.');
       return;
     }
 
-    api.post('/api/investment/create-account', { date, name,email, mobileNo, AadharNo, Address,  investmentAmount })
+    api.post('/api/loan/create-account', { date, name,email, mobileNo, AadharNo, Address,  loanAmount })
       .then(result => {
         console.log(result);
         alert('Account created successfully!');
@@ -32,7 +33,7 @@ const CreateInvestmentAccount = () => {
         setAadharNo('');
         setAddress('');
         setEmail('');
-        setInvestmentAmount('');
+        setLoanAmount('');
         setError(null);
       })
       .catch(error => {
@@ -98,12 +99,12 @@ const CreateInvestmentAccount = () => {
         />
       </div>
       <div className="form-group">
-        <label>Investment Amount</label>
+        <label>Loan Amount</label>
         <input
           type="text"
           placeholder="Enter Opening Balance"
-          value={investmentAmount}
-          onChange={(e) => setInvestmentAmount(e.target.value)}
+          value={loanAmount}
+          onChange={(e) => setLoanAmount(e.target.value)}
         />
       </div>
       <button type="submit" className="submit-btn">Submit</button>
@@ -111,5 +112,4 @@ const CreateInvestmentAccount = () => {
   );
 };
 
-export default CreateInvestmentAccount;
-
+export default CreateLoanAccount;

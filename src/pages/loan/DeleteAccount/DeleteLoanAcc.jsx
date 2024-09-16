@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import api from '../api/index'; 
+import api from '../../../api';
 
 function DeleteLoanAcc() {
   const { accountNo } = useParams(); 

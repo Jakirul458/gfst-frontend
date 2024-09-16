@@ -1,10 +1,11 @@
 
 
 import React, { useEffect, useState } from 'react';
-import api from '../api/index'
+import api from '../../../api';
 import { Link } from 'react-router-dom';
+import './AllLoanAccounts.css';
 
-function InvestmentAccounts() {
+function LoanAccounts() {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -12,7 +13,7 @@ function InvestmentAccounts() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await api.get('/api/investment');
+        const response = await api.get('/api/loan');
         console.log('API Response:', response.data);
         setUsers(response.data.data);
         setFilteredUsers(response.data.data);
@@ -49,7 +50,7 @@ function InvestmentAccounts() {
     printWindow.document.write(`
       <html>
       <head>
-        <title> List of all savings Accounts </title>
+        <title> List of all loan Accounts </title>
         <style>
           table { width: 100%; border-collapse: collapse; }
           th, td { border: 1px solid black; padding: 8px; text-align: left; }
@@ -68,7 +69,7 @@ function InvestmentAccounts() {
 
   return (
     <>
-      <h1 className="mb-4">List of Investment Accounts</h1>
+      <h1 className="mb-4">List of Loan Accounts</h1>
 
       <input
         type="text"
@@ -89,7 +90,7 @@ function InvestmentAccounts() {
               <th>Mobile No</th>
               <th>Aadhar No</th>
               <th>Address</th>
-              <th>Investment Amount</th>
+              <th>Loan Amount</th>
             </tr>
           </thead>
 
@@ -98,14 +99,14 @@ function InvestmentAccounts() {
               <tr key={user.accountNo}>
                 <td>{user.date}</td>
                 <td>
-                  <Link to={`/investment/account/${user.accountNo}`}>{user.accountNo}</Link>
+                  <Link to={`/loan/account/${user.accountNo}`}>{user.accountNo}</Link>
                 </td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.mobileNo}</td>
                 <td>{user.AadharNo}</td>
                 <td>{user.Address}</td>
-                <td>{user.investmentAmount}</td>
+                <td>{user.loanAmount}</td>
               </tr>
             ))}
           </tbody>
@@ -119,4 +120,4 @@ function InvestmentAccounts() {
   );
 }
 
-export default InvestmentAccounts;
+export default LoanAccounts;

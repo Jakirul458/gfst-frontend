@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import React, { useState } from 'react';
-import api from '../api/index'
+import api from '../../../api';
 // import './loantransaction.css';
 
 const loantransaction = () => {

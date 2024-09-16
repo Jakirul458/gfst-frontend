@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../../api/index';
+import api from '../../../api';
 import { Link } from 'react-router-dom';
-import { formatMongoDate } from '../../../util/FormatDate';
 
-function MonthlySavingAudit() {
+function MonthlyInvestmentAudit() {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -13,7 +12,7 @@ function MonthlySavingAudit() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await api.get('/api/transaction/all/savings  ');
+        const response = await api.get('/api/transaction/all/investment');
         console.log('API Response:', response.data);
         setUsers(response.data.data);
         setFilteredUsers(response.data.data);
@@ -28,7 +27,6 @@ function MonthlySavingAudit() {
   useEffect(() => {
     let filtered = users;
 
-    // Filter by search query (accountNo, transactionId, remarks)
     if (searchQuery) {
       filtered = filtered.filter((user) =>
         (user.accountNo && user.accountNo.toString().toLowerCase().includes(searchQuery.toLowerCase())) ||
@@ -37,13 +35,19 @@ function MonthlySavingAudit() {
       );
     }
 
-    // Filter by date range
     if (startDate && endDate) {
       filtered = filtered.filter((user) => {
         const date = new Date(user.date);
         return date >= new Date(startDate) && date <= new Date(endDate);
       });
     }
+
+  
+    filtered = filtered.map((user) => ({
+      ...user,
+      deposit: user.typeOfTransaction === 'deposit' ? user.amount : 0,
+      withdraw: user.typeOfTransaction === 'withdraw' ? user.amount : 0,
+    }));
 
     setFilteredUsers(filtered);
   }, [searchQuery, startDate, endDate, users]);
@@ -66,7 +70,7 @@ function MonthlySavingAudit() {
     printWindow.document.write(`
       <html>
       <head>
-        <title>List of All Savings Accounts Transactions</title>
+        <title>List of Monthly Loan Transactions</title>
         <style>
           table { width: 100%; border-collapse: collapse; }
           th, td { border: 1px solid black; padding: 4px; text-align: left; }
@@ -85,9 +89,9 @@ function MonthlySavingAudit() {
 
   return (
     <>
-      <h1 className="mb-4">List of Savings Transactions</h1>
+      <h1 className="mb-4">List of Investment Transactions</h1>
 
-      {/* Combined Search input */}
+      
       <input
         type="text"
         placeholder="Search by Account No, Transaction ID, or Remarks"
@@ -96,7 +100,7 @@ function MonthlySavingAudit() {
         className="form-control mb-4 search-bar"
       />
 
-      {/* Date range inputs */}
+      
       <div className="mb-4">
         <input
           type="date"
@@ -118,31 +122,28 @@ function MonthlySavingAudit() {
         <table className="table table-bordered table-hover">
           <thead className="thead-dark">
             <tr>
-              <th>Serial No</th>
-              <th>Account No</th>
-              <th>Transaction ID</th>
-              <th>Deposit</th>
+              <th>Serial No</th>  
+              <th>Account No</th>             
+              <th>Transaction ID</th>                
+              <th>Profit</th>
               <th>Withdraw</th>
               <th>Remarks</th>
               <th>Date</th>
             </tr>
           </thead>
           <tbody>
-  {filteredUsers.map((user, index) => {
-    console.log(user);  // Debugging line to check API data
-    return (
-      <tr key={index}>
-        <td>{index + 1}</td>       
-        <td> <Link to={`/savings/account/${user.accountNo}`}>{user.accountNo}</Link> </td>            
-        <td>{user.transactionId}</td>
-        <td>{user.typeOfTransaction === 'deposit' ? user.amount : 0}</td>
-        <td>{user.typeOfTransaction === 'withdraw' ? user.amount : 0}</td>
-        <td>{user.remarks}</td>
-        <td>{formatMongoDate(user.createdAt)}</td>
-      </tr>
-    );
-  })}
-</tbody>
+            {filteredUsers.map((user, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td> 
+                <td><Link to={`/investment/account/${user.accountNo}`}>{user.accountNo}</Link></td>           
+                <td>{user.transactionId}</td>                           
+                <td>{user.deposit}</td>
+                <td>{user.withdraw}</td>
+                <td>{user.remarks}</td>
+                <td>{user.date}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
 
@@ -153,4 +154,4 @@ function MonthlySavingAudit() {
   );
 }
 
-export default MonthlySavingAudit;
+export default MonthlyInvestmentAudit;
