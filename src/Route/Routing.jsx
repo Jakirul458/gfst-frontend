@@ -33,11 +33,13 @@ import InvestmentProfile from '../pages/investment/SingleAccount/InvestmentProfi
 import InvestmentAccounts from "../pages/investment/AllAccounts/InvestmentAccounts";
 import Profit from "../pages/investment/Profit/Profit";
 
+import { Navigate } from "react-router-dom";
 
 
 export const router = createBrowserRouter([
     {
       path: "/",
+      element: <Navigate to="/login" />,
       children: [
         {
           path: "/login",
