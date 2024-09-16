@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import './CreateSavingAccountForm.css';
-import axios from 'axios';
 import api from '../api/index'
 
 const CreateLoanAccount = () => {

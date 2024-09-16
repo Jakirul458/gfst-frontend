@@ -74,7 +74,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import api from '../api/index'
+import api from '../../../api/index'
 import './Dashboard.css';
 
 function Dashboard() {

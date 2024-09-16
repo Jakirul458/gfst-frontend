@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './FindSavingAccount.css';
+import './FindSavingsAccount.css';
 
-const FindSavingAccount = () => {
+const FindSavingsAccount = () => {
   const [accountNo, setAccountNo] = useState('');
   const [accountInfo, setAccountInfo] = useState(null);
   const [error, setError] = useState('');
@@ -61,5 +61,5 @@ const FindSavingAccount = () => {
   );
 };
 
-export default FindSavingAccount;
+export default FindSavingsAccount;
 

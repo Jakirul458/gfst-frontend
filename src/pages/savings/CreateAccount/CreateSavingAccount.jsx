@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './CreateSavingAccountForm.css';
-import api from '../api/index'
+import api from '../../../api/index'
 
 const CreateSavingAccount = () => {
   const [date, setDate] = useState('');

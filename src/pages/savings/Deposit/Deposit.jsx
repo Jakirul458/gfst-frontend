@@ -1,24 +1,25 @@
+
 import axios from 'axios';
 import React, { useState } from 'react';
-import api from '../api/index'
-// import './withdraw.css';
+import api from '../../../api/index'
+// import './deposit.css';
 
-const withdraw = () => {
+const Deposit = () => {
   const [account, setAccount] = useState('');
   const [date, setDate] = useState('');
   const [transactionid, setTransactionid] = useState('');
-  const [withdraw, setwithdraw] = useState('');
+  const [deposit, setdeposit] = useState('');
   const [error, setError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
   const [accountBalance, setAccountBalance] = useState('');
-  const [remarks, setRemarks] = useState('withdraw'); // Default to 'withdraw'
+  const [remarks, setRemarks] = useState('deposit'); // Default to 'deposit'
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post('/api/transaction/withdraw', {
-        accountNo : account, amount : withdraw, remarks },
+      const response = await api.post('/api/transaction/deposit/', {
+        accountNo : account, amount : deposit, remarks },
       );
       console.log(response.data)
       if (response.data.success) {
@@ -27,8 +28,8 @@ const withdraw = () => {
         setAccount('');
         setDate('');
         setTransactionid('');
-        setwithdraw('');
-        setRemarks('withdraw');
+        setdeposit('');
+        setRemarks('deposit');
         setError(null);
         setIsVerified(false);
         setAccountName('');
@@ -58,7 +59,7 @@ const withdraw = () => {
       }
     }catch (err) {
       setIsVerified(false);
-      setAccountName(''); 
+      setAccountName('');
       setAccountBalance('');
       setError('Error verifying account. Please try again.');
     }
@@ -70,10 +71,10 @@ const withdraw = () => {
         {error && <p className="error">{error}</p>}
 
         <div className="form-group">
-        <h2 style={{ textAlign: 'center' }}>For Withdraw</h2>
+          
+        <h2 style={{ textAlign: 'center' }}>For Deposit</h2>
 
-
-        <br />
+          <br />
           <input
             type="text"
             placeholder="Enter savings account number"
@@ -85,26 +86,24 @@ const withdraw = () => {
 
         {isVerified && (
           <>
-            <p>Consumer Name: <strong>{accountName}</strong></p><br />
+            <p>Consumer Name: <strong>{accountName}</strong></p><br />   
             <p> Previous Balance:  <strong>₹ {accountBalance}</strong></p><br />   
-            <div className="form-group">
-              
+            <div className="form-group">      
               <input
                 type="number"
-                placeholder="Enter withdraw Amount "
-                value={withdraw}
-                onChange={(e) => setwithdraw(e.target.value)}
+                value={deposit}
+                onChange={(e) => setdeposit(e.target.value)}
               />
             </div>
-
-            {/* <div className="form-group">
+{/* 
+            <div className="form-group">
               <label>Remarks</label>
               <select
                 value={remarks}
                 onChange={(e) => setRemarks(e.target.value)}
               >
-                <option value="withdraw">withdraw</option>
-               
+                <option value="deposit">deposit</option>
+         
               </select>
             </div> */}
 
@@ -116,4 +115,4 @@ const withdraw = () => {
   );
 };
 
-export default withdraw;
+export default Deposit;

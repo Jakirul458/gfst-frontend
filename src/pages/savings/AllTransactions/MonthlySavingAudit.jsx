@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import api from '../api/index';
+import api from '../../../api/index';
 import { Link } from 'react-router-dom';
 
 function MonthlySavingAudit() {
@@ -12,7 +12,7 @@ function MonthlySavingAudit() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await api.get('/api/transaction/all/savings');
+        const response = await api.get('/api/transaction/all/savings  ');
         console.log('API Response:', response.data);
         setUsers(response.data.data);
         setFilteredUsers(response.data.data);

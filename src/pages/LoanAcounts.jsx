@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api/index'
 import { Link } from 'react-router-dom';
-import './AllAcountsForm.css';
+import './AllAccountsForm.css';
 
 function LoanAccounts() {
   const [users, setUsers] = useState([]);

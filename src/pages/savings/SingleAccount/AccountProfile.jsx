@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
-import api from '../api/index'
-import './Profile.css';
+import api from '../../../api/index'
+import './AccountProfile.css';
 
 
 function AccountProfile() {

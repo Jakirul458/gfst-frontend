@@ -1,14 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import SignIn from "../pages/auth/SignIn/SignIn";
-import CreateSavingAccount from '../pages/CreateSavingAccount';
-import Deposit from "../pages/Deposit";
-import Withdraw from "../pages/Withdraw";
-import AllAccounts from "../pages/AllAccounts";
-import FindSavaingAccount from "../pages/FindSavaingAccount";
-import MonthlySavingAudit from "../pages/MonthlySavingAudit";
-import AccountProfile from "../pages/AccountProfile";
-import UpdateSavingsAcc from '../pages/UpdateSavingsAcc'
-import DeleteSavingsAcc from '../pages/DeleteSavingsAcc'
+import CreateSavingAccount from "../pages/savings/CreateAccount/CreateSavingAccount";
+import Deposit from "../pages/savings/Deposit/Deposit";
+import Withdraw from "../pages/savings/Withdraw/Withdraw";
+import AllAccounts from "../pages/savings/AllAccounts/AllAccounts";
+import DeleteSavingsAcc from "../pages/savings/DeleteSavingsAccount/DeleteSavingsAcc";
+import UpdateSavingsAcc from "../pages/savings/UpdateSavingsAccount/UpdateSavingsAcc";
+import MonthlySavingAudit from "../pages/savings/AllTransactions/MonthlySavingAudit";
+import AccountProfile from '../pages/savings/SingleAccount/AccountProfile'
+import FindSavingsAccount from "../pages/savings/FindSavingsAccount/FindSavingsAccount";
 
 import CreateLoanAccount from "../pages/CreateLoanAccount";
 import LoanInstallment from "../pages/LoanInstallment";
@@ -26,10 +26,9 @@ import InvestmentProfile from "../pages/InvestmentProfile"
 import UpdateInvestmentAcc from '../pages/UpdateInvestmentAcc'
 import Profit from '../pages/Profit'
 
-
-import Dashboard from "../pages/Dashboard";
-import About from "../pages/About";
-import Contact from "../pages/Contact";
+import Dashboard from "../pages/society/Dashboard/Dashboard";
+import About from "../pages/society/About/About";
+import Contact from "../pages/society/Contact/Contact";
 
 import MainLayout from '../layout/MainLayout';
 
@@ -66,7 +65,7 @@ export const router = createBrowserRouter([
                 },
                 {
                   path: "find",
-                  element: <FindSavaingAccount />,
+                  element: <FindSavingsAccount />,
                 },
                 {
                   path: "audit",

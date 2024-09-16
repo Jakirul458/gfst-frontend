@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 // import axios from 'axios';
-import api from '../api/index'
+import api from '../../../api/index'
 
 function UpdateSavingsAcc() {
   const { accountNo } = useParams(); // Get account number from URL
