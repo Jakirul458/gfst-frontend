@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api/index';
+import { Link } from 'react-router-dom';
 
 function MonthlyLoanAudit() {
   const [users, setUsers] = useState([]);
@@ -133,7 +134,10 @@ function MonthlyLoanAudit() {
           <tbody>
             {filteredUsers.map((user, index) => (
               <tr key={index}>
-                <td>{index + 1}</td>   
+                <td>{index + 1}</td> 
+                <td>
+                  <Link to={`/loan/account/${user.accountNo}`}>{user.accountNo}</Link>
+                </td>  
                 <td>{user.accountNo}</td>            
                 <td>{user.transactionId}</td>                           
                 <td>{user.deposit}</td>

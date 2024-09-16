@@ -11,6 +11,7 @@ const withdraw = () => {
   const [error, setError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
+  const [accountBalance, setAccountBalance] = useState('');
   const [remarks, setRemarks] = useState('withdraw'); // Default to 'withdraw'
 
   const handleSubmit = async (e) => {
@@ -31,6 +32,7 @@ const withdraw = () => {
         setError(null);
         setIsVerified(false);
         setAccountName('');
+        setAccountBalance('');
       } else {
         setError(response.data.message);
       }
@@ -46,15 +48,18 @@ const withdraw = () => {
       if (response.data.success) {
         setIsVerified(true);
         setAccountName(response.data.data.name);
+        setAccountBalance(response.data.data.balance);
         setError(null);
       } else {
         setIsVerified(false);
-        setAccountName(''); // Clear the account name if verification fails
+        setAccountName(''); 
+        setAccountBalance('');
         setError('Account does not exist.');
       }
     }catch (err) {
       setIsVerified(false);
-      setAccountName(''); // Clear the account name on error
+      setAccountName(''); 
+      setAccountBalance('');
       setError('Error verifying account. Please try again.');
     }
   };
@@ -81,7 +86,7 @@ const withdraw = () => {
         {isVerified && (
           <>
             <p>Consumer Name: <strong>{accountName}</strong></p><br />
-
+            <p> Previous Balance:  <strong>₹ {accountBalance}</strong></p><br />   
             <div className="form-group">
               
               <input
