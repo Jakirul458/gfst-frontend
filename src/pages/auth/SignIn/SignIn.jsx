@@ -87,7 +87,7 @@ const SignIn = () => {
 
     if(res.data.success){
       // setIsAuthenticated(true);
-      navigate('/app/savings/create')
+      navigate('/app/society/dashboard')
     }else {
       // setIsAuthenticated(false);
       alert('Invalid Username & Password');
