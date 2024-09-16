@@ -1,4 +1,4 @@
-/* Navbar.css */
+/*Navbar.css*/
 * {
   margin: 0;
   padding: 0;
@@ -8,54 +8,70 @@
 
 .navbar-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 20px;
   background-color: teal;
   color: #fff;
-  height: 70px;
+}
+
+@media (min-width: 768px) {
+  .navbar-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+  }
 }
 
 .navbar-brand .heading {
-  font-size: 280%; /* Adjust the size as needed */
-  color: #f1c40f; /* Adjust the color as needed */
+  font-size: 2em;
+  color: #f1c40f;
+}
+
+@media (min-width: 768px) {
+  .navbar-brand .heading {
+    font-size: 2.8em;
+  }
 }
 
 .navbar-links {
   display: flex;
-  align-items: center;
-  gap: 30px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .navbar-links {
+    flex-direction: row;
+    gap: 30px;
+  }
 }
 
 .nav-link {
   color: #fff;
   text-decoration: none;
   font-size: 20px;
-  padding: 10px; /* Add padding for a better clickable area */
+  padding: 10px;
   transition: background-color 0.3s ease;
-  cursor: pointer; /* Add mouse cursor */
 }
 
 .nav-link:hover {
-  background-color: rgb(17, 36, 36); /* Same hover effect as sidebar */
-  cursor: pointer; /* Mouse cursor on hover */
+  background-color: rgb(17, 36, 36);
 }
 
 .logout-button {
   background: none;
   border: none;
   color: inherit;
-  cursor: pointer; /* Add mouse cursor */
+  cursor: pointer;
   font: inherit;
-  margin: 0;
-  padding: 10px; /* Add padding to match nav-links */
-  text-decoration: none;
+  padding: 10px;
   font-size: 20px;
   transition: background-color 0.3s ease;
 }
 
 .logout-button:hover {
-  background-color: rgb(17, 36, 36); /* Same hover effect as sidebar */
-  cursor: pointer; /* Mouse cursor on hover */
+  background-color: rgb(17, 36, 36);
   color: #fff;
 }

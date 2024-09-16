@@ -1,47 +1,55 @@
+/*Footer.css*/
 .footer {
     background-color: #808183;
-    padding: 5px; 
-    text-align: center;
-    width: 100%;
+    padding: 10px;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap; 
-}
-.footer-us{
-   
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  
+  .footer-us {
     text-align: left;
-}
-
-.footer div {
-    margin: 5px; 
-    padding: 0; 
-    background-color: transparent; 
-    box-shadow: none; 
-    border-radius: 0; 
-}
-
-.footer h4 {
-    margin-bottom: 5px; 
-    font-size: 1.1em; 
-    color: #06213d; 
-}
-
-.footer p {
+  }
+  
+  .footer div {
+    margin: 5px;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  
+  .footer h4 {
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    color: #06213d;
+  }
+  
+  .footer p {
     color: #151313;
-    font-size: 0.9em; 
-}
-
-@media (max-width: 768px) {
+    font-size: 0.9em;
+  }
+  
+  @media (min-width: 768px) {
     .footer {
-        flex-direction: column;
+      flex-direction: row;
+      padding: 5px;
     }
-}
-.email-link {
-    color: #1111e9; /* Blue color for the link */
-    text-decoration: none; /* Remove underline */
-}
-
-.email-link:hover {
-    text-decoration: underline; /* Underline on hover */
-}
+  }
+  
+  @media (max-width: 768px) {
+    .footer {
+      flex-direction: column;
+    }
+  }
+  
+  .email-link {
+    color: #1111e9;
+    text-decoration: none;
+  }
+  
+  .email-link:hover {
+    text-decoration: underline;
+  }
+  
