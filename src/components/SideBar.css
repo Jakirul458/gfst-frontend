@@ -9,22 +9,21 @@
   display: flex;
   height: 100vh;
   font-family: Arial, sans-serif;
-  flex-direction: column; /* Mobile-first approach */
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
   background-color: teal;
-  width: 100%;
-  height: auto;
-  padding: 15px;
+  width: 15%;
+  height: 100%; /* Full height of the viewport */
+  padding: 11px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .sidebar .section {
-  margin-bottom: 10px;
+  margin-bottom: 0%;
 }
 
 .sidebar .section h2 {
@@ -52,41 +51,65 @@
   cursor: pointer;
 }
 
-@media (min-width: 768px) {
-  .dashboard {
-    flex-direction: row;
-  }
-
-  .sidebar {
-    width: 25%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .sidebar {
-    width: 15%;
-  }
-}
-
 .content {
   flex: 1;
-  padding: 10px;
+  padding: 30px;
   background-color: #fcfafa;
   overflow-y: auto;
 }
 
-@media (min-width: 768px) {
-  .content {
-    padding: 15px;
+a.active {
+  background-color: rgb(11, 65, 69);
+}
+
+/* Media Queries for Responsive Design */
+
+/* For tablets and small desktops */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 20%;
   }
 
-  @media (min-width: 1024px) {
-    .content {
-      padding: 30px;
-    }
+  .content {
+    padding: 20px;
   }
 }
 
-a.active {
-  background-color: rgb(11, 65, 69);
+/* For larger mobile devices */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 25%;
+  }
+
+  .content {
+    padding: 15px;
+  }
+}
+
+/* For mobile devices (portrait) */
+@media (max-width: 480px) {
+  .dashboard {
+    flex-direction: column; /* Stack sidebar on top for small screens */
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto; /* Auto height when stacked */
+    padding: 20px;
+  }
+
+  .content {
+    padding: 10px;
+  }
+}
+
+/* For mobile devices (landscape) */
+@media (max-width: 600px) and (orientation: landscape) {
+  .sidebar {
+    width: 30%;
+  }
+
+  .content {
+    padding: 10px;
+  }
 }
