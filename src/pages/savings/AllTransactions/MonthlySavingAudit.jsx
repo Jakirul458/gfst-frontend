@@ -74,6 +74,7 @@ function MonthlySavingAudit() {
         </style>
       </head>
       <body>
+      <p>List of Savings Transactions</p>
         ${printContents}
       </body>
       </html>
