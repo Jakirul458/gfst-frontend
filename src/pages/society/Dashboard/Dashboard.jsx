@@ -43,12 +43,12 @@ function Dashboard() {
       {error && <div className="error-message">{error}</div>}
 
       <div className="section">
-        <div className="section-title">Remaining Savings Balance</div>
+        <div className="section-title">Total Savings Balance</div>
         <div className="section-content">₹{totalSavingsBalance}</div>
       </div>
 
       <div className="section">
-        <div className="section-title">Available Savings Balance</div>
+        <div className="section-title">Remaining Loan Balance</div>
         <div className="section-content">₹{totalSavingsBalance - totalLoanBalance}</div> {/* Placeholder value */}
       </div>
 

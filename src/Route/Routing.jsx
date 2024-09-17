@@ -38,7 +38,7 @@ import { Navigate } from "react-router-dom";
 
 export const router = createBrowserRouter([
     {
-      path: "/login",
+      path: "/",
       // element: <Navigate to="/login" />,
       children: [
         {
