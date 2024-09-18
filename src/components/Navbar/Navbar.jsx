@@ -12,6 +12,7 @@ function Navbar({ handleLogout }) {
       </div>
 
       <div className="navbar-links">
+       <NavLink to='/app/society/adminpanel' className="nav-link">Admin Panel</NavLink>
         <NavLink to='/app/society/dashboard' className="nav-link">Dashboard</NavLink>
         <NavLink to='/app/society/about' className="nav-link">About</NavLink>
         <NavLink to='/app/society/contact' className="nav-link">Contact</NavLink>
