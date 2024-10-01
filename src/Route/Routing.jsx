@@ -4,6 +4,7 @@ import Dashboard from "../pages/society/Dashboard/Dashboard";
 import About from "../pages/society/About/About";
 import Contact from "../pages/society/Contact/Contact";
 import MainLayout from '../layout/MainLayout';
+import AdminPanel from '../pages/society/Admin/AdminPanel' 
 //savings
 import CreateSavingAccount from "../pages/savings/CreateAccount/CreateSavingAccount";
 import Deposit from "../pages/savings/Deposit/Deposit";
@@ -176,6 +177,10 @@ export const router = createBrowserRouter([
       {
         path: "society/",
         children: [
+          {
+            path: "adminpanel",
+            element: <AdminPanel />,
+          },
           {
             path: "dashboard",
             element: <Dashboard />,

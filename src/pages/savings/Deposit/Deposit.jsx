@@ -1,14 +1,12 @@
-
-import axios from 'axios';
 import React, { useState } from 'react';
-import api from '../../../api/index'
-// import './deposit.css';
+import api from '../../../api/index';
+import './Deposit.css';
 
 const Deposit = () => {
   const [account, setAccount] = useState('');
   const [date, setDate] = useState('');
   const [transactionid, setTransactionid] = useState('');
-  const [deposit, setdeposit] = useState('');
+  const [deposit, setDeposit] = useState('');
   const [error, setError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
@@ -19,16 +17,18 @@ const Deposit = () => {
     e.preventDefault();
     try {
       const response = await api.post('/api/transaction/deposit/', {
-        accountNo : account, amount : deposit, remarks },
-      );
-      console.log(response.data)
+        accountNo: account,
+        amount: deposit,
+        remarks,
+      });
+      console.log(response.data);
       if (response.data.success) {
         alert('Transaction successful!');
         // Clear form fields after successful submission
         setAccount('');
         setDate('');
         setTransactionid('');
-        setdeposit('');
+        setDeposit('');
         setRemarks('deposit');
         setError(null);
         setIsVerified(false);
@@ -53,11 +53,11 @@ const Deposit = () => {
         setError(null);
       } else {
         setIsVerified(false);
-        setAccountName(''); 
+        setAccountName('');
         setAccountBalance('');
         setError('Account does not exist.');
       }
-    }catch (err) {
+    } catch (err) {
       setIsVerified(false);
       setAccountName('');
       setAccountBalance('');
@@ -66,52 +66,60 @@ const Deposit = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="account-form">
-        {error && <p className="error">{error}</p>}
+    <div className="deposit-container">
+      <form onSubmit={handleSubmit} className="deposit-form">
+        <h2 className="form-title">Deposit Funds</h2>
+        {error && <p className="error-message">{error}</p>}
 
         <div className="form-group">
-          
-        <h2 style={{ textAlign: 'center' }}>For Deposit</h2>
-
-          <br />
+          <label htmlFor="account-number">Account Number</label>
           <input
             type="text"
+            id="account-number"
+            className="form-control"
             placeholder="Enter savings account number"
             value={account}
             onChange={(e) => setAccount(e.target.value)}
           />
-          <button type="button" onClick={handleVerify} className="verify-btn">Verify</button>
+          <button
+            type="button"
+            onClick={handleVerify}
+            className="btn verify-btn"
+          >
+            Verify Account
+          </button>
         </div>
 
         {isVerified && (
           <>
-            <p>Consumer Name: <strong>{accountName}</strong></p><br />   
-            <p> Present Balance:  <strong>₹ {accountBalance}</strong></p><br />   
-            <div className="form-group">      
+            <div className="verified-info">
+              <p>
+                Consumer Name: <strong>{accountName}</strong>
+              </p>
+              <p>
+                Present Balance: <strong>₹ {accountBalance}</strong>
+              </p>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="deposit-amount">Deposit Amount (₹)</label>
               <input
                 type="number"
+                id="deposit-amount"
+                className="form-control"
+                placeholder="Enter amount to deposit"
                 value={deposit}
-                onChange={(e) => setdeposit(e.target.value)}
+                onChange={(e) => setDeposit(e.target.value)}
               />
             </div>
-{/* 
-            <div className="form-group">
-              <label>Remarks</label>
-              <select
-                value={remarks}
-                onChange={(e) => setRemarks(e.target.value)}
-              >
-                <option value="deposit">deposit</option>
-         
-              </select>
-            </div> */}
 
-            <button type="submit" className="submit-btn">Submit</button>
+            <button type="submit" className="btn submit-btn">
+              Submit Deposit
+            </button>
           </>
         )}
       </form>
-    </>
+    </div>
   );
 };
 

@@ -70,9 +70,14 @@ function AccountProfile() {
 
   return (
     <div className="account-profile-container" id="account-profile">
+        <div className="action-buttons">
+        <button onClick={handlePrint} className="print-btn">Print</button>
+        <button onClick={handleUpdate} className="update-btn">Update</button>
+        <button onClick={handleDelete} className="delete-btn">Delete</button>
+      </div>
       <br />
       <div className="account-details">
-        <p>Account No: <strong>{accountDetails.accountNo} </strong></p>
+        <p>Savings Account No: <strong>{accountDetails.accountNo} </strong></p>
         <p>Name : <strong> {accountDetails.name}</strong></p>
         <p>Email :  <strong>{accountDetails.email}</strong></p>
         <p>Mobile : <strong> {accountDetails.mobileNo}</strong></p>
@@ -106,11 +111,7 @@ function AccountProfile() {
         </tbody>
       </table>
 
-      <div className="action-buttons">
-        <button onClick={handlePrint} className="print-btn">Print</button>
-        <button onClick={handleUpdate} className="update-btn">Update</button>
-        <button onClick={handleDelete} className="delete-btn">Delete</button>
-      </div>
+    
     </div>
   );
 }

@@ -1,4 +1,4 @@
-.main__container {
+/* .main__container {
     display: flex;
     flex-direction: column;
     width: 100vw;
@@ -21,4 +21,31 @@
         grid-area: area2;
     }
     
+} */
+
+
+.main__container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
+
+.main_app_container {
+    height: calc(100vh - 4rem);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas: "area1 area1 area2 area2 area2 area2 area2 area2 area2 area2 area2 area2";
+
+    .sidebar__container {
+        grid-area: area1;
+    }
+    
+    .main__content {
+        grid-area: area2;
+        overflow-x: auto; 
+        height: 100%; 
+        white-space: nowrap; 
+    }
+} 

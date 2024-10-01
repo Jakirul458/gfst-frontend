@@ -64,6 +64,9 @@ function AllAccounts() {
 
   return (
     <>
+     <div className="print-btn-container">
+        <button type="button" className="print-btn" onClick={handlePrint}>Print</button>
+      </div>
       <h1 className="mb-4">List of Savings Accounts</h1>
 
       <input

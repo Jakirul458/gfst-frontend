@@ -1,10 +1,8 @@
-
-import axios from 'axios';
 import React, { useState } from 'react';
 import api from '../../../api';
-// import './loantransaction.css';
+import './LoanInstalment.css';
 
-const loantransaction = () => {
+const LoanTransaction = () => {
   const [account, setAccount] = useState('');
   const [date, setDate] = useState('');
   const [transactionid, setTransactionid] = useState('');
@@ -12,17 +10,16 @@ const loantransaction = () => {
   const [error, setError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
-  const [loanAmount, setloanAmount] = useState('');
+  const [loanAmount, setLoanAmount] = useState('');
   const [remarks, setRemarks] = useState('loantransaction'); // Default to 'loantransaction'
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await api.post('/api/transaction/emi', {
-        accountNo: account, amount: deposit, remarks, 
-      },
-      );
-      console.log(response.data)
+        accountNo: account, amount: deposit, remarks,
+      });
+      console.log(response.data);
       if (response.data.success) {
         alert('Transaction successful!');
         // Clear form fields after successful submission
@@ -34,7 +31,7 @@ const loantransaction = () => {
         setError(null);
         setIsVerified(false);
         setAccountName('');
-        setloanAmount('');
+        setLoanAmount('');
       } else {
         setError(response.data.message);
       }
@@ -50,89 +47,78 @@ const loantransaction = () => {
       if (response.data.success) {
         setIsVerified(true);
         setAccountName(response.data.data.name);
-        setloanAmount(response.data.data.loanAmount)
+        setLoanAmount(response.data.data.loanAmount);
         setError(null);
       } else {
         setIsVerified(false);
-        setAccountName(''); // Clear the account name if verification fails
-        setloanAmount('');
+        setAccountName('');
+        setLoanAmount('');
         setError('Account does not exist.');
       }
     } catch (err) {
       setIsVerified(false);
-      setAccountName(''); // Clear the account name on error
-      setloanAmount('');
+      setAccountName('');
+      setLoanAmount('');
       setError('Error verifying account. Please try again.');
     }
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="account-form">
-        {error && <p className="error">{error}</p>}
+    <div className="loan-transaction-container">
+      <form onSubmit={handleSubmit} className="loan-transaction-form">
+        <h2 className="form-title">Loan EMI Payment</h2>
+        {error && <p className="error-message">{error}</p>}
 
         <div className="form-group">
-          <h2 style={{ textAlign: 'center' }}>For EMI</h2>
+          <label htmlFor="account-number">Loan Account Number</label>
           <input
             type="text"
+            id="account-number"
+            className="form-control"
             placeholder="Enter loan account number"
             value={account}
             onChange={(e) => setAccount(e.target.value)}
           />
-          <button type="button" onClick={handleVerify} className="verify-btn">Verify</button>
+          <button
+            type="button"
+            onClick={handleVerify}
+            className="btn verify-btn"
+          >
+            Verify Account
+          </button>
         </div>
 
         {isVerified && (
           <>
-            <p>Consumer Name: <strong>{accountName}</strong></p><br />
-            <p> Due loan amount:  <strong>₹ {loanAmount}</strong></p><br />
-            {/* <p>Remaining Loan Amount : ₹<strong> {accountDetails.loanAmount}</strong></p> */}
-
-            {/* <div className="form-group">
-              <label>Date</label>
-              <input
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-              />
-            </div> */}
-
-            {/* <div className="form-group">
-              <label>Transaction ID</label>
-              <input
-                type="text"
-                value={transactionid}
-                onChange={(e) => setTransactionid(e.target.value)}
-              />
-            </div> */}
+            <div className="verified-info">
+              <p>
+                Consumer Name: <strong>{accountName}</strong>
+              </p>
+              <p>
+                Due Loan Amount: <strong>₹ {loanAmount}</strong>
+              </p>
+            </div>
 
             <div className="form-group">
-
+              <label htmlFor="deposit-amount">EMI Payment (₹)</label>
               <input
                 type="number"
-                placeholder="Enter amount"
+                id="deposit-amount"
+                className="form-control"
+                placeholder="Enter payment amount"
                 value={deposit}
                 onChange={(e) => setDeposit(e.target.value)}
               />
             </div>
 
-            {/* <div className="form-group">
-              <label>Remarks</label>
-              <select
-                value={remarks}
-                onChange={(e) => setRemarks(e.target.value)}
-              >
-                <option value="loantransaction">loantransaction</option>
-                
-              </select>
-            </div> */}
-
-            <button type="submit" className="submit-btn">Submit</button>
+            <button type="submit" className="btn submit-btn">
+              Submit EMI Payment
+            </button>
           </>
         )}
       </form>
-    </>
+    </div>
   );
 };
 
-export default loantransaction;
+export default LoanTransaction;

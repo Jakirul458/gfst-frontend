@@ -1,13 +1,12 @@
-import axios from 'axios';
 import React, { useState } from 'react';
-import api from '../../../api/index'
-// import './withdraw.css';
+import api from '../../../api/index';
+import './Withdraw.css';
 
 const Withdraw = () => {
   const [account, setAccount] = useState('');
   const [date, setDate] = useState('');
   const [transactionid, setTransactionid] = useState('');
-  const [withdraw, setwithdraw] = useState('');
+  const [withdraw, setWithdraw] = useState('');
   const [error, setError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
@@ -18,16 +17,18 @@ const Withdraw = () => {
     e.preventDefault();
     try {
       const response = await api.post('/api/transaction/withdraw', {
-        accountNo : account, amount : withdraw, remarks },
-      );
-      console.log(response.data)
+        accountNo: account,
+        amount: withdraw,
+        remarks,
+      });
+      console.log(response.data);
       if (response.data.success) {
         alert('Transaction successful!');
         // Clear form fields after successful submission
         setAccount('');
         setDate('');
         setTransactionid('');
-        setwithdraw('');
+        setWithdraw('');
         setRemarks('withdraw');
         setError(null);
         setIsVerified(false);
@@ -52,67 +53,73 @@ const Withdraw = () => {
         setError(null);
       } else {
         setIsVerified(false);
-        setAccountName(''); 
+        setAccountName('');
         setAccountBalance('');
         setError('Account does not exist.');
       }
-    }catch (err) {
+    } catch (err) {
       setIsVerified(false);
-      setAccountName(''); 
+      setAccountName('');
       setAccountBalance('');
       setError('Error verifying account. Please try again.');
     }
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="account-form">
-        {error && <p className="error">{error}</p>}
+    <div className="withdraw-container">
+      <form onSubmit={handleSubmit} className="withdraw-form">
+        <h2 className="form-title">Withdraw Funds</h2>
+        {error && <p className="error-message">{error}</p>}
 
         <div className="form-group">
-        <h2 style={{ textAlign: 'center' }}>For Withdraw</h2>
-
-
-        <br />
+          <label htmlFor="account-number">Account Number</label>
           <input
             type="text"
+            id="account-number"
+            className="form-control"
             placeholder="Enter savings account number"
             value={account}
             onChange={(e) => setAccount(e.target.value)}
           />
-          <button type="button" onClick={handleVerify} className="verify-btn">Verify</button>
+          <button
+            type="button"
+            onClick={handleVerify}
+            className="btn verify-btn"
+          >
+            Verify Account
+          </button>
         </div>
 
         {isVerified && (
           <>
-            <p>Consumer Name: <strong>{accountName}</strong></p><br />
-            <p> Present Balance:  <strong>₹ {accountBalance}</strong></p><br />   
+            <div className="verified-info">
+              <p>
+                Consumer Name: <strong>{accountName}</strong>
+              </p>
+              <p>
+                Present Balance: <strong>₹ {accountBalance}</strong>
+              </p>
+            </div>
+
             <div className="form-group">
-              
+              <label htmlFor="withdraw-amount">Withdraw Amount (₹)</label>
               <input
                 type="number"
-                placeholder="Enter withdraw Amount "
+                id="withdraw-amount"
+                className="form-control"
+                placeholder="Enter amount to withdraw"
                 value={withdraw}
-                onChange={(e) => setwithdraw(e.target.value)}
+                onChange={(e) => setWithdraw(e.target.value)}
               />
             </div>
 
-            {/* <div className="form-group">
-              <label>Remarks</label>
-              <select
-                value={remarks}
-                onChange={(e) => setRemarks(e.target.value)}
-              >
-                <option value="withdraw">withdraw</option>
-               
-              </select>
-            </div> */}
-
-            <button type="submit" className="submit-btn">Submit</button>
+            <button type="submit" className="btn submit-btn">
+              Submit Withdrawal
+            </button>
           </>
         )}
       </form>
-    </>
+    </div>
   );
 };
 

@@ -78,7 +78,6 @@ function MonthlySavingAudit() {
         </style>
       </head>
       <body>
-    
         ${printContents}
       </body>
       </html>
@@ -90,6 +89,9 @@ function MonthlySavingAudit() {
 
   return (
     <>
+      <div className="print-btn-container">
+        <button type="button" className="print-btn" onClick={handlePrint}>Print</button>
+      </div>
       <h1 className="mb-4">List of Savings Transactions</h1>
 
       <input
@@ -116,7 +118,6 @@ function MonthlySavingAudit() {
           placeholder="End Date"
         />
       </div>
-
 
       <div id="accounts-table">
         <table className="table table-bordered table-hover">
@@ -148,10 +149,10 @@ function MonthlySavingAudit() {
           </tbody>
         </table>
       </div>
-
       <div className="print-btn-container">
         <button type="button" className="print-btn" onClick={handlePrint}>Print</button>
       </div>
+
     </>
   );
 }
