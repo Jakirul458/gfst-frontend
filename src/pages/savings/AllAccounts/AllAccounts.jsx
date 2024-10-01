@@ -68,7 +68,7 @@ function AllAccounts() {
 
       <input
         type="text"
-        placeholder="Search by Account Number, Aadhar Number, or Name"
+        placeholder="Search by Account Number / Aadhar Number / Consumer Name"
         value={searchQuery}
         onChange={handleSearch}
         className="form-control mb-4 search-bar"
