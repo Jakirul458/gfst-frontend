@@ -12,13 +12,14 @@ const loantransaction = () => {
   const [error, setError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
+  const [loanAmount, setloanAmount] = useState('');
   const [remarks, setRemarks] = useState('loantransaction'); // Default to 'loantransaction'
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await api.post('/api/transaction/emi', {
-        accountNo: account, amount: deposit, remarks
+        accountNo: account, amount: deposit, remarks, 
       },
       );
       console.log(response.data)
@@ -33,6 +34,7 @@ const loantransaction = () => {
         setError(null);
         setIsVerified(false);
         setAccountName('');
+        setloanAmount('');
       } else {
         setError(response.data.message);
       }
@@ -48,15 +50,18 @@ const loantransaction = () => {
       if (response.data.success) {
         setIsVerified(true);
         setAccountName(response.data.data.name);
+        setloanAmount(response.data.data.loanAmount)
         setError(null);
       } else {
         setIsVerified(false);
         setAccountName(''); // Clear the account name if verification fails
+        setloanAmount('');
         setError('Account does not exist.');
       }
     } catch (err) {
       setIsVerified(false);
       setAccountName(''); // Clear the account name on error
+      setloanAmount('');
       setError('Error verifying account. Please try again.');
     }
   };
@@ -80,6 +85,8 @@ const loantransaction = () => {
         {isVerified && (
           <>
             <p>Consumer Name: <strong>{accountName}</strong></p><br />
+            <p> Due loan amount:  <strong>₹ {loanAmount}</strong></p><br />
+            {/* <p>Remaining Loan Amount : ₹<strong> {accountDetails.loanAmount}</strong></p> */}
 
             {/* <div className="form-group">
               <label>Date</label>

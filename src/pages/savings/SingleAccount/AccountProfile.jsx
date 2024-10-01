@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
-import api from '../../../api/index'
+import api from '../../../api/index';
 import './AccountProfile.css';
 import { formatMongoDate } from '../../../util/FormatDate';
 
@@ -12,13 +12,10 @@ function AccountProfile() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location.pathname.split('/')[4], "somelog")
-
   useEffect(() => {
     const fetchAccountDetails = async () => {
       try {
         const response = await api.get(`/api/savings/${location.pathname.split('/')[4]}`);
-
         setAccountDetails(response.data.data);
       } catch (err) {
         setError('Error fetching account details');
@@ -30,43 +27,32 @@ function AccountProfile() {
   }, [location]);
 
   useEffect(() => {
-    if(!accountDetails.accountNo) return;
-    const fetchTransactions = async() => {
+    if (!accountDetails.accountNo) return;
+    const fetchTransactions = async () => {
       try {
         const response = await api.get(`/api/transaction/${accountDetails.accountNo}`);
-        console.log(response, "transaciton response")
-
-        const smdata = new Date(response.data.data.createdAt);
-        response.data.data.date = smdata.toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit',        
-        });
-        
         setTransactions(response.data.data);
-        
       } catch (error) {
         setError('Error fetching account details');
         console.error(err);
       }
-    }
+    };
 
     fetchTransactions();
-  },[accountDetails])
+  }, [accountDetails]);
 
   const handlePrint = () => {
     const printContents = document.getElementById('account-profile').outerHTML;
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
       <html>
-      <head><title> Loan Account Profile</title></head>
-       <style>
+      <head><title>Savings Account Profile</title>
+      <style>
           table { width: 100%; border-collapse: collapse; }
           th, td { border: 1px solid black; padding: 8px; text-align: left; }
           th { background-color: #f2f2f2; }
-        </style>
+      </style>
+      </head>
       <body>${printContents}</body>
       </html>
     `);
@@ -76,60 +62,56 @@ function AccountProfile() {
 
   const handleDelete = () => {
     navigate(`/app/savings/account/delete/${accountDetails.accountNo}`);
-
   };
-  
 
   const handleUpdate = async () => {
     navigate(`/app/savings/account/update/${accountDetails.accountNo}`);
-    
   };
 
- 
-
-
   return (
-    <>
-      <div id="account-profile">
-        <p> <strong>Account No : </strong> {accountDetails.accountNo}</p>
-        <p><strong>Name: </strong> {accountDetails.name}</p>
-        <p><strong>Email: </strong> {accountDetails.email}</p>
-        <p><strong>Mobile: </strong> {accountDetails.mobileNo}</p>
-        <p><strong>Aadhar: </strong> {accountDetails.AadharNo}</p>
-        <p><strong>Address: </strong> {accountDetails.Address}</p>
-        <p><strong> Available Balance: ₹</strong> {accountDetails.balance}</p>
-<br />
+    <div className="account-profile-container" id="account-profile">
+      <br />
+      <div className="account-details">
+        <p>Account No: <strong>{accountDetails.accountNo} </strong></p>
+        <p>Name : <strong> {accountDetails.name}</strong></p>
+        <p>Email :  <strong>{accountDetails.email}</strong></p>
+        <p>Mobile : <strong> {accountDetails.mobileNo}</strong></p>
+        <p>Aadhar :  <strong>{accountDetails.AadharNo}</strong></p>
+        <p>Address : <strong> {accountDetails.Address}</strong></p>
+        <p>Available Balance : ₹<strong> {accountDetails.balance}</strong></p>
+        <br />
         <h3>Transaction History</h3>
-        <table className="table table-bordered table-hover">
-          <thead className="thead-dark">
-            <tr>
-              <th>Date</th>
-              <th>Transaction ID</th>
-              <th>Deposit</th>
-              <th>Withdraw</th>
-              <th>Remarks</th>
-            </tr>
-          </thead>
-          <tbody>
-            {transactions.length > 0 ? transactions.map((transaction) => (
-              <tr key={transaction._id}>
-                <td>{formatMongoDate(transaction.createdAt)}</td>
-                <td>{transaction.transactionId}</td>
-                <td>{transaction.typeOfTransaction === 'deposit'? transaction.amount : 0}</td>
-                <td>{transaction.typeOfTransaction === 'withdraw'? transaction.amount : 0}</td>
-                <td>{transaction.remarks}</td>
-              </tr>
-            )) : <tr><td colSpan="5">No transactions available</td></tr>}
-          </tbody>
-        </table>
       </div>
+
+      <table className="table table-bordered table-hover">
+        <thead className="thead-dark">
+          <tr>
+            <th>Date</th>
+            <th>Transaction ID</th>
+            <th>Deposit</th>
+            <th>Withdraw</th>
+            <th>Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          {transactions.length > 0 ? transactions.map((transaction) => (
+            <tr key={transaction._id}>
+              <td>{formatMongoDate(transaction.createdAt)}</td>
+              <td>{transaction.transactionId}</td>
+              <td>{transaction.typeOfTransaction === 'deposit' ? transaction.amount : 0}</td>
+              <td>{transaction.typeOfTransaction === 'withdraw' ? transaction.amount : 0}</td>
+              <td>{transaction.remarks}</td>
+            </tr>
+          )) : <tr><td colSpan="5">No transactions available</td></tr>}
+        </tbody>
+      </table>
 
       <div className="action-buttons">
-        <button onClick={handlePrint} className="btn btn-primary">Print</button>
-        <button onClick={handleUpdate} className="btn btn-warning">Update</button>
-        <button onClick={handleDelete} className="btn btn-danger">Delete</button>
+        <button onClick={handlePrint} className="print-btn">Print</button>
+        <button onClick={handleUpdate} className="update-btn">Update</button>
+        <button onClick={handleDelete} className="delete-btn">Delete</button>
       </div>
-    </>
+    </div>
   );
 }
 

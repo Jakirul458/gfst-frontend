@@ -43,7 +43,7 @@ const SideBar = () => {
                     <NavLink to='/app/savings/deposit'>Deposit</NavLink>
                     <NavLink to='/app/savings/withdraw'>Withdraw</NavLink>
                     <NavLink to='/app/savings/all'>All Accounts</NavLink>
-                    <NavLink to='/app/savings/find'>Find Saving Accounts</NavLink>
+                    <NavLink to='/app/savings/search-account'>Search Account</NavLink>
                     <NavLink to='/app/savings/audit'>Savings Transaction</NavLink>
                 </nav>
             </div>
@@ -54,7 +54,7 @@ const SideBar = () => {
                     <NavLink to='/app/loan/create'>Create Account</NavLink>
                     <NavLink to='/app/loan/emi'>EMI</NavLink>
                     <NavLink to='/app/loan/all'>Loan Accounts</NavLink>
-                    <NavLink to='/app/loan/find'>Find Loan Account</NavLink>
+                    <NavLink to='/app/loan/search-account'>Search Account</NavLink>
                     <NavLink to='/app/loan/audit'>Loan Transaction</NavLink>
                     
                 </nav>

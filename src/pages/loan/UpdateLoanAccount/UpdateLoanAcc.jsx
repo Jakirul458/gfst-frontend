@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../../api/index';
-import './UpdateSavingsAcc.css'; // Create a CSS file for additional custom styles
+import './UpdateLoanAcc.css'; 
 
-function UpdateSavingsAcc() {
-  const { accountNo } = useParams(); // Get account number from URL
+function UpdateLoanAcc() {
+  const { accountNo } = useParams(); 
   const [accountDetails, setAccountDetails] = useState({
     name: '',
     email: '',
@@ -18,8 +18,8 @@ function UpdateSavingsAcc() {
   useEffect(() => {
     const fetchAccountDetails = async () => {
       try {
-        const response = await api.get(`/api/savings/${accountNo}`);
-        setAccountDetails(response.data.data); // Populate form fields with existing data
+        const response = await api.get(`/api/loan/${accountNo}`);
+        setAccountDetails(response.data.data); 
       } catch (err) {
         setError('Error fetching account details');
         console.error(err);
@@ -40,9 +40,9 @@ function UpdateSavingsAcc() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.put(`/api/savings/${accountNo}`, accountDetails);
+      await api.put(`/api/loan/${accountNo}`, accountDetails);
       alert('Account updated successfully');
-      navigate(`/app/savings/account/${accountNo}`); // Redirect back to the profile page after update
+      navigate(`/app/loan/account/${accountNo}`); 
     } catch (err) {
       console.error('Error updating account:', err);
       setError('Error updating account');
@@ -118,4 +118,4 @@ function UpdateSavingsAcc() {
   );
 }
 
-export default UpdateSavingsAcc;
+export default UpdateLoanAcc;

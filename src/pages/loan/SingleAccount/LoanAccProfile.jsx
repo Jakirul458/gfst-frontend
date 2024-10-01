@@ -11,7 +11,7 @@ function LoanAccProfile() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location.pathname.split('/')[3], "somelog")
+  console.log(location.pathname.split('/')[3], "somelog");
 
   useEffect(() => {
     const fetchAccountDetails = async () => {
@@ -26,37 +26,32 @@ function LoanAccProfile() {
     fetchAccountDetails();
   }, [location]);
 
-    useEffect(() => {
-      const fetchTransactions = async() => {
-        try {
-          if(!accountDetails)
-            return;
-          const response = await api.get(`/api/transaction/type/${accountDetails?.accountNo}`);
-          console.log(response, "responvkdfnvj")
-          setTransactions(response.data.data);
-
-          console.log(response.data.data, "dfkjvnkj")
-          
-        } catch (error) {
-          setError('Error fetching account details');
-          console.error(err);
-        }
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        if (!accountDetails) return;
+        const response = await api.get(`/api/transaction/type/${accountDetails?.accountNo}`);
+        console.log(response, "responvkdfnvj");
+        setTransactions(response.data.data);
+      } catch (error) {
+        setError('Error fetching transactions');
+        console.error(err);
       }
-
-      fetchTransactions();
-    },[accountDetails])
+    };
+    fetchTransactions();
+  }, [accountDetails]);
 
   const handlePrint = () => {
     const printContents = document.getElementById('account-profile').outerHTML;
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
       <html>
-      <head><title>Print Account Profile</title></head>
-       <style>
-          table { width: 100%; border-collapse: collapse; }
-          th, td { border: 1px solid black; padding: 8px; text-align: left; }
-          th { background-color: #f2f2f2; }
-        </style>
+      <head><title>Loan Account Profile</title></head>
+      <style>
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+      </style>
       <body>${printContents}</body>
       </html>
     `);
@@ -64,24 +59,13 @@ function LoanAccProfile() {
     printWindow.print();
   };
 
-  const handleDelete = async () => {
-    navigate(`/loan/account/delete/${accountDetails.accountNo}`);
-
-    // const confirmDelete = window.confirm("Are you sure you want to delete this account?");
-    // if (confirmDelete) {
-    //   try {
-    //     await api.delete(`/api/loan/${accountDetails.AadharNo}`);
-    //     alert('Account deleted successfully.');
-    //     navigate('/loanaccounts'); // Redirect to account list after deletion
-    //   } catch (error) {
-    //     console.error('Error deleting account:', error);
-    //     alert('Error deleting account.');
-    //   }
-    // }
+ 
+  const handleDelete = () => {
+    navigate(`/app/loan/account/delete/${accountDetails.accountNo}`);
   };
-
-  const handleUpdate = () => {
-    navigate(`/loan/account/update/${accountDetails.accountNo}`);
+ 
+  const handleUpdate = async () => {
+    navigate(`/app/loan/account/update/${accountDetails.accountNo}`);
   };
 
   if (error) {
@@ -94,16 +78,19 @@ function LoanAccProfile() {
 
   return (
     <>
-      <div id="account-profile">
-        <h1>Loan Account No : {accountDetails.accountNo}</h1>
-        <p><strong>Name:</strong> {accountDetails.name}</p>
-        <p><strong>Email:</strong> {accountDetails.email}</p>
-        <p><strong>Mobile:</strong> {accountDetails.mobileNo}</p>
-        <p><strong>Aadhar:</strong> {accountDetails.AadharNo}</p>
-        <p><strong>Address:</strong> {accountDetails.Address}</p>
-        <p><strong>Remaining Loan Amount: ₹</strong> {accountDetails.loanAmount}</p>
-<br />
-        <h2>Transaction History</h2>
+      <div id="account-profile" className="account-profile-container">
+       <br />
+        <div className="account-details">
+           <p>Loan Account number : <strong>{accountDetails.accountNo}</strong></p>
+          <p>Name :<strong> {accountDetails.name}</strong></p>
+          <p>Email :<strong> {accountDetails.email}</strong></p>
+          <p>Mobile :<strong> {accountDetails.mobileNo}</strong></p>
+          <p>Aadhar :<strong> {accountDetails.AadharNo}</strong></p>
+          <p>Address :<strong> {accountDetails.Address}</strong></p>
+          <p>Remaining Loan Amount : ₹<strong> {accountDetails.loanAmount}</strong></p>
+        </div>
+        <br />
+        <h3>Transaction History</h3>
         <table className="table table-bordered table-hover">
           <thead className="thead-dark">
             <tr>
@@ -119,8 +106,8 @@ function LoanAccProfile() {
               <tr key={transaction._id}>
                 <td>{transaction.date}</td>
                 <td>{transaction.transactionId}</td>
-                <td>{transaction.typeOfTransaction === 'emi'? transaction.amount : 0}</td>
-                <td>{transaction.typeOfTransaction === 'loan'? transaction.amount : 0}</td>
+                <td>{transaction.typeOfTransaction === 'emi' ? transaction.amount : 0}</td>
+                <td>{transaction.typeOfTransaction === 'loan' ? transaction.amount : 0}</td>
                 <td>{transaction.remarks}</td>
               </tr>
             )) : <tr><td colSpan="5">No transactions available</td></tr>}
@@ -129,9 +116,9 @@ function LoanAccProfile() {
       </div>
 
       <div className="action-buttons">
-        <button onClick={handlePrint} className="btn btn-primary">Print</button>
-        <button onClick={handleUpdate} className="btn btn-warning">Update</button>
-        <button onClick={handleDelete} className="btn btn-danger">Delete</button>
+        <button onClick={handlePrint} className="print-btn">Print</button>
+        <button onClick={handleUpdate} className="update-btn">Update</button>
+        <button onClick={handleDelete} className="delete-btn">Delete</button>
       </div>
     </>
   );

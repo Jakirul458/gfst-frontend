@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import api from '../../../api/index';
 import { Link } from 'react-router-dom';
 import { formatMongoDate } from '../../../util/FormatDate';
+import './Transaction.css';
 
 function MonthlySavingAudit() {
   const [users, setUsers] = useState([]);
@@ -13,7 +14,7 @@ function MonthlySavingAudit() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await api.get('/api/transaction/all/savings  ');
+        const response = await api.get('/api/transaction/all/savings');
         console.log('API Response:', response.data);
         setUsers(response.data.data);
         setFilteredUsers(response.data.data);
@@ -40,8 +41,11 @@ function MonthlySavingAudit() {
     // Filter by date range
     if (startDate && endDate) {
       filtered = filtered.filter((user) => {
-        const date = new Date(user.date);
-        return date >= new Date(startDate) && date <= new Date(endDate);
+        const userDate = new Date(user.createdAt).setHours(0, 0, 0, 0); // Clear the time component
+        const start = new Date(startDate).setHours(0, 0, 0, 0);
+        const end = new Date(endDate).setHours(23, 59, 59, 999); // Include the entire end date
+
+        return userDate >= start && userDate <= end;
       });
     }
 
@@ -66,7 +70,7 @@ function MonthlySavingAudit() {
     printWindow.document.write(`
       <html>
       <head>
-        <title>List of All Savings Accounts Transactions</title>
+        <title>List of Savings Accounts Transactions</title>
         <style>
           table { width: 100%; border-collapse: collapse; }
           th, td { border: 1px solid black; padding: 4px; text-align: left; }
@@ -74,7 +78,7 @@ function MonthlySavingAudit() {
         </style>
       </head>
       <body>
-      <p>List of Savings Transactions</p>
+    
         ${printContents}
       </body>
       </html>
@@ -88,32 +92,31 @@ function MonthlySavingAudit() {
     <>
       <h1 className="mb-4">List of Savings Transactions</h1>
 
-      {/* Combined Search input */}
       <input
         type="text"
-        placeholder="Search by Account No, Transaction ID, or Remarks"
+        placeholder="Search by Account No / Transaction ID / Remarks"
         value={searchQuery}
         onChange={handleSearch}
         className="form-control mb-4 search-bar"
       />
 
-      {/* Date range inputs */}
-      <div className="mb-4">
+      <div className="date-filter-container mb-4">
         <input
           type="date"
           value={startDate}
           onChange={handleStartDateChange}
-          className="form-control mb-2"
+          className="form-control date-input"
           placeholder="Start Date"
         />
         <input
           type="date"
           value={endDate}
           onChange={handleEndDateChange}
-          className="form-control"
+          className="form-control date-input"
           placeholder="End Date"
         />
       </div>
+
 
       <div id="accounts-table">
         <table className="table table-bordered table-hover">
@@ -129,21 +132,20 @@ function MonthlySavingAudit() {
             </tr>
           </thead>
           <tbody>
-  {filteredUsers.map((user, index) => {
-    console.log(user);  // Debugging line to check API data
-    return (
-      <tr key={index}>
-        <td>{index + 1}</td>       
-        <td> <Link to={`/savings/account/${user.accountNo}`}>{user.accountNo}</Link> </td>            
-        <td>{user.transactionId}</td>
-        <td>{user.typeOfTransaction === 'deposit' ? user.amount : 0}</td>
-        <td>{user.typeOfTransaction === 'withdraw' ? user.amount : 0}</td>
-        <td>{user.remarks}</td>
-        <td>{formatMongoDate(user.createdAt)}</td>
-      </tr>
-    );
-  })}
-</tbody>
+            {filteredUsers.map((user, index) => {
+              return (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td><Link to={`/app/savings/account/${user.accountNo}`}>{user.accountNo}</Link></td>
+                  <td>{user.transactionId}</td>
+                  <td>{user.typeOfTransaction === 'deposit' ? user.amount : 0}</td>
+                  <td>{user.typeOfTransaction === 'withdraw' ? user.amount : 0}</td>
+                  <td>{user.remarks}</td>
+                  <td>{formatMongoDate(user.createdAt)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
 

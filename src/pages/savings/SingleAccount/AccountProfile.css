@@ -1,91 +1,32 @@
 
-h3 {
-    color: #343a40;
-    font-weight: 700;
-    text-align: center;
-}
+/*.account-details {
+    text-align: left; 
+    margin: 0 auto; 
+    max-width: 400px; 
+    margin-bottom: 20px; 
 
-p {
-    font-size: 16px;
-    color: #555;
-}
+*/
 
-/* Table Styling */
-.table {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
-    font-size: 1rem;
-}
-
-.table th,
-.table td {
-    padding: 12px;
-    text-align: center;
-    vertical-align: middle;
-}
-
-.table thead {
-    background-color: #086fd5;
-    color: #f8f5f5;
-}
-
-.table thead th {
-    border-bottom: 2px solid #424a53;
-}
-
-.table tbody tr:nth-child(odd) {
-    background-color: #e1f0f1;
-}
-
-.table tbody tr:nth-child(even) {
-    background-color: #e5e7de;
-}
-
-.table tbody tr:hover {
-    background-color: #929981;
-    cursor: pointer;
-}
-
-.table tbody tr td {
-    border-bottom: 1px solid #140606;
-    border-top: 1px solid #140606;
-}
-
-.table tbody tr td:first-child {
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-}
-
-.table tbody tr td:last-child {
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-}
-
-/* Buttons Styling */
 .print-btn,
 .update-btn,
 .delete-btn {
-    /* display: block;
-    padding: 10px;
+    display: inline-block; /* Inline-block for horizontal alignment */
+    padding: 10px 20px;
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 20px;
-    font-size: 20px;
+    border-radius: 20px; /* Rounded corners */
+    font-size: 18px;
     cursor: pointer;
-    margin: 10px;
-    width: 120px;
-    text-align: center; */
-    display: block;
-    width: 70px;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    font-size: 20px;
-    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    min-width: 120px; /* Ensure buttons are the same width */
+}
+
+.print-btn:hover,
+.update-btn:hover,
+.delete-btn:hover {
+    background-color: #0056b3; /* Darken color on hover */
 }
 
 .update-btn {
@@ -93,19 +34,33 @@ p {
     color: black;
 }
 
+.update-btn:hover {
+    background-color: #e0a800;
+}
+
 .delete-btn {
     background-color: #dc3545;
     color: white;
 }
 
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
 /* Center buttons horizontally and vertically */
-.print-btn-container {
+.action-buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    /* Spacing between buttons */
-    margin-top: 20px;
     align-items: center;
+    gap: 30px; /* Space between buttons */
+    margin-top: 40px;
+}
+
+/* Ensure the buttons are spaced nicely */
+.print-btn,
+.update-btn,
+.delete-btn {
+    padding: 12px 30px; /* Adjust the padding for a more uniform look */
 }
 
 /* Print Styles */
@@ -135,7 +90,6 @@ p {
     }
 
     .print-btn,
-    .print-btn-container,
     .update-btn,
     .delete-btn {
         display: none !important;

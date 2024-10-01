@@ -86,7 +86,7 @@ const Withdraw = () => {
         {isVerified && (
           <>
             <p>Consumer Name: <strong>{accountName}</strong></p><br />
-            <p> Previous Balance:  <strong>₹ {accountBalance}</strong></p><br />   
+            <p> Present Balance:  <strong>₹ {accountBalance}</strong></p><br />   
             <div className="form-group">
               
               <input

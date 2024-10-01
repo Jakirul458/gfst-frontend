@@ -13,14 +13,14 @@ import DeleteSavingsAcc from "../pages/savings/DeleteSavingsAccount/DeleteSaving
 import UpdateSavingsAcc from "../pages/savings/UpdateSavingsAccount/UpdateSavingsAcc";
 import MonthlySavingAudit from "../pages/savings/AllTransactions/MonthlySavingAudit";
 import AccountProfile from '../pages/savings/SingleAccount/AccountProfile'
-import FindSavingsAccount from "../pages/savings/FindSavingsAccount/FindSavingsAccount";
+import SearchAccount from "../pages/savings/SearchAccount/SearchAccount";
 //loan
 import CreateLoanAccount from "../pages/loan/CreateAccount/CreateLoanAccount";
 import LoanInstallment from "../pages/loan/Installment/LoanInstallment";
 import MonthlyLoanAudit from "../pages/loan/AllTransactions/MonthlyLoanAudit";
-import FindLoanAccounts from "../pages/loan/FindLoanAccount/FindLoanAccounts";
-import UpdateLoanAcc from "../pages/loan/UpdateAccount/UpdateLoanAcc";
-import DeleteLoanAcc from "../pages/loan/DeleteAccount/DeleteLoanAcc";
+import SearchLoanAccount from "../pages/loan/SearchAccount/SearchLoanAccount";
+import UpdateLoanAcc from "../pages/loan/UpdateLoanAccount/UpdateLoanAcc";
+import DeleteLoanAcc from "../pages/loan/DeleteLoanAccount/DeleteLoanAcc";
 import LoanAccProfile from '../pages/loan/SingleAccount/LoanAccProfile';
 import LoanAccounts from "../pages/loan/AllAccounts/LoanAcounts";
 //investment
@@ -35,168 +35,6 @@ import Profit from "../pages/investment/Profit/Profit";
 
 import { Navigate } from "react-router-dom";
 
-
-// export const router = createBrowserRouter([
-//     {
-//       path: "/",
-//       element: <Navigate to="/login" replace/>,
-//       children: [
-//         {
-//           path: "/login",
-//           element: <SignIn />,
-//         },
-//         {
-//           path : "app/",
-//           element: <MainLayout />,
-//           children : [
-//             {
-//               path: "savings/",
-//               children : [
-//                 {
-//                   path: "create",
-//                   element: <CreateSavingAccount />,
-//                 },
-//                 {
-//                   path: "deposit",
-//                   element: <Deposit />,
-//                 },
-//                 {
-//                   path: "withdraw",
-//                   element: <Withdraw />,
-//                 },
-//                 {
-//                   path: "all",
-//                   element: <AllAccounts />,
-//                 },
-//                 {
-//                   path: "find",
-//                   element: <FindSavingsAccount />,
-//                 },
-//                 {
-//                   path: "audit",
-//                   element: <MonthlySavingAudit />,
-//                 },
-//                 {
-//                   path : "account/:account",
-//                   element : <AccountProfile />
-//                 },
-//                 {
-//                   path : "account/update/:accountNo",
-//                   element : <UpdateSavingsAcc />
-//                 },
-//                 {
-//                   path : "account/delete/:accountNo",
-//                   element : <DeleteSavingsAcc />
-//                 }
-//               ]
-//             },
-    
-//             {
-//               path: "loan/",
-//               children : [
-//                 {
-//                   path: "create",
-//                   element: <CreateLoanAccount />,
-//                 },
-//                 {
-//                   path: "emi",
-//                   element: <LoanInstallment />,
-//                 },
-//                 {
-//                   path: "withdraw",
-//                   element: <Withdraw />,
-//                 },
-//                 {
-//                   path: "all",
-//                   element: <LoanAccounts />,
-//                 },
-//                 {
-//                   path: "find",
-//                   element: <FindLoanAccounts />,
-//                 },
-//                 {
-//                   path: "audit",
-//                   element: <MonthlyLoanAudit />,
-//                 },
-//                 {
-//                   path : "account/:account",
-//                   element : <LoanAccProfile />
-//                 },
-//                 {
-//                   path : "update/:accountNo",
-//                   element : <UpdateLoanAcc />
-//                 },
-//                 {
-//                   path : "delete/:accountNo",
-//                   element : <DeleteLoanAcc />
-//                 }
-//               ]
-//             },
-    
-//             {
-//               path: "investment/",
-//               children : [
-//                 {
-//                   path: "create",
-//                   element: <CreateInvestmentAccount />,
-//                 },
-//                 {
-//                   path: "profit",
-//                   element: <Profit />,
-//                 },
-//                 {
-//                   path: "withdraw",
-//                   element: <Withdraw />,
-//                 },
-//                 {
-//                   path: "all",
-//                   element: <InvestmentAccounts />,
-//                 },
-//                 {
-//                   path: "find",
-//                   element: <FindInvestmentAccount />,
-//                 },
-//                 {
-//                   path: "audit",
-//                   element: <MonthlyInvestmentAudit />,
-//                 },
-//                 {
-//                   path : "account/:account",
-//                   element : <InvestmentProfile />
-//                 },
-//                 {
-//                   path : "update/:accountNo",
-//                   element : <UpdateInvestmentAcc />
-//                 },
-//                 {
-//                   path : "delete/:accountNo",
-//                   element : <DeleteInvestmentAcc />
-//                 }
-//               ]
-//             },
-    
-//             {
-//               path: "society/",
-//               children : [
-//                 {
-//                   path: "dashboard",
-//                   element: <Dashboard />,
-//                 },
-//                 {
-//                   path: "about",
-//                   element: <About />,
-//                 },
-//                 {
-//                   path: "contact",
-//                   element: <Contact />,
-//                 },
-//               ]
-//             }
-//           ]
-//         }
-//       ],
-//     },
-//   ])
 
 export const router = createBrowserRouter([
   {
@@ -231,17 +69,18 @@ export const router = createBrowserRouter([
             element: <AllAccounts />,
           },
           {
-            path: "find",
-            element: <FindSavingsAccount />,
+            path: "search-account",
+            element: <SearchAccount />,
           },
           {
             path: "audit",
             element: <MonthlySavingAudit />,
           },
           {
-            path: "account/:account",
+            path: "account/:account",  
             element: <AccountProfile />,
           },
+          
           {
             path: "account/update/:accountNo",
             element: <UpdateSavingsAcc />,
@@ -272,23 +111,23 @@ export const router = createBrowserRouter([
             element: <LoanAccounts />,
           },
           {
-            path: "find",
-            element: <FindLoanAccounts />,
+            path: "search-account",
+            element: <SearchAccount />,
           },
           {
             path: "audit",
             element: <MonthlyLoanAudit />,
           },
           {
-            path: "account/:account",
+            path: "account/:accountNo",  // Changed from :account to :accountNo for consistency
             element: <LoanAccProfile />,
           },
           {
-            path: "update/:accountNo",
+            path: "account/update/:accountNo",
             element: <UpdateLoanAcc />,
           },
           {
-            path: "delete/:accountNo",
+            path: "account/delete/:accountNo",
             element: <DeleteLoanAcc />,
           }
         ],
@@ -321,7 +160,7 @@ export const router = createBrowserRouter([
             element: <MonthlyInvestmentAudit />,
           },
           {
-            path: "account/:account",
+            path: "account/:accountNo",  // Changed from :account to :accountNo for consistency
             element: <InvestmentProfile />,
           },
           {
@@ -354,4 +193,3 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
-  

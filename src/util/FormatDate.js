@@ -3,8 +3,8 @@ export function formatMongoDate(dateString) {
   
     const options = {
       year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+      month: 'numeric',
+      day: '2-digit',
       hour: '2-digit',
       minute: '2-digit',
     };

@@ -1,0 +1,152 @@
+/* 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+
+  .search-bar, .form-control {
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  .form-control.mb-2, .form-control {
+    margin-bottom: 10px;
+  }
+  
+  input::placeholder {
+    color: #888;
+  }
+  
+
+  #accounts-table {
+    margin-top: 30px;
+  }
+  
+  .table {
+    width: 90%;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  thead {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  th, td {
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #ddd;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tbody tr:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+  }
+  
+
+  .print-btn-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .print-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .print-btn:hover {
+    background-color: #0056b3;
+  }
+  
+
+  @media (max-width: 768px) {
+    .search-bar, .form-control {
+      width: 80%;
+    }
+  
+    .table {
+      width: 100%;
+    }
+  }
+  */
+
+
+ 
+
+.search-bar {
+  width: 50%; 
+  margin: 0 auto; 
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+
+.date-filter-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px; 
+}
+
+.date-input {
+  width: 150px; 
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+/* th, td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: left;
+} */
+.print-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.print-btn:hover {
+  background-color: #0056b3;
+}
+/* .table {
+  width: 90%;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}  */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
