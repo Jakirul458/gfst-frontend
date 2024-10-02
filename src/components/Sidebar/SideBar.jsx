@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle, faPiggyBank, faWallet, faListAlt, faSearch, faClipboardList, faMoneyBillWave, faChartLine } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faCoins, faWallet, faListAlt, faSearch, faClipboardList, faMoneyBillWave, faChartLine } from '@fortawesome/free-solid-svg-icons';
 import './SideBar.css'; 
 
 const SideBar = () => {
@@ -14,7 +14,7 @@ const SideBar = () => {
             <FontAwesomeIcon icon={faPlusCircle} /> Create Account
           </NavLink>
           <NavLink to='/app/savings/deposit'>
-            <FontAwesomeIcon icon={faPiggyBank} /> Deposit
+            <FontAwesomeIcon icon={faCoins} /> Deposit
           </NavLink>
           <NavLink to='/app/savings/withdraw'>
             <FontAwesomeIcon icon={faWallet} /> Withdraw

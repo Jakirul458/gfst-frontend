@@ -20,16 +20,16 @@ function Dashboard() {
       }
     };
 
-  const fetchTotalLoanBalance = async () => {
-  try {
-    const response = await api.get('/api/society/total_loan_balance');
-    console.log('Loan API response:', response.data); 
-    setTotalLoanBalance(response.data.totalLoanBalance);
-  } catch (err) {
-    console.error('Error fetching total loan balance:', err);
-    setError('Failed to fetch total loan balance');
-  }
-};
+    const fetchTotalLoanBalance = async () => {
+      try {
+        const response = await api.get('/api/society/total_loan_balance');
+        console.log('Loan API response:', response.data);
+        setTotalLoanBalance(response.data.totalLoanBalance);
+      } catch (err) {
+        console.error('Error fetching total loan balance:', err);
+        setError('Failed to fetch total loan balance');
+      }
+    };
 
 
     fetchTotalSavingsBalance();
@@ -58,18 +58,28 @@ function Dashboard() {
       </div>
 
       <div className="section">
+        <div className="section-title">Total Loan Sanction</div>
+        <div className="section-content">₹0</div> {/*sum of loan take (loan)*/}
+      </div>
+
+      <div className="section">
+        <div className="section-title">Total collect Loan Amount</div>
+        <div className="section-content">₹0</div> {/* sum of emi (emmi) */}
+      </div>
+
+      <div className="section">
         <div className="section-title">Remaining Loan Amount</div>
         <div className="section-content">₹{totalLoanBalance}</div>
       </div>
 
       <div className="section">
-        <div className="section-title">Total Investment Balance</div>
-        <div className="section-content">₹0</div> {/* Placeholder value */}
+        <div className="section-title">Total Investment Balance </div>
+        <div className="section-content">₹0</div> {/* sum of total investment  balance fiel */}
       </div>
 
       <div className="section">
         <div className="section-title">Profit Balance</div>
-        <div className="section-content">₹0</div> {/* Placeholder value */}
+        <div className="section-content">₹0</div> {/* sum of profit (profit) */}
       </div>
     </div>
   );
