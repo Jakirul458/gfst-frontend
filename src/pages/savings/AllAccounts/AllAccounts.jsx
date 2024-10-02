@@ -48,8 +48,9 @@ function AllAccounts() {
         <title>List of All Savings Accounts</title>
         <style>
           table { width: 100%; border-collapse: collapse; }
-          th, td { border: 1px solid black; padding: 8px; text-align: left; }
+          th, td { border: 1px solid black; padding: 1px; text-align: center; }
           th { background-color: #f2f2f2; }
+            a { text-decoration: none; color: black; }
         </style>
       </head>
       <body>
@@ -64,9 +65,7 @@ function AllAccounts() {
 
   return (
     <>
-     <div className="print-btn-container">
-        <button type="button" className="print-btn" onClick={handlePrint}>Print</button>
-      </div>
+     
       <h1 className="mb-4">List of Savings Accounts</h1>
 
       <input

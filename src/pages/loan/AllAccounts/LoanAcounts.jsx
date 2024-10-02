@@ -53,8 +53,9 @@ function LoanAccounts() {
         <title> List of all loan Accounts </title>
         <style>
           table { width: 100%; border-collapse: collapse; }
-          th, td { border: 1px solid black; padding: 8px; text-align: left; }
+          th, td { border: 1px solid black; padding: 8px; text-align: center; }
           th { background-color: #f2f2f2; }
+            a { text-decoration: none; color: black; }
         </style>
       </head>
       <body>

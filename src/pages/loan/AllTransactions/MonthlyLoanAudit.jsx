@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../../api';
+import './Transactions.css';
+import { formatMongoDate } from '../../../util/FormatDate';
 
 function MonthlyLoanAudit() {
   const [users, setUsers] = useState([]);
@@ -27,6 +29,7 @@ function MonthlyLoanAudit() {
   useEffect(() => {
     let filtered = users;
 
+    // Filter by search query (accountNo, transactionId, remarks)
     if (searchQuery) {
       filtered = filtered.filter((user) =>
         (user.accountNo && user.accountNo.toString().toLowerCase().includes(searchQuery.toLowerCase())) ||
@@ -35,19 +38,16 @@ function MonthlyLoanAudit() {
       );
     }
 
+    // Filter by date range
     if (startDate && endDate) {
       filtered = filtered.filter((user) => {
-        const date = new Date(user.date);
-        return date >= new Date(startDate) && date <= new Date(endDate);
+        const userDate = new Date(user.createdAt).setHours(0, 0, 0, 0); // Clear the time component
+        const start = new Date(startDate).setHours(0, 0, 0, 0);
+        const end = new Date(endDate).setHours(23, 59, 59, 999); // Include the entire end date
+
+        return userDate >= start && userDate <= end;
       });
     }
-
-  
-    filtered = filtered.map((user) => ({
-      ...user,
-      deposit: user.typeOfTransaction === 'deposit' ? user.amount : 0,
-      withdraw: user.typeOfTransaction === 'withdraw' ? user.amount : 0,
-    }));
 
     setFilteredUsers(filtered);
   }, [searchQuery, startDate, endDate, users]);
@@ -73,8 +73,9 @@ function MonthlyLoanAudit() {
         <title>List of Monthly Loan Transactions</title>
         <style>
           table { width: 100%; border-collapse: collapse; }
-          th, td { border: 1px solid black; padding: 4px; text-align: left; }
+          th, td { border: 1px solid black; padding: 4px; text-align: center; }
           th { background-color: #f2f2f2; }
+          a { text-decoration: none; color: black; }
         </style>
       </head>
       <body>
@@ -94,7 +95,7 @@ function MonthlyLoanAudit() {
       
       <input
         type="text"
-        placeholder="Search by Account No, Transaction ID, or Remarks"
+        placeholder="Search by Account No / Transaction ID / Remarks"
         value={searchQuery}
         onChange={handleSearch}
         className="form-control mb-4 search-bar"
@@ -140,7 +141,7 @@ function MonthlyLoanAudit() {
                 <td>{user.typeOfTransaction === 'emi' ? user.amount : 0}</td>
                 <td>{user.typeOfTransaction === 'loan' ? user.amount : 0}</td>
                 <td>{user.remarks}</td>
-                <td>{user.date}</td>
+                <td>{formatMongoDate(user.createdAt)}</td>
               </tr>
             ))}
           </tbody>

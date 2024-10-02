@@ -96,6 +96,14 @@ tbody tr:hover {
 .print-btn:hover {
   background-color: #0056b3;
 }
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+a:hover {
+  text-decoration: none; 
+}
 
 @media (max-width: 768px) {
   .search-bar, .form-control {

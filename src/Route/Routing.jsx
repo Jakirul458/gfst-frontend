@@ -28,13 +28,176 @@ import LoanAccounts from "../pages/loan/AllAccounts/LoanAcounts";
 import CreateInvestmentAccount from "../pages/investment/CreateAccount/CreateInvestmentAccount";
 import MonthlyInvestmentAudit from "../pages/investment/MonthlyAudit/MonthlyInvestmentAudit";
 import FindInvestmentAccount from "../pages/investment/FindInvestmentAccount/FindInvestmentAccount";
-import UpdateInvestmentAcc from "../pages/investment/UpdateAccount/UpdateInvestmentAcc";
-import DeleteInvestmentAcc from "../pages/investment/DeleteAccount/DeleteInvestmentAcc";
+import DeleteInvestmentAcc from "../pages/investment/DeleteInvestmentAccount/DeleteInvestmentAcc";
+import UpdateInvestmentAcc from "../pages/investment/UpdateInvestmentAccount/UpdateInvestmentAcc";
 import InvestmentProfile from '../pages/investment/SingleAccount/InvestmentProfile';
 import InvestmentAccounts from "../pages/investment/AllAccounts/InvestmentAccounts";
 import Profit from "../pages/investment/Profit/Profit";
 
 import { Navigate } from "react-router-dom";
+
+
+// export const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <Navigate to="/login" replace />,
+//   },
+//   {
+//     path: "/login",
+//     element: <SignIn />,
+//   },
+//   {
+//     path: "app/",
+//     element: <MainLayout />,
+//     children: [
+//       {
+//         path: "savings/",
+//         children: [
+//           {
+//             path: "create",
+//             element: <CreateSavingAccount />,
+//           },
+//           {
+//             path: "deposit",
+//             element: <Deposit />,
+//           },
+//           {
+//             path: "withdraw",
+//             element: <Withdraw />,
+//           },
+//           {
+//             path: "all",
+//             element: <AllAccounts />,
+//           },
+//           {
+//             path: "search-account",
+//             element: <SearchAccount />,
+//           },
+//           {
+//             path: "audit",
+//             element: <MonthlySavingAudit />,
+//           },
+//           {
+//             path: "account/:account",  
+//             element: <AccountProfile />,
+//           },
+          
+//           {
+//             path: "account/update/:accountNo",
+//             element: <UpdateSavingsAcc />,
+//           },
+//           {
+//             path: "account/delete/:accountNo",
+//             element: <DeleteSavingsAcc />,
+//           }
+//         ],
+//       },
+//       {
+//         path: "loan/",
+//         children: [
+//           {
+//             path: "create",
+//             element: <CreateLoanAccount />,
+//           },
+//           {
+//             path: "emi",
+//             element: <LoanInstallment />,
+//           },
+//           {
+//             path: "withdraw",
+//             element: <Withdraw />,
+//           },
+//           {
+//             path: "all",
+//             element: <LoanAccounts />,
+//           },
+//           {
+//             path: "search-account",
+//             element: <SearchAccount />,
+//           },
+//           {
+//             path: "audit",
+//             element: <MonthlyLoanAudit />,
+//           },
+//           {
+//             path: "account/:accountNo",  
+//             element: <LoanAccProfile />,
+//           },
+//           {
+//             path: "account/update/:accountNo",
+//             element: <UpdateLoanAcc />,
+//           },
+//           {
+//             path: "account/delete/:accountNo",
+//             element: <DeleteLoanAcc />,
+//           }
+//         ],
+//       },
+//       {
+//         path: "investment/",
+//         children: [
+//           {
+//             path: "create",
+//             element: <CreateInvestmentAccount />,
+//           },
+//           {
+//             path: "profit",
+//             element: <Profit />,
+//           },
+//           {
+//             path: "withdraw",
+//             element: <Withdraw />,
+//           },
+//           {
+//             path: "all",
+//             element: <InvestmentAccounts />,
+//           },
+//           {
+//             path: "find",
+//             element: <FindInvestmentAccount />,
+//           },
+//           {
+//             path: "audit",
+//             element: <MonthlyInvestmentAudit />,
+//           },
+//           {
+//             path: "account/:accountNo",  
+//             element: <InvestmentProfile />,
+//           },
+//           {
+//             path: "update/:accountNo",
+//             element: <UpdateInvestmentAcc />,
+//           },
+//           {
+//             path: "delete/:accountNo",
+//             element: <DeleteInvestmentAcc />,
+//           }
+//         ],
+//       },
+//       {
+//         path: "society/",
+//         children: [
+//           {
+//             path: "adminpanel",
+//             element: <AdminPanel />,
+//           },
+//           {
+//             path: "dashboard",
+//             element: <Dashboard />,
+//           },
+//           {
+//             path: "about",
+//             element: <About />,
+//           },
+//           {
+//             path: "contact",
+//             element: <Contact />,
+//           },
+//         ],
+//       }
+//     ],
+//   },
+// ]);
 
 
 export const router = createBrowserRouter([
@@ -50,151 +213,61 @@ export const router = createBrowserRouter([
     path: "app/",
     element: <MainLayout />,
     children: [
+      // Savings routes
       {
         path: "savings/",
         children: [
-          {
-            path: "create",
-            element: <CreateSavingAccount />,
-          },
-          {
-            path: "deposit",
-            element: <Deposit />,
-          },
-          {
-            path: "withdraw",
-            element: <Withdraw />,
-          },
-          {
-            path: "all",
-            element: <AllAccounts />,
-          },
-          {
-            path: "search-account",
-            element: <SearchAccount />,
-          },
-          {
-            path: "audit",
-            element: <MonthlySavingAudit />,
-          },
-          {
-            path: "account/:account",  
-            element: <AccountProfile />,
-          },
-          
-          {
-            path: "account/update/:accountNo",
-            element: <UpdateSavingsAcc />,
-          },
-          {
-            path: "account/delete/:accountNo",
-            element: <DeleteSavingsAcc />,
-          }
+          { path: "create", element: <CreateSavingAccount /> },
+          { path: "deposit", element: <Deposit /> },
+          { path: "withdraw", element: <Withdraw /> },
+          { path: "all", element: <AllAccounts /> },
+          { path: "search-account", element: <SearchAccount /> },
+          { path: "audit", element: <MonthlySavingAudit /> },
+          { path: "account/:accountNo", element: <AccountProfile /> }, 
+          { path: "account/update/:accountNo", element: <UpdateSavingsAcc /> },
+          { path: "account/delete/:accountNo", element: <DeleteSavingsAcc /> },
         ],
       },
+      // Loan routes
       {
         path: "loan/",
         children: [
-          {
-            path: "create",
-            element: <CreateLoanAccount />,
-          },
-          {
-            path: "emi",
-            element: <LoanInstallment />,
-          },
-          {
-            path: "withdraw",
-            element: <Withdraw />,
-          },
-          {
-            path: "all",
-            element: <LoanAccounts />,
-          },
-          {
-            path: "search-account",
-            element: <SearchAccount />,
-          },
-          {
-            path: "audit",
-            element: <MonthlyLoanAudit />,
-          },
-          {
-            path: "account/:accountNo",  // Changed from :account to :accountNo for consistency
-            element: <LoanAccProfile />,
-          },
-          {
-            path: "account/update/:accountNo",
-            element: <UpdateLoanAcc />,
-          },
-          {
-            path: "account/delete/:accountNo",
-            element: <DeleteLoanAcc />,
-          }
+          { path: "create", element: <CreateLoanAccount /> },
+          { path: "emi", element: <LoanInstallment /> },
+          { path: "withdraw", element: <Withdraw /> },
+          { path: "all", element: <LoanAccounts /> },
+          { path: "search-account", element: <SearchAccount /> },
+          { path: "audit", element: <MonthlyLoanAudit /> },
+          { path: "account/:accountNo", element: <LoanAccProfile /> },
+          { path: "account/update/:accountNo", element: <UpdateLoanAcc /> },
+          { path: "account/delete/:accountNo", element: <DeleteLoanAcc /> },
         ],
       },
+      // Investment routes
       {
         path: "investment/",
         children: [
-          {
-            path: "create",
-            element: <CreateInvestmentAccount />,
-          },
-          {
-            path: "profit",
-            element: <Profit />,
-          },
-          {
-            path: "withdraw",
-            element: <Withdraw />,
-          },
-          {
-            path: "all",
-            element: <InvestmentAccounts />,
-          },
-          {
-            path: "find",
-            element: <FindInvestmentAccount />,
-          },
-          {
-            path: "audit",
-            element: <MonthlyInvestmentAudit />,
-          },
-          {
-            path: "account/:accountNo",  // Changed from :account to :accountNo for consistency
-            element: <InvestmentProfile />,
-          },
-          {
-            path: "update/:accountNo",
-            element: <UpdateInvestmentAcc />,
-          },
-          {
-            path: "delete/:accountNo",
-            element: <DeleteInvestmentAcc />,
-          }
+          { path: "create", element: <CreateInvestmentAccount /> },
+          { path: "profit", element: <Profit /> },
+          { path: "withdraw", element: <Withdraw /> },
+          { path: "all", element: <InvestmentAccounts /> },
+          { path: "find", element: <FindInvestmentAccount /> },
+          { path: "audit", element: <MonthlyInvestmentAudit /> },
+          { path: "account/:accountNo", element: <InvestmentProfile /> }, 
+          { path: "account/update/:accountNo", element: <UpdateInvestmentAcc /> },
+          { path: "account/delete/:accountNo", element: <DeleteInvestmentAcc /> },
         ],
       },
+      // Society routes
       {
         path: "society/",
         children: [
-          {
-            path: "adminpanel",
-            element: <AdminPanel />,
-          },
-          {
-            path: "dashboard",
-            element: <Dashboard />,
-          },
-          {
-            path: "about",
-            element: <About />,
-          },
-          {
-            path: "contact",
-            element: <Contact />,
-          },
+          { path: "adminpanel", element: <AdminPanel /> },
+          { path: "dashboard", element: <Dashboard /> },
+          { path: "about", element: <About /> },
+          { path: "contact", element: <Contact /> },
         ],
-      }
+      },
     ],
   },
 ]);

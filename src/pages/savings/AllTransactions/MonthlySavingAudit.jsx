@@ -73,8 +73,9 @@ function MonthlySavingAudit() {
         <title>List of Savings Accounts Transactions</title>
         <style>
           table { width: 100%; border-collapse: collapse; }
-          th, td { border: 1px solid black; padding: 4px; text-align: left; }
+          th, td { border: 1px solid black; padding: 4px; text-align: center; }
           th { background-color: #f2f2f2; }
+          a { text-decoration: none; color: black; }
         </style>
       </head>
       <body>
@@ -89,9 +90,7 @@ function MonthlySavingAudit() {
 
   return (
     <>
-      <div className="print-btn-container">
-        <button type="button" className="print-btn" onClick={handlePrint}>Print</button>
-      </div>
+    
       <h1 className="mb-4">List of Savings Transactions</h1>
 
       <input

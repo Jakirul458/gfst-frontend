@@ -70,11 +70,7 @@ function AccountProfile() {
 
   return (
     <div className="account-profile-container" id="account-profile">
-        <div className="action-buttons">
-        <button onClick={handlePrint} className="print-btn">Print</button>
-        <button onClick={handleUpdate} className="update-btn">Update</button>
-        <button onClick={handleDelete} className="delete-btn">Delete</button>
-      </div>
+
       <br />
       <div className="account-details">
         <p>Savings Account No: <strong>{accountDetails.accountNo} </strong></p>
@@ -110,8 +106,12 @@ function AccountProfile() {
           )) : <tr><td colSpan="5">No transactions available</td></tr>}
         </tbody>
       </table>
+      <div className="action-buttons">
+        <button onClick={handlePrint} className="print-btn">Print</button>
+        <button onClick={handleUpdate} className="update-btn">Update</button>
+        <button onClick={handleDelete} className="delete-btn">Delete</button>
+      </div>
 
-    
     </div>
   );
 }

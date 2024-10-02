@@ -36,15 +36,15 @@ const Layout = ({ children }) => {
   return (
     <div className="main__container">
       <Navbar />
-      <div className='main_app_container'>      
+      <div className='main_app_container'>
         <div className='sidebar__container'>
           <div>
             {/* <AdminPanel /> */}
             <div>
-           <SideBar />
+              <SideBar />
+            </div>
           </div>
-          </div>
-                 
+
         </div>
 
         <div className='main__content'>
