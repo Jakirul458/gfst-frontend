@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../../api/index';
-import './SearchAccount.css'; 
+import './SearchInvestmentAccount.css'; 
 
-const SearchAccount = () => {
+const SearchLoanAccount = () => {
   const [accountNo, setAccountNo] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -14,10 +14,10 @@ const SearchAccount = () => {
     setError('');
 
     try {
-      const response = await api.get(`/api/savings/${accountNo}`);
+      const response = await api.get(`/api/investment/${accountNo}`);
       if (response.data && response.data.data) {
         // If the account exists, navigate to the account profile page
-        navigate(`/app/savings/account/${accountNo}`);
+        navigate(`/app/investment/account/${accountNo}`);
       } else {
         setError('Account not found.');
       }
@@ -31,7 +31,7 @@ const SearchAccount = () => {
 
   return (
     <div className="search-account-container">
-      <h1>Search for a Savings Account</h1>
+      <h1>Search for a Investment Account</h1>
       <div className="search-bar">
         <input
           type="text"
@@ -50,4 +50,4 @@ const SearchAccount = () => {
   );
 };
 
-export default SearchAccount;
+export default SearchLoanAccount;

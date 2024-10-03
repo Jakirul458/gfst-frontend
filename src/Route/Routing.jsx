@@ -1,8 +1,6 @@
 import { createBrowserRouter ,} from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import SignIn from "../pages/auth/SignIn/SignIn";
-import Dashboard from "../pages/society/Dashboard/Dashboard";
-import About from "../pages/society/About/About";
-import Contact from "../pages/society/Contact/Contact";
 import MainLayout from '../layout/MainLayout';
 import AdminPanel from '../pages/society/Admin/AdminPanel' 
 //savings
@@ -27,14 +25,19 @@ import LoanAccounts from "../pages/loan/AllAccounts/LoanAcounts";
 //investment
 import CreateInvestmentAccount from "../pages/investment/CreateAccount/CreateInvestmentAccount";
 import MonthlyInvestmentAudit from "../pages/investment/MonthlyAudit/MonthlyInvestmentAudit";
-import FindInvestmentAccount from "../pages/investment/FindInvestmentAccount/FindInvestmentAccount";
+import SearchInvestmentAccount from "../pages/investment/SearchInvestmentAccount/SearchInvestmentAccount";
 import DeleteInvestmentAcc from "../pages/investment/DeleteInvestmentAccount/DeleteInvestmentAcc";
 import UpdateInvestmentAcc from "../pages/investment/UpdateInvestmentAccount/UpdateInvestmentAcc";
 import InvestmentProfile from '../pages/investment/SingleAccount/InvestmentProfile';
 import InvestmentAccounts from "../pages/investment/AllAccounts/InvestmentAccounts";
 import Profit from "../pages/investment/Profit/Profit";
+//Society
+import Dashboard from "../pages/society/Dashboard/Dashboard";
+import About from "../pages/society/About/About";
+import Contact from "../pages/society/Contact/Contact";
+import Donation from "../pages/society/Donation/Donation";
+import Expenditure from "../pages/society/Expenditure/Expenditure";
 
-import { Navigate } from "react-router-dom";
 
 
 // export const router = createBrowserRouter([
@@ -236,7 +239,7 @@ export const router = createBrowserRouter([
           { path: "emi", element: <LoanInstallment /> },
           { path: "withdraw", element: <Withdraw /> },
           { path: "all", element: <LoanAccounts /> },
-          { path: "search-account", element: <SearchAccount /> },
+          { path: "search-loan-account", element: <SearchLoanAccount /> },
           { path: "audit", element: <MonthlyLoanAudit /> },
           { path: "account/:accountNo", element: <LoanAccProfile /> },
           { path: "account/update/:accountNo", element: <UpdateLoanAcc /> },
@@ -251,7 +254,7 @@ export const router = createBrowserRouter([
           { path: "profit", element: <Profit /> },
           { path: "withdraw", element: <Withdraw /> },
           { path: "all", element: <InvestmentAccounts /> },
-          { path: "find", element: <FindInvestmentAccount /> },
+          { path: "search-investment-account", element: <SearchInvestmentAccount /> },
           { path: "audit", element: <MonthlyInvestmentAudit /> },
           { path: "account/:accountNo", element: <InvestmentProfile /> }, 
           { path: "account/update/:accountNo", element: <UpdateInvestmentAcc /> },
@@ -266,6 +269,8 @@ export const router = createBrowserRouter([
           { path: "dashboard", element: <Dashboard /> },
           { path: "about", element: <About /> },
           { path: "contact", element: <Contact /> },
+          { path: "donation", element: <Donation /> },
+          { path: "expenditure", element: <Expenditure /> },
         ],
       },
     ],

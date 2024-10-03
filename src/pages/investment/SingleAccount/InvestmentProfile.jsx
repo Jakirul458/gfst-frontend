@@ -78,7 +78,7 @@ function InvestmentProfile() {
         <p>Mobile : <strong> {accountDetails.mobileNo}</strong></p>
         <p>Aadhar :  <strong>{accountDetails.AadharNo}</strong></p>
         <p>Address : <strong> {accountDetails.Address}</strong></p>
-        <p>Available Balance : ₹<strong> {accountDetails.investmentAmount}</strong></p>
+        <p>Investment Amount : ₹<strong> {accountDetails.investmentAmount}</strong></p>
         <br />
         <h3>Transaction History</h3>
       </div>

@@ -1,0 +1,25 @@
+.expenditure-section {
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .expenditure-section h2 {
+    color: #FF5722;
+  }
+  
+  .expenditure-section form div {
+    margin-bottom: 10px;
+  }
+  
+  .expense-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .expense-list li {
+    background-color: #ffffff;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+  

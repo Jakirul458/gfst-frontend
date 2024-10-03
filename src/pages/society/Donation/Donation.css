@@ -1,0 +1,25 @@
+.donation-section {
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .donation-section h2 {
+    color: #4CAF50;
+  }
+  
+  .donation-section form div {
+    margin-bottom: 10px;
+  }
+  
+  .donation-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .donation-list li {
+    background-color: #ffffff;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+  

@@ -1,4 +1,4 @@
-.navbar-container {
+/* .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,7 +17,7 @@
 }
 
 .navbar-links {
-  /* display: flex; */
+ 
   align-items: center;
   gap: 20px;
 }
@@ -32,7 +32,7 @@
 }
 
 .nav-link:hover {
-  background-color: rgb(17, 36, 36); /* Same hover effect as sidebar */
+  background-color: rgb(17, 36, 36); 
   cursor: pointer; 
 }
 
@@ -43,14 +43,101 @@
   cursor: pointer;
   font: inherit;
   margin: 0;
-  padding: 10px; /* Add padding to match nav-links */
+  padding: 10px; 
   text-decoration: none;
   font-size: 20px;
   transition: background-color 0.3s ease;
 }
 
 .logout-button:hover {
-  background-color: rgb(17, 36, 36); /* Same hover effect as sidebar */
-  cursor: pointer; /* Mouse cursor on hover */
+  background-color: rgb(17, 36, 36); 
+  cursor: pointer; 
   color: #fff;
+} */
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px; /* Adjusted padding for smaller screens */
+  background-color: teal;
+  color: #fff;
+  height: 4rem;
 }
+
+.navbar-brand .heading {
+  font-size: 1.6rem; /* Responsive font size */
+  color: #f1c40f; 
+}
+
+.navbar-links {
+  display: flex; /* Ensure links are displayed in a row */
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem; /* Responsive font size */
+  padding: 10px; 
+  transition: background-color 0.3s ease;
+  cursor: pointer; 
+}
+
+.nav-link:hover {
+  background-color: rgb(17, 36, 36);
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  margin: 0;
+  padding: 10px;
+  font-size: 1rem; /* Responsive font size */
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: rgb(17, 36, 36);
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column; /* Stack items on small screens */
+    padding: 10px; /* Less padding on mobile */
+  }
+
+  .navbar-brand .heading {
+    font-size: 1.4rem; /* Slightly smaller on mobile */
+  }
+
+  .navbar-links {
+    flex-wrap: wrap; /* Allow wrapping of links */
+    justify-content: center; /* Center the links */
+    gap: 10px; /* Adjust gap for mobile */
+  }
+
+  .nav-link, .logout-button {
+    font-size: 0.9rem; /* Smaller font size on mobile */
+    padding: 8px; /* Smaller padding on mobile */
+  }
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center; /* Align logo and heading vertically */
+}
+
+.navbar-logo {
+  height: 40px; /* Adjust the height as needed */
+  margin-right: 10px; /* Space between logo and heading */
+}
+
+
+
+

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../../api/index';
-import './SearchAccount.css'; // Ensure this CSS file contains styles for this component
+import './SearchLoanAccount.css'; 
 
-const SearchAccount = () => {
+const SearchLoanAccount = () => {
   const [accountNo, setAccountNo] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -50,4 +50,4 @@ const SearchAccount = () => {
   );
 };
 
-export default SearchAccount;
+export default SearchLoanAccount;
