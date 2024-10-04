@@ -1,4 +1,4 @@
-.donation-section {
+/* .donation-section {
     padding: 20px;
     background-color: #f5f5f5;
   }
@@ -22,4 +22,98 @@
     margin-bottom: 5px;
     border-radius: 5px;
   }
-  
+   */
+
+
+/* Styles for the donation component */
+.donation-section {
+  width: 50%;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.donation-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form div {
+  margin-bottom: 10px;
+}
+
+form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Slip styles */
+.donation-slip {
+  text-align: left;
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.donation-slip h3 {
+  text-align: center;
+}
+
+.donation-slip p {
+  margin: 10px 0;
+}
+
+button.print-button {
+  margin-top: 15px;
+  background-color: #007bff;
+}
+
+/* Print styles */
+@media print {
+  /* Hide everything except the slip */
+  body * {
+    visibility: hidden;
+  }
+
+  .donation-slip, .donation-slip * {
+    visibility: visible;
+  }
+
+  .donation-slip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}

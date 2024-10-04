@@ -122,6 +122,14 @@ function Dashboard() {
       {error && <div className="error-message">{error}</div>}
 
       <div className="cards-container">
+      <div className="card">
+          <div className="card-title">Total Society Capital</div>
+          <div className="card-content">₹{/*totalSavingsBalance + totalProfit + totalDonation*/}</div>
+        </div>
+        <div className="card">
+          <div className="card-title">Total Society Present Capital</div>
+          <div className="card-content">₹{/*(totalSavingsBalance + totalProfit + totalDonation) -totalExpenditure*/}</div>
+        </div>
         <div className="card">
           <div className="card-title">Total Savings Amount</div>
           <div className="card-content">₹{totalSavingsBalance}</div>
@@ -134,12 +142,12 @@ function Dashboard() {
 
         <div className="card">
           <div className="card-title">Total Loan Sanction</div>
-          <div className="card-content">₹0</div>
+          <div className="card-content">₹{/*totalLoan*/}</div>
         </div>
 
         <div className="card">
           <div className="card-title">Total Collected Loan Amount</div>
-          <div className="card-content">₹0</div>
+          <div className="card-content">₹{/*total-emi*/}</div>
         </div>
 
         <div className="card">
@@ -148,14 +156,22 @@ function Dashboard() {
         </div>
 
         <div className="card">
-          <div className="card-title">Total Investment Balance</div>
-          <div className="card-content">₹0</div>
+          <div className="card-title">Total Investment Amount</div>
+          <div className="card-content">₹{/*totalInvestmentAmount*/}</div>
         </div>
 
         <div className="card">
-          <div className="card-title">Profit Balance</div>
-          <div className="card-content">₹0</div>
+          <div className="card-title">Profit Amount</div>
+          <div className="card-content">₹{/*totalProfit*/}</div>
         </div>
+        <div className="card">
+          <div className="card-title">Total Donation</div>
+          <div className="card-content">₹{/*totalDonation*/}</div>
+        </div> 
+        <div className="card">
+          <div className="card-title">Total Expenditure</div>
+          <div className="card-content">₹{/*totalExpenditure*/}</div>
+        </div>             
       </div>
     </div>
   );

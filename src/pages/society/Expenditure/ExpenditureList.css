@@ -1,0 +1,30 @@
+.expenditure-list-section {
+    margin-top: 20px;
+  }
+  
+  .expenditure-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .expenditure-item {
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .expenditure-info p {
+    margin: 5px 0;
+  }
+  
+  .expenditure-item:nth-child(odd) {
+    background-color: #f0f0f0;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  

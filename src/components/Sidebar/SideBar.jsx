@@ -337,9 +337,15 @@ const SideBar = () => {
             <NavLink to='/app/society/donation'>
               <FontAwesomeIcon icon={faChartLine} /> Donation
             </NavLink>
+            <NavLink to='/app/society/donor-list'>
+              <FontAwesomeIcon icon={faListAlt} /> Donor List
+            </NavLink>
             <NavLink to='/app/society/expenditure'>
               <FontAwesomeIcon icon={faPlusCircle} /> Expenditure
-            </NavLink>     
+            </NavLink> 
+            <NavLink to='/app/society/expenditure-list'>
+              <FontAwesomeIcon icon={faListAlt} /> Expenditure List
+            </NavLink>    
           </div>
         )}
       </div>

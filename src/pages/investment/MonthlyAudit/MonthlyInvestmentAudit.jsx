@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../../api';
 import { Link } from 'react-router-dom';
+import api from '../../../api';
+
+import { formatMongoDate } from '../../../util/FormatDate';
 
 function MonthlyInvestmentAudit() {
   const [users, setUsers] = useState([]);
@@ -27,6 +29,7 @@ function MonthlyInvestmentAudit() {
   useEffect(() => {
     let filtered = users;
 
+    // Filter by search query (accountNo, transactionId, remarks)
     if (searchQuery) {
       filtered = filtered.filter((user) =>
         (user.accountNo && user.accountNo.toString().toLowerCase().includes(searchQuery.toLowerCase())) ||
@@ -35,19 +38,16 @@ function MonthlyInvestmentAudit() {
       );
     }
 
+    // Filter by date range
     if (startDate && endDate) {
       filtered = filtered.filter((user) => {
-        const date = new Date(user.date);
-        return date >= new Date(startDate) && date <= new Date(endDate);
+        const userDate = new Date(user.createdAt).setHours(0, 0, 0, 0); // Clear the time component
+        const start = new Date(startDate).setHours(0, 0, 0, 0);
+        const end = new Date(endDate).setHours(23, 59, 59, 999); // Include the entire end date
+
+        return userDate >= start && userDate <= end;
       });
     }
-
-  
-    filtered = filtered.map((user) => ({
-      ...user,
-      deposit: user.typeOfTransaction === 'deposit' ? user.amount : 0,
-      withdraw: user.typeOfTransaction === 'withdraw' ? user.amount : 0,
-    }));
 
     setFilteredUsers(filtered);
   }, [searchQuery, startDate, endDate, users]);
@@ -73,8 +73,9 @@ function MonthlyInvestmentAudit() {
         <title>List of Monthly Loan Transactions</title>
         <style>
           table { width: 100%; border-collapse: collapse; }
-          th, td { border: 1px solid black; padding: 4px; text-align: left; }
+          th, td { border: 1px solid black; padding: 4px; text-align: center; }
           th { background-color: #f2f2f2; }
+          a { text-decoration: none; color: black; }
         </style>
       </head>
       <body>
@@ -94,7 +95,7 @@ function MonthlyInvestmentAudit() {
       
       <input
         type="text"
-        placeholder="Search by Account No, Transaction ID, or Remarks"
+        placeholder="Search by Account No / Transaction ID / Remarks"
         value={searchQuery}
         onChange={handleSearch}
         className="form-control mb-4 search-bar"
@@ -125,7 +126,7 @@ function MonthlyInvestmentAudit() {
               <th>Serial No</th>  
               <th>Account No</th>             
               <th>Transaction ID</th>                
-              <th>Profit</th>
+              <th>Deposit</th>
               <th>Withdraw</th>
               <th>Remarks</th>
               <th>Date</th>
@@ -135,12 +136,12 @@ function MonthlyInvestmentAudit() {
             {filteredUsers.map((user, index) => (
               <tr key={index}>
                 <td>{index + 1}</td> 
-                <td><Link to={`/investment/account/${user.accountNo}`}>{user.accountNo}</Link></td>           
+                <td><Link to={`/app/loan/account/${user.accountNo}`}>{user.accountNo}</Link></td>           
                 <td>{user.transactionId}</td>                           
-                <td>{user.deposit}</td>
-                <td>{user.withdraw}</td>
+                <td>{user.typeOfTransaction === 'profit' ? user.amount : 0}</td>
+                <td>{user.typeOfTransaction === 'investment' ? user.amount : 0}</td>
                 <td>{user.remarks}</td>
-                <td>{user.date}</td>
+                <td>{formatMongoDate(user.createdAt)}</td>
               </tr>
             ))}
           </tbody>

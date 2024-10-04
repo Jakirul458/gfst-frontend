@@ -1,20 +1,30 @@
-import React from 'react'
-
+import React from 'react';
+import './About.css';
 function About() {
   return (
-    <div>
-
-    
-    <h1>Golden Future Supportive Trust </h1>
-    {/* <h2>ভূমিকা:-</h2> <br />
-    <p>জুলুম নির্যাতনের বিবর্তনে কিছু মানুষ আজ অসহায়। তথাকথিত বিশ্বায়ন তাদেরকে করে তুলেছে মজলুম। এই মজলুমদের মসিহা কে হবে? কে তাদের কান্না মুছে দেবে? পৃথিবীতে ন্যায়বিচার প্রতিষ্ঠা করা যাদের দায়িত্ব ছিল তারাও আজ সুপথকে আঁকড়ে রাখতে ব্যর্থ হয়েছে। স্রষ্টার বিচারে তারা হারিয়েছে রাজ দ্ন্ড। বিশ্বায়নের গতিপথ নির্ধারণকারী এইসব জালেমেরা ধীরে ধীরে সমগ্র পৃথিবীর পরিকাঠামো কে হস্তগত করতে উদ্যত হয়েছে। এই বিশ্বযুদ্ধে আসুন সকল ভাল মানুষেরা একত্রিত হই।</p> 
-    <br /> */}
-    <h2>Our Aim </h2>
-    {/* <p>'Golden Future Supportive Trust' is a society which is an interest free society and we can take our money as a loan and pay it back every month without any interest.</p> */}
-    <br />
-    <p> 'Golden Future Supportive Trust' is...</p>
+    <div className="about-container">
+      <br />
+      <h1>Youth Supportive Trust</h1>
+      <h2>ভূমিকা</h2>
+      <p>
+     জুলুম নির্যাতনের বিবর্তনে কিছু মানুষ আজ অসহায়। তথাকথিত বিশ্বায়ন তাদেরকে করে তুলেছে মজলুম।
+       <br />এই মজলুমদের মসিহা কে হবে? কে তাদের কান্না মুছে দেবে? পৃথিবীতে ন্যায়বিচার প্রতিষ্ঠা করা যাদের দায়িত্ব ছিল 
+       <br />তারাও আজ সুপথকে আঁকড়ে রাখতে ব্যর্থ হয়েছে। স্রষ্টার বিচারে তারা হারিয়েছে রাজ দ্ন্ড। বিশ্বায়নের গতিপথ নির্ধারণকারী 
+       <br />এইসব জালেমেরা ধীরে ধীরে সমগ্র পৃথিবীর পরিকাঠামো কে হস্তগত করতে উদ্যত হয়েছে। এই বিশ্বযুদ্ধে আসুন সকল ভাল 
+       <br />মানুষেরা একত্রিত হই।
+      </p><br />
+      <h2>Introduction</h2>
+      <p>
+      Some people today are helpless due to the evolution of oppression. The so-called globalization
+      <br />has made them oppressed. Who will be the Messiah of the oppressed? Who will wipe their tears? 
+      <br />To establish justice in the world Even those who were responsible have failed to stick to the 
+      <br />path today. In God's judgment they have lost their kingdom. These tyrants who set the course of
+      <br />globalization have gradually taken over the infrastructure of the entire world. Let all good men
+      <br />unite in this world war.
+      </p>
     </div>
-  )
+  );
 }
 
-export default About
+export default About;
+

@@ -1,0 +1,25 @@
+.donor-list-section {
+    margin-top: 20px;
+  }
+  
+  .donor-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .donor-item {
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .donor-info p {
+    margin: 5px 0;
+  }
+  
+  .donor-item:nth-child(odd) {
+    background-color: #e6e6e6;
+  }
+  

@@ -37,6 +37,8 @@ import About from "../pages/society/About/About";
 import Contact from "../pages/society/Contact/Contact";
 import Donation from "../pages/society/Donation/Donation";
 import Expenditure from "../pages/society/Expenditure/Expenditure";
+import DonorList from "../pages/society/Donation/DonorList";
+import ExpenditureList from "../pages/society/Expenditure/ExpenditureList";
 
 
 
@@ -270,7 +272,9 @@ export const router = createBrowserRouter([
           { path: "about", element: <About /> },
           { path: "contact", element: <Contact /> },
           { path: "donation", element: <Donation /> },
+          { path: "donor-list", element: <DonorList /> },
           { path: "expenditure", element: <Expenditure /> },
+          { path: "expenditure-list", element: <ExpenditureList /> },
         ],
       },
     ],
