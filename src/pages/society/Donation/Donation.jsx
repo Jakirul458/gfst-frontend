@@ -24,21 +24,21 @@ const Donation = () => {
     e.preventDefault();
     try {
       // Sending data to the server
-      const response = await api.post('/app/society/donation', {
+      const response = await api.post('/api/donation', {
         donorName,
         donationAmount,
         donationDate,
         address,
         mobileNo,
       });
-
+     
       if (response.data.success) {
         setDonationSubmitted(true);
 
         // Clear form inputs after submission
-        setDonorName('');
-        setDonationAmount('');
-        setDonationDate('');
+        // setDonorName('');
+        // setDonationAmount('');
+        // setDonationDate('');
         setAddress('');
         setMobileNo('');
         setError(null); // Reset error

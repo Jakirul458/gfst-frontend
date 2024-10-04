@@ -11,10 +11,10 @@ const DonorList = () => {
   useEffect(() => {
     const fetchDonors = async () => {
       try {
-        const response = await api.get('/app/society/donation'); // Adjust this path according to your API
+        const response = await api.get('/api/donation');
+        console.log('response', response)
         if (response.data.success) {
-          setDonors(response.data.donors); // Assuming the response contains a 'donors' array
-        } else {
+          setDonors(response.data.data); 
           setError(response.data.message);
         }
       } catch (err) {

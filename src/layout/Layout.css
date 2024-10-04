@@ -34,6 +34,7 @@
 
 .main_app_container {
     height: calc(100vh - 4rem);
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-areas: "area1 area1 area2 area2 area2 area2 area2 area2 area2 area2 area2 area2";
@@ -44,8 +45,15 @@
     
     .main__content {
         grid-area: area2;
+        width: 100%;
         overflow-x: auto; 
         height: 100%; 
         white-space: nowrap; 
     }
 } 
+
+.display_block {
+    display: block;
+    height: calc(100vh - 4rem);
+    width: 100%;
+}

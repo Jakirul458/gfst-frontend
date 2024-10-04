@@ -15,10 +15,11 @@ const Profit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post('/api/investment/profit/', {
+      const response = await api.post('/api/transaction/profit/', {
         accountNo: account,
-        profitAmount: profit,
+        amount: profit,
       });
+
       if (response.data.success) {
         const newBalance = parseFloat(accountBalance) + parseFloat(profit); // Calculate new balance after profit calculation
 

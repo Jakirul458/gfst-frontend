@@ -21,7 +21,7 @@ function MonthlyInvestmentAudit() {
     const fetchUsers = async () => {
       try {
         const response = await api.get('/api/transaction/all/investment');
-        console.log('API Response:', response.data);
+        console.log('API Response:', response.data.data);
         setUsers(response.data.data);
         setFilteredUsers(response.data.data);
       } catch (err) {
@@ -45,17 +45,17 @@ function MonthlyInvestmentAudit() {
     }
 
     // Filter by date range
-    if (startDate && endDate) {
-      filtered = filtered.filter((user) => {
-        const userDate = new Date(user.createdAt).setHours(0, 0, 0, 0); // Clear the time component
-        const start = new Date(startDate).setHours(0, 0, 0, 0);
-        const end = new Date(endDate).setHours(23, 59, 59, 999); // Include the entire end date
+    // if (startDate && endDate) {
+    //   filtered = filtered.filter((user) => {
+    //     const userDate = new Date(user.createdAt).setHours(0, 0, 0, 0); // Clear the time component
+    //     const start = new Date(startDate).setHours(0, 0, 0, 0);
+    //     const end = new Date(endDate).setHours(23, 59, 59, 999); // Include the entire end date
 
-        return userDate >= start && userDate <= end;
-      });
-    }
+    //     return userDate >= start && userDate <= end;
+    //   });
+    // }
 
-    setFilteredUsers(filtered);
+    // setFilteredUsers(filtered);
   }, [searchQuery, startDate, endDate, users]);
 
   const handleSearch = (e) => {

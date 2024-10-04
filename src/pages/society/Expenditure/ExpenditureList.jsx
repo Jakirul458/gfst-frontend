@@ -10,16 +10,19 @@ const ExpenditureList = () => {
   useEffect(() => {
     const fetchExpenditures = async () => {
       try {
-        const response = await api.get('/app/society/expenditure');
+        const response = await api.get('/api/expenditure');
+        console.log('API Response:', response); // Log the entire response
+
         if (response.data.success) {
-          setExpenditures(response.data.data); 
+          setExpenditures(response.data.data);
         } else {
           setError(response.data.message);
         }
       } catch (err) {
+        console.error('Error fetching expenditures:', err); // Log the error
         setError('An error occurred while fetching expenditures.');
       } finally {
-        setLoading(false);
+        setLoading(false); // Ensure loading is set to false
       }
     };
 
@@ -27,16 +30,13 @@ const ExpenditureList = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading expenditures...</p>;
-  }
-
-  if (error) {
-    return <p className="error-message">{error}</p>;
+    return <p>Loading...</p>; // Show a loading state while fetching
   }
 
   return (
     <div className="expenditure-list">
       <h2>Expenditure List</h2>
+      {error && <p>{error}</p>} {/* Display any error message */}
       {expenditures.length === 0 ? (
         <p>No expenditures found.</p>
       ) : (
@@ -64,4 +64,3 @@ const ExpenditureList = () => {
 };
 
 export default ExpenditureList;
-

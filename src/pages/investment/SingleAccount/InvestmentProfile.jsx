@@ -88,7 +88,7 @@ function InvestmentAccProfile() {
           <p>Aadhar :<strong> {accountDetails.AadharNo}</strong></p>
           <p>Address :<strong> {accountDetails.Address}</strong></p>
           <p>Investment Amount : ₹<strong> {accountDetails.investmentAmount}</strong></p>
-          <p>Total profit Return : ₹ <strong> {accountDetails.profitAmount}</strong></p>
+          <p>Total profit Return : ₹ <strong> {accountDetails.profit}</strong></p>
         </div>
         <br />
         <h3>Transaction History</h3>

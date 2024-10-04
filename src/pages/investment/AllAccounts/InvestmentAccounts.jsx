@@ -89,6 +89,7 @@ function InvestmentAccounts() {
               <th>Aadhar No</th>
               <th>Address</th>
               <th>Investment Amount</th>
+              <th>Profit</th>
             </tr>
           </thead>
 
@@ -105,6 +106,7 @@ function InvestmentAccounts() {
                 <td>{user.AadharNo}</td>
                 <td>{user.Address}</td>
                 <td>{user.investmentAmount}</td>
+                <td>{user.profit}</td>
               </tr>
             ))}
           </tbody>
