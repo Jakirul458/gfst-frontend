@@ -39,6 +39,7 @@ import Donation from "../pages/society/Donation/Donation";
 import Expenditure from "../pages/society/Expenditure/Expenditure";
 import DonorList from "../pages/society/Donation/DonorList";
 import ExpenditureList from "../pages/society/Expenditure/ExpenditureList";
+import CloseInvestmentAcc from "../pages/investment/CloseInvestmentAcc/CloseInvestmentAcc";
 
 
 
@@ -261,6 +262,7 @@ export const router = createBrowserRouter([
           { path: "account/:accountNo", element: <InvestmentProfile /> }, 
           { path: "account/update/:accountNo", element: <UpdateInvestmentAcc /> },
           { path: "account/delete/:accountNo", element: <DeleteInvestmentAcc /> },
+          {path:"close-investment",element:<CloseInvestmentAcc />}
         ],
       },
       // Society routes

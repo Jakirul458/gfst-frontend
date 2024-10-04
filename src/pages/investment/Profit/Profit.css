@@ -1,89 +1,93 @@
-/* Container */
-.deposit-container {
-  max-width: 500px;
-  margin: 50px auto;
+.profit-container {
+  max-width: 600px;
+  margin: 40px auto;
   padding: 20px;
-  background-color: #f4f4f9;
+  background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Title */
-.form-title {
-  font-size: 24px;
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-  font-weight: bold;
+.profit-form {
+  display: flex;
+  flex-direction: column;
 }
 
-/* Form group */
+.form-title {
+  text-align: center;
+  font-size: 24px;
+  color: #09ed23;
+  margin-bottom: 20px;
+}
+
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .form-group label {
-  font-weight: 600;
   display: block;
-  margin-bottom: 5px;
+  font-size: 16px;
   color: #333;
+  margin-bottom: 5px;
 }
 
 .form-control {
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s;
 }
 
 .form-control:focus {
-  border-color: #007bff;
+  border-color: #09ed23;
+  outline: none;
 }
 
-/* Error message */
 .error-message {
-  color: red;
-  font-weight: bold;
+  color: #d9534f;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-/* Verified Account Info */
 .verified-info {
-  background-color: #e6f7ff;
-  padding: 10px;
-  border-left: 4px solid #007bff;
-  margin-bottom: 15px;
+  background-color: #e9ffe9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #09ed23;
 }
 
 .verified-info p {
-  margin: 0;
   font-size: 16px;
+  margin: 5px 0;
   color: #333;
 }
 
 .verified-info strong {
-  font-weight: 700;
+  color: #09ed23;
 }
 
-/* Buttons */
 .btn {
-  display: inline-block;
-  padding: 10px 15px;
-  font-size: 16px;
+  background-color: #09ed23;
+  color: #fff;
+  padding: 10px;
   border: none;
   border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #07c81d;
 }
 
 .verify-btn {
   margin-top: 10px;
   background-color: #007bff;
-  color: white;
+  padding: 8px 15px;
+  font-size: 14px;
 }
 
 .verify-btn:hover {
@@ -91,12 +95,32 @@
 }
 
 .submit-btn {
-  width: 100%;
-  background-color: #28a745;
-  color: white;
+  background-color: #09ed23;
+  padding: 10px;
+  font-size: 16px;
   margin-top: 15px;
 }
 
 .submit-btn:hover {
-  background-color: #218838;
+  background-color: #07c81d;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .profit-container {
+    padding: 15px;
+  }
+
+  .form-title {
+    font-size: 22px;
+  }
+
+  .form-control {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .btn {
+    font-size: 14px;
+  }
 }

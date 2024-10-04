@@ -221,7 +221,7 @@ import {
   faPlusCircle, faCoins, faWallet, 
   faListAlt, faSearch, faClipboardList, 
   faMoneyBillWave, faChartLine, faHandHoldingUsd, 
-  faChartPie, faUniversity, faUsers 
+  faChartPie, faUniversity, faUsers, faWindowClose
 } from '@fortawesome/free-solid-svg-icons';
 import './SideBar.css';
 
@@ -319,7 +319,10 @@ const SideBar = () => {
               <FontAwesomeIcon icon={faSearch} /> Search Account
             </NavLink>
             <NavLink to='/app/investment/audit'>
-              <FontAwesomeIcon icon={faClipboardList} /> Monthly Audit
+              <FontAwesomeIcon icon={faClipboardList} /> Investment Transaction
+            </NavLink>
+            <NavLink to='/app/investment/close-investment'>
+              <FontAwesomeIcon icon={faWindowClose} /> Close Investment
             </NavLink>
           </div>
         )}
@@ -349,7 +352,8 @@ const SideBar = () => {
           </div>
         )}
       </div>
-    </div>
+       </div>
+    
   );
 }
 

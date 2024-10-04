@@ -100,3 +100,33 @@
 .submit-btn:hover {
   background-color: #218838;
 }
+
+
+
+/* Add this to your CSS file */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-slip, .print-slip * {
+    visibility: visible;
+  }
+
+  .print-slip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    border: 1px solid #000;
+    background-color: #fff;
+  }
+
+  /* Optionally hide buttons and unnecessary elements */
+  button, .btn {
+    display: none;
+  }
+}

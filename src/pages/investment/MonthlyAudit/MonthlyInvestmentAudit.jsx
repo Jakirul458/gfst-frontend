@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../../api';
-
 import { formatMongoDate } from '../../../util/FormatDate';
 
 function MonthlyInvestmentAudit() {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+
+  // Calculate default dates
+  const today = new Date().toISOString().split('T')[0]; // Current date
+  const last31Days = new Date(new Date().setDate(new Date().getDate() - 31)).toISOString().split('T')[0]; // 31 days ago
+
+  // Set default start and end date to the past 31 days
+  const [startDate, setStartDate] = useState(last31Days);
+  const [endDate, setEndDate] = useState(today);
+
   const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
@@ -70,7 +76,7 @@ function MonthlyInvestmentAudit() {
     printWindow.document.write(`
       <html>
       <head>
-        <title>List of Monthly Loan Transactions</title>
+        <title>List of Monthly Investment Transactions</title>
         <style>
           table { width: 100%; border-collapse: collapse; }
           th, td { border: 1px solid black; padding: 4px; text-align: center; }
@@ -92,7 +98,6 @@ function MonthlyInvestmentAudit() {
     <>
       <h1 className="mb-4">List of Investment Transactions</h1>
 
-      
       <input
         type="text"
         placeholder="Search by Account No / Transaction ID / Remarks"
@@ -101,7 +106,6 @@ function MonthlyInvestmentAudit() {
         className="form-control mb-4 search-bar"
       />
 
-      
       <div className="mb-4">
         <input
           type="date"
@@ -123,23 +127,26 @@ function MonthlyInvestmentAudit() {
         <table className="table table-bordered table-hover">
           <thead className="thead-dark">
             <tr>
-              <th>Serial No</th>  
-              <th>Account No</th>             
-              <th>Transaction ID</th>                
-              <th>Deposit</th>
-              <th>Withdraw</th>
+              <th>Serial No</th>
+              <th>Account No</th>
+              <th>Transaction ID</th>
+              <th>profit</th>              
+              <th>Investment Amount</th>
+              <th>Investment Return</th>
               <th>Remarks</th>
               <th>Date</th>
+             
             </tr>
           </thead>
           <tbody>
             {filteredUsers.map((user, index) => (
               <tr key={index}>
-                <td>{index + 1}</td> 
-                <td><Link to={`/app/loan/account/${user.accountNo}`}>{user.accountNo}</Link></td>           
-                <td>{user.transactionId}</td>                           
+                <td>{index + 1}</td>
+                <td><Link to={`/app/investment/account/${user.accountNo}`}>{user.accountNo}</Link></td>
+                <td>{user.transactionId}</td>
                 <td>{user.typeOfTransaction === 'profit' ? user.amount : 0}</td>
                 <td>{user.typeOfTransaction === 'investment' ? user.amount : 0}</td>
+                <td>{user.typeOfTransaction === 'investmentreturn' ? user.amount : 0}</td>
                 <td>{user.remarks}</td>
                 <td>{formatMongoDate(user.createdAt)}</td>
               </tr>

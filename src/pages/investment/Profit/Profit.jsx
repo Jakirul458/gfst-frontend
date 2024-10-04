@@ -1,126 +1,35 @@
-// import React, { useState } from 'react';
-// import './Profit.css';
 
-// const Profit = () => {
-//   const [account, setAccount] = useState('');
-//   const [date, setDate] = useState('');
-//   const [transactionid, setTransactionid] = useState('');
-//   const [deposit, setDeposit] = useState('');
-//   const [error, setError] = useState(null);
-//   const [isVerified, setIsVerified] = useState(false);
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     // Handle successful account creation
-//   };
-
-//   const handleVerify = async () => {
-//     try {
-//       // Replace with your API endpoint
-//       const response = await fetch(`https://your-api.com/verify-account?account=${account}`);
-//       const result = await response.json();
-
-//       if (result.exists) {
-//         setIsVerified(true);
-//         setError(null);
-//       } else {
-//         setIsVerified(false);
-//         setError('Account does not exist.');
-//       }
-//     } catch (err) {
-//       setIsVerified(false);
-//       setError('Error verifying account. Please try again.');
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit} className="account-form">
-//       {error && <p className="error">{error}</p>}
-
-//       <div className="form-group">
-//         <label>Account No</label>
-//         <input
-//           type="text"
-//           placeholder='Enter Consumer Account Number'
-//           value={account}
-//           onChange={(e) => setAccount(e.target.value)}
-//         />
-//         <button type="button" onClick={handleVerify} className="verify-btn">Verify</button>
-//       </div>
-
-//       {isVerified && (
-//         <>
-//           <div className="form-group">
-//             <label>Date</label>
-//             <input
-//               type="date"
-//               value={date}
-//               onChange={(e) => setDate(e.target.value)}
-//             />
-//           </div>
-
-//           <div className="form-group">
-//             <label>Transaction ID</label>
-//             <input
-//               type="text"
-//               value={transactionid}
-//               onChange={(e) => setTransactionid(e.target.value)}
-//             />
-//           </div>
-
-//           <div className="form-group">
-//             <label>Deposit Amount</label>
-//             <input
-//               type="number"
-//               value={deposit}
-//               onChange={(e) => setDeposit(e.target.value)}
-//             />
-//           </div>
-//           <button type="submit" className="submit-btn">Submit</button>
-//         </>
-//       )}
-
-      
-//     </form>
-//   );
-// };
-
-// export default Profit;
-
-
-
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import api from '../../../api/index';
 import './Profit.css';
 
 const Profit = () => {
   const [account, setAccount] = useState('');
-  const [date, setDate] = useState('');
-  const [transactionid, setTransactionid] = useState('');
-  const [deposit, setDeposit] = useState('');
+  const [date, setDate] = useState(new Date().toLocaleDateString());
+  const [profit, setProfit] = useState(''); // For storing the profit amount
   const [error, setError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
   const [accountBalance, setAccountBalance] = useState('');
-  const [remarks, setRemarks] = useState('deposit'); // Default to 'deposit'
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post('/api/transaction/profit/', {
+      const response = await api.post('/api/investment/profit/', {
         accountNo: account,
-        amount: deposit,
-        remarks,
+        profitAmount: profit,
       });
-      console.log(response.data);
       if (response.data.success) {
-        alert('Transaction successful!');
+        const newBalance = parseFloat(accountBalance) + parseFloat(profit); // Calculate new balance after profit calculation
+
+        alert('Profit calculation successful!');
+        // Generate the print slip with updated balance
+        printSlip(accountName, profit, newBalance, date);
+
         // Clear form fields after successful submission
         setAccount('');
-        setDate('');
-        setTransactionid('');
-        setDeposit('');
-        setRemarks('deposit');
+        setDate(new Date().toLocaleDateString());
+        setProfit('');
         setError(null);
         setIsVerified(false);
         setAccountName('');
@@ -129,13 +38,13 @@ const Profit = () => {
         setError(response.data.message);
       }
     } catch (err) {
-      setError('An error occurred during the transaction.');
+      setError('An error occurred during the profit calculation.');
     }
   };
 
   const handleVerify = async () => {
     try {
-      const response = await api.get(`/api/savings/${account}`);
+      const response = await api.get(`/api/investment/${account}`);
 
       if (response.data.success) {
         setIsVerified(true);
@@ -146,7 +55,7 @@ const Profit = () => {
         setIsVerified(false);
         setAccountName('');
         setAccountBalance('');
-        setError('Account does not exist.');
+        setError('Investment account does not exist.');
       }
     } catch (err) {
       setIsVerified(false);
@@ -156,10 +65,33 @@ const Profit = () => {
     }
   };
 
+  // Function to generate the print slip
+  const printSlip = (consumerName, profitAmount, presentBalance, date) => {
+    const slipContent = `
+      <html>
+      <head><title>Profit  Slip</title></head>
+      <body>
+        <h1>Youth Supportive Society</h1>
+        <p>Consumer Name: <strong>${consumerName}</strong></p>
+        <p>Profit Amount: <strong>₹ ${profitAmount}</strong></p>
+        <p>Available Balance: <strong>₹ ${presentBalance}</strong></p>
+        <p>Date: <strong>${date}</strong></p>
+        <script>
+          window.print();
+        </script>
+      </body>
+      </html>
+    `;
+    
+    const newWindow = window.open('', '_blank', 'width=600,height=400');
+    newWindow.document.write(slipContent);
+    newWindow.document.close(); // Close document to make the print window available
+  };
+
   return (
-    <div className="deposit-container">
-      <form onSubmit={handleSubmit} className="deposit-form">
-        <h2 className="form-title">Profit</h2>
+    <div className="profit-container">
+      <form onSubmit={handleSubmit} className="profit-form">
+        <h2 className="form-title"> Profit funds</h2>
         {error && <p className="error-message">{error}</p>}
 
         <div className="form-group">
@@ -187,18 +119,20 @@ const Profit = () => {
               <p>
                 Consumer Name: <strong>{accountName}</strong>
               </p>
-            
+              <p>
+                Present Balance: <strong>₹ {accountBalance}</strong>
+              </p>
             </div>
 
             <div className="form-group">
-              <label htmlFor="deposit-amount">Profit Amount (₹)</label>
+              <label htmlFor="profit-amount">Profit Amount (₹)</label>
               <input
                 type="number"
-                id="deposit-amount"
+                id="profit-amount"
                 className="form-control"
                 placeholder="Enter profit amount"
-                value={deposit}
-                onChange={(e) => setDeposit(e.target.value)}
+                value={profit}
+                onChange={(e) => setProfit(e.target.value)}
               />
             </div>
 

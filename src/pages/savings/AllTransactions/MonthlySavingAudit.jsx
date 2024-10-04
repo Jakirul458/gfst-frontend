@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import api from '../../../api/index';
 import { Link } from 'react-router-dom';
@@ -7,8 +8,15 @@ import './Transaction.css';
 function MonthlySavingAudit() {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+
+  // Calculate default dates
+  const today = new Date().toISOString().split('T')[0]; // Current date
+  const last31Days = new Date(new Date().setDate(new Date().getDate() - 31)).toISOString().split('T')[0]; // 31 days ago
+
+  // Set default start and end date to the past 31 days
+  const [startDate, setStartDate] = useState(last31Days);
+  const [endDate, setEndDate] = useState(today);
+
   const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
@@ -101,7 +109,7 @@ function MonthlySavingAudit() {
         className="form-control mb-4 search-bar"
       />
 
-      <div className="date-filter-container mb-4">
+      <div className="date-filter-container mb-4">       
         <input
           type="date"
           value={startDate}
@@ -109,6 +117,7 @@ function MonthlySavingAudit() {
           className="form-control date-input"
           placeholder="Start Date"
         />
+                                                
         <input
           type="date"
           value={endDate}

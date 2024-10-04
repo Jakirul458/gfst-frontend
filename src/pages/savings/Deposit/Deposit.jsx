@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import api from '../../../api/index';
 import './Deposit.css';
 
 const Deposit = () => {
   const [account, setAccount] = useState('');
-  const [date, setDate] = useState('');
-  const [transactionid, setTransactionid] = useState('');
+  const [date, setDate] = useState(new Date().toLocaleDateString());
   const [deposit, setDeposit] = useState('');
   const [error, setError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
@@ -21,13 +20,16 @@ const Deposit = () => {
         amount: deposit,
         remarks,
       });
-      console.log(response.data);
       if (response.data.success) {
+        const newBalance = parseFloat(accountBalance) + parseFloat(deposit); // Calculate new balance after deposit
+
         alert('Transaction successful!');
+        // Generate the print slip with updated balance
+        printSlip(accountName, deposit, newBalance, date);
+
         // Clear form fields after successful submission
         setAccount('');
-        setDate('');
-        setTransactionid('');
+        setDate(new Date().toLocaleDateString());
         setDeposit('');
         setRemarks('deposit');
         setError(null);
@@ -63,6 +65,29 @@ const Deposit = () => {
       setAccountBalance('');
       setError('Error verifying account. Please try again.');
     }
+  };
+
+  // Function to generate the print slip
+  const printSlip = (consumerName, depositAmount, presentBalance, date) => {
+    const slipContent = `
+      <html>
+      <head><title>Deposit Slip</title></head>
+      <body>
+        <h1>Youth Supportive Society</h1>
+        <p>Consumer Name: <strong>${consumerName}</strong></p>
+        <p>Deposit Amount: <strong>₹ ${depositAmount}</strong></p>
+        <p>Available Balance: <strong>₹ ${presentBalance}</strong></p>
+        <p>Date: <strong>${date}</strong></p>
+        <script>
+          window.print();
+        </script>
+      </body>
+      </html>
+    `;
+    
+    const newWindow = window.open('', '_blank', 'width=600,height=400');
+    newWindow.document.write(slipContent);
+    newWindow.document.close(); // Close document to make the print window available
   };
 
   return (

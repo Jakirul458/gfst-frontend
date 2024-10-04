@@ -50,9 +50,10 @@
 // export default Navbar;
 
 
-
 import React from 'react'; 
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserShield, faTachometerAlt, faInfoCircle, faEnvelope, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; // Import icons
 import './Navbar.css'; // Import the CSS file
 
 function Navbar({ handleLogout }) {
@@ -63,11 +64,21 @@ function Navbar({ handleLogout }) {
       </div>
 
       <div className="navbar-links">
-        <NavLink to='/app/society/adminpanel' className="nav-link">Admin Panel</NavLink>
-        <NavLink to='/app/society/dashboard' className="nav-link">Dashboard</NavLink>
-        <NavLink to='/app/society/about' className="nav-link">About</NavLink>
-        <NavLink to='/app/society/contact' className="nav-link">Contact</NavLink>
-        <button onClick={handleLogout} className="nav-link logout-button">Logout</button>
+        <NavLink to='/app/society/adminpanel' className="nav-link">
+          <FontAwesomeIcon icon={faUserShield} /> Admin Panel
+        </NavLink>
+        <NavLink to='/app/society/dashboard' className="nav-link">
+          <FontAwesomeIcon icon={faTachometerAlt} /> Dashboard
+        </NavLink>
+        <NavLink to='/app/society/about' className="nav-link">
+          <FontAwesomeIcon icon={faInfoCircle} /> About
+        </NavLink>
+        <NavLink to='/app/society/contact' className="nav-link">
+          <FontAwesomeIcon icon={faEnvelope} /> Contact
+        </NavLink>
+        <button onClick={handleLogout} className="nav-link logout-button">
+          <FontAwesomeIcon icon={faSignOutAlt} /> Logout
+        </button>
       </div>
     </div>
   );
