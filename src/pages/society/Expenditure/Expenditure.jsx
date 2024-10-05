@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoneyBillWave, faFileInvoiceDollar } from '@fortawesome/free-solid-svg-icons';
 import api from '../../../api/index'; // Adjust the path according to your project structure
@@ -24,8 +24,8 @@ const Expenditure = () => {
     };
 
     try {
-      const response = await api.post('/api/expenditure');
-
+      const response = await api.post('/api/expenditure'); 
+      
       if (response.data.success) {
         setExpenses([...expenses, newExpense]);
         setSuccessMessage('Expenditure submitted successfully!');

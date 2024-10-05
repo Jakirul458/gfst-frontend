@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './CreateLoanAccountForm.css'; // Ensure this is your CSS file
 import api from '../../../api';
 
@@ -23,11 +23,11 @@ const CreateLoanAccount = () => {
     e.preventDefault();
     console.log("Form submitted");
 
-    if (!date || !name || !email || !mobileNo || !AadharNo || !Address || !loanAmount) {
+    if (!date || !AadharNo || !loanAmount || !name || !Address || !email || !mobileNo) {
       setError('Please fill in all fields.');
       return;
     }
-     // Mobile number validation (must be 10 digits)
+    //  Mobile number validation (must be 10 digits)
      const mobileRegex = /^\d{10}$/;
      if (!mobileRegex.test(mobileNo)) {
        setError('Mobile number must be exactly 10 digits.');
@@ -39,24 +39,23 @@ const CreateLoanAccount = () => {
      setError('Aadhar number must be exactly 12 digits.');
      return;
    }
-    // Email validation (basic email pattern)
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError('Please enter a valid email address.');
-      return;
-    }
-
-    api.post('/api/loan/create-account', { date, name, email, mobileNo, AadharNo, Address, loanAmount })
+    api.post('/api/loan/create-account', { date, AadharNo, loanAmount, name, Address, email, mobileNo })
       .then(result => {
         console.log(result);
-        alert('Account created successfully!');
+
+        if(result.data.success) {
+          alert("Account created successfully");
+        }else {
+          setError(result.data.message);
+          alert(result.data.message);
+        }
 
         // Clear form fields after successful submission
         setDate('');
         setName('');
         setMobileNo('');
-        setAadharNo('');
         setAddress('');
+        setAadharNo('');
         setEmail('');
         setLoanAmount('');
         setError(null);
@@ -93,7 +92,7 @@ const CreateLoanAccount = () => {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        
+
         <div className="form-group">
           <label>Email</label>
           <input
@@ -104,7 +103,7 @@ const CreateLoanAccount = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        
+                
         <div className="form-group">
           <label>Mobile No</label>
           <input

@@ -1,12 +1,11 @@
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import api from '../../../api';
 import './LoanInstalment.css';
 
 const LoanInstallment = () => {
   const [account, setAccount] = useState('');
   const [date, setDate] = useState(new Date().toLocaleDateString());
-  const [transactionid, setTransactionid] = useState('');
   const [deposit, setDeposit] = useState('');
   const [error, setError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
@@ -22,17 +21,15 @@ const LoanInstallment = () => {
         amount: deposit,
         remarks,
       });
+
       if (response.data.success) {
-        const remainingLoanAmount = parseFloat(loanAmount) - parseFloat(deposit); // Calculate remaining loan amount after payment
+        const remainingLoanAmount = parseFloat(loanAmount) - parseFloat(deposit);
 
         alert('Transaction successful!');
-        // Generate the EMI payment slip
         printSlip(accountName, deposit, remainingLoanAmount, date);
 
-        // Clear form fields after successful submission
         setAccount('');
         setDate(new Date().toLocaleDateString());
-        setTransactionid('');
         setDeposit('');
         setRemarks('loantransaction');
         setError(null);

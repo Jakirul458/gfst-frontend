@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './CreateSavingAccountForm.css'; // Ensure this is your CSS file
 import api from '../../../api/index';
 
@@ -18,72 +18,32 @@ const CreateSavingAccount = () => {
     setDate(formattedDate);
   }, []);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Form submitted");
-
-  //   if (!date || !name || !email || !mobileNo || !AadharNo || !Address) {
-  //     setError('Please fill in all fields.');
-  //     return;
-  //   }
-
-  //   api.post('/api/savings/create-account', { date, name, email, mobileNo, AadharNo, Address })
-  //     .then(result => {
-  //       console.log(result);
-
-  //       if (result.data.success) {
-  //         alert("Account created successfully");
-  //       } else {
-  //         alert(result.data.data.message);
-  //       }
-
-  //       // Clear form fields after successful submission
-  //       setDate('');
-  //       setName('');
-  //       setMobileNo('');
-  //       setAadharNo('');
-  //       setAddress('');
-  //       setEmail('');
-  //       setError(null);
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //       setError('An error occurred while creating the account.');
-  //     });
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted");
 
-    // Basic validations
     if (!date || !name || !email || !mobileNo || !AadharNo || !Address) {
       setError('Please fill in all fields.');
       return;
     }
 
-    // Mobile number validation (must be 10 digits)
     const mobileRegex = /^\d{10}$/;
     if (!mobileRegex.test(mobileNo)) {
       setError('Mobile number must be exactly 10 digits.');
       return;
     }
 
-    // Aadhar number validation (must be 12 digits)
     const aadharRegex = /^\d{12}$/;
     if (!aadharRegex.test(AadharNo)) {
       setError('Aadhar number must be exactly 12 digits.');
       return;
     }
 
-    // Email validation (basic email pattern)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setError('Please enter a valid email address.');
       return;
     }
 
-    // If all validations pass, proceed with API call
     api.post('/api/savings/create-account', { date, name, email, mobileNo, AadharNo, Address })
       .then(result => {
         console.log(result);
@@ -94,7 +54,6 @@ const CreateSavingAccount = () => {
           alert(result.data.data.message);
         }
 
-        // Clear form fields after successful submission
         setDate('');
         setName('');
         setMobileNo('');

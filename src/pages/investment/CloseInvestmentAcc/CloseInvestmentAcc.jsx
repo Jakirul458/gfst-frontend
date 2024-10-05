@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import api from '../../../api/index';
 import './CloseInvestmentAcc.css';
 
@@ -11,13 +11,15 @@ const CloseInvestmentAcc = () => {
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
   const [accountBalance, setAccountBalance] = useState('');
+   const [closeInvesment, setCloseInvestment] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const response = await api.post('/api/transaction/close-investment', {
         accountNo: account,
-        closingBalance: accountBalance, // Assuming you'll return the remaining balance
+        amount: accountBalance,
       });
 
       if (response.data.success) {
@@ -33,6 +35,7 @@ const CloseInvestmentAcc = () => {
         setIsVerified(false);
         setAccountName('');
         setAccountBalance('');
+        setCloseInvestment('');
       } else {
         setError(response.data.message);
       }
@@ -48,7 +51,7 @@ const CloseInvestmentAcc = () => {
       if (response.data.success) {
         setIsVerified(true);
         setAccountName(response.data.data.name);
-        setAccountBalance(response.data.data.balance);
+        setAccountBalance(response.data.data.investmentAmount);
         setError(null);
       } else {
         setIsVerified(false);
@@ -121,9 +124,20 @@ const CloseInvestmentAcc = () => {
                 Investment Amount: <strong>₹ {accountBalance}</strong>
               </p>
             </div>
+            <div className="form-group">
+              <label htmlFor="close-investment">Close Investment(₹)</label>
+              <input
+                type="number"
+                id="close-investment"
+                className="form-control"
+                placeholder="Enter close investment amount"
+                value={closeInvesment}
+                onChange={(e) => setCloseInvestment(e.target.value)}
+              />
+            </div>
 
             <button type="submit" className="btn submit-btn">
-              Return Amount
+              Submit
             </button>
           </>
         )}

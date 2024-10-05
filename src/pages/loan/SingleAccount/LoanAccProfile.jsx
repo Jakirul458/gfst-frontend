@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import  { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../../../api';
 import './Profile.css';
 
 function LoanAccProfile() {
-  const params = useParams();
   const [accountDetails, setAccountDetails] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState(null);
@@ -30,12 +29,15 @@ function LoanAccProfile() {
     const fetchTransactions = async () => {
       try {
         if (!accountDetails) return;
-        const response = await api.get(`/api/transaction/type/${accountDetails?.accountNo}`);
-        console.log(response, "responvkdfnvj");
+        const response = await api.get(`/api/transaction/type/${accountDetails?.accountNo}`,{
+          params:{
+            type : ['loan', 'emi']
+          }
+        });
         setTransactions(response.data.data);
       } catch (error) {
         setError('Error fetching transactions');
-        console.error(err);
+        console.error(error);
       }
     };
     fetchTransactions();

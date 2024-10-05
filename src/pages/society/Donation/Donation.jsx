@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingHeart, faDonate, faPrint } from '@fortawesome/free-solid-svg-icons';
 import api from '../../../api/index'; // Import your API instance
@@ -23,7 +23,6 @@ const Donation = () => {
   const handleDonationSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Sending data to the server
       const response = await api.post('/api/donation', {
         donorName,
         donationAmount,
@@ -31,19 +30,19 @@ const Donation = () => {
         address,
         mobileNo,
       });
+
      
       if (response.data.success) {
         setDonationSubmitted(true);
 
-        // Clear form inputs after submission
-        // setDonorName('');
-        // setDonationAmount('');
-        // setDonationDate('');
+        setDonorName('');
+        setDonationAmount('');
+        setDonationDate('');
         setAddress('');
         setMobileNo('');
         setError(null); // Reset error
       } else {
-        setError(response.data.message); // Handle server error
+        setError(response.data.message);
       }
     } catch (err) {
       setError('An error occurred while submitting the donation. Please try again.');

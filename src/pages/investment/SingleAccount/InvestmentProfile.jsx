@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import api from '../../../api';
 import './Profile.css';
 
 function InvestmentAccProfile() {
-  const params = useParams();
+  
   const [accountDetails, setAccountDetails] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
-
-  console.log(location.pathname.split('/')[4], "somelog");
 
   useEffect(() => {
     const fetchAccountDetails = async () => {
@@ -30,16 +28,19 @@ function InvestmentAccProfile() {
     const fetchTransactions = async () => {
       try {
         if (!accountDetails) return;
-        const response = await api.get(`/api/transaction/type/${accountDetails?.accountNo}`);
-        console.log(response, "responvkdfnvj");
+        const response = await api.get(`/api/transaction/type/${location.pathname.split('/')[4]}`,{
+          params:{
+            type : ['profit', 'closeinvestment',"investment"]
+          }
+        });
         setTransactions(response.data.data);
       } catch (error) {
         setError('Error fetching transactions');
-        console.error(err);
+        console.error(error);
       }
     };
     fetchTransactions();
-  }, [accountDetails]);
+  }, [accountDetails, location]);
 
   const handlePrint = () => {
     const printContents = document.getElementById('account-profile').outerHTML;
