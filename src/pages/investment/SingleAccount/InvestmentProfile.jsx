@@ -11,7 +11,7 @@ function InvestmentAccProfile() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location.pathname.split('/')[3], "somelog");
+  console.log(location.pathname.split('/')[4], "somelog");
 
   useEffect(() => {
     const fetchAccountDetails = async () => {

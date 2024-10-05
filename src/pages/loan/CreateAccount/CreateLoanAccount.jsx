@@ -27,6 +27,24 @@ const CreateLoanAccount = () => {
       setError('Please fill in all fields.');
       return;
     }
+     // Mobile number validation (must be 10 digits)
+     const mobileRegex = /^\d{10}$/;
+     if (!mobileRegex.test(mobileNo)) {
+       setError('Mobile number must be exactly 10 digits.');
+       return;
+     }
+   // Aadhar number validation (must be 12 digits)
+   const aadharRegex = /^\d{12}$/;
+   if (!aadharRegex.test(AadharNo)) {
+     setError('Aadhar number must be exactly 12 digits.');
+     return;
+   }
+    // Email validation (basic email pattern)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
 
     api.post('/api/loan/create-account', { date, name, email, mobileNo, AadharNo, Address, loanAmount })
       .then(result => {

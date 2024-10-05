@@ -67,6 +67,13 @@ function AccountProfile() {
   const handleUpdate = async () => {
     navigate(`/app/savings/account/update/${accountDetails.accountNo}`);
   };
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  if (!accountDetails) {
+    return <p>Loading account details...</p>;
+  }
 
   return (
     <div className="account-profile-container" id="account-profile">
