@@ -25,7 +25,7 @@
 
 
 
-
+/* 
 .main__container {
     display: flex;
     flex-direction: column;
@@ -58,12 +58,12 @@
     display: block;
     height: calc(100vh - 4rem);
     width: 100%;
-}
+} */
 
 
 
 
-/* .main__container {
+ .main__container {
     display: flex;
     flex-direction: column;
     width: 100vw;
@@ -87,4 +87,4 @@
         height: 100%; 
         white-space: nowrap; 
     }
-}  */
+}  
