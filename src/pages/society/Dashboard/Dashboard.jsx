@@ -75,6 +75,11 @@ function Dashboard() {
           <div className="card-content">₹{totalLoanBalance}</div>
         </div> */}
 
+            <div className="card">
+          <div className="card-title">  Total loan amount</div>
+          <div className="card-content">₹{totalEmi+totalLoanBalance}</div>
+        </div>
+
         <div className="card">
           <div className="card-title"> Collected total loan amount</div>
           <div className="card-content">₹{totalEmi}</div>
