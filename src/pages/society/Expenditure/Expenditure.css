@@ -1,4 +1,20 @@
+.success-message {
+  font-size: 1.2em;
+  color: #155724; /* Green color for success */
+  background-color: #d4edda; /* Light green background */
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.highlighted {
+  font-weight: bold;
+  border: 2px solid #28a745; /* Dark green border */
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.5); /* Subtle shadow */
+}
 /* General styles */
+
+
 .expenditure-section {
   max-width: 600px;
   margin: 0 auto;

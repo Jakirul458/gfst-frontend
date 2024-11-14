@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import api from '../../../api/index'; // Import your API instance
 import './DonorList.css'; // Add your custom styles here
@@ -16,6 +14,9 @@ const DonorList = () => {
         if (response.data.success) {
           setDonors(response.data.data); 
           setError(response.data.message);
+        }
+        else {
+          setError(response.data.message || 'Failed to load donations.');
         }
       } catch (err) {
         setError('Error fetching donor list. Please try again.');
@@ -36,20 +37,20 @@ const DonorList = () => {
           <thead>
             <tr>
               <th>Donor Name</th>
-              <th>Amount</th>
-              <th>Date</th>
               <th>Address</th>
               <th>Mobile No</th>
+              <th>Amount</th>
+              <th>Date</th>
             </tr>
           </thead>
           <tbody>
             {donors.map((donor, index) => (
               <tr key={index}>
                 <td>{donor.donorName}</td>
+                <td>{donor.donorAddress}</td> 
+                <td>{donor.donorMobileNo}</td> 
                 <td>₹{donor.donationAmount}</td>
-                <td>{donor.donationDate}</td>
-                <td>{donor.address}</td>
-                <td>{donor.mobileNo}</td>
+                <td>{donor.donationDate}</td>     
               </tr>
             ))}
           </tbody>

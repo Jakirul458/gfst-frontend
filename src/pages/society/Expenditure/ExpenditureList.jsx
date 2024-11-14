@@ -1,42 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../../api/index'; 
+import api from '../../../api/index';
 import './ExpenditureList.css'; 
 
 const ExpenditureList = () => {
   const [expenditures, setExpenditures] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchExpenditures = async () => {
       try {
         const response = await api.get('/api/expenditure');
-        console.log('API Response:', response); // Log the entire response
-
+        console.log('response', response);     
+        setExpenditures(response.data);
         if (response.data.success) {
-          setExpenditures(response.data.data);
-        } else {
+          setExpenditures(response.data.data); 
           setError(response.data.message);
+        } else {
+          setError(response.data.message );
         }
       } catch (err) {
-        console.error('Error fetching expenditures:', err); // Log the error
-        setError('An error occurred while fetching expenditures.');
-      } finally {
-        setLoading(false); // Ensure loading is set to false
+        setError('Error fetching expenditure list. Please try again.');
       }
     };
 
     fetchExpenditures();
   }, []);
 
-  if (loading) {
-    return <p>Loading...</p>; // Show a loading state while fetching
-  }
-
   return (
-    <div className="expenditure-list">
+    <div className="expenditure-list-section">
       <h2>Expenditure List</h2>
-      {error && <p>{error}</p>} {/* Display any error message */}
+      {error && <p className="error-message">{error}</p>} {/* Display any error message */}
       {expenditures.length === 0 ? (
         <p>No expenditures found.</p>
       ) : (
@@ -51,9 +44,9 @@ const ExpenditureList = () => {
           <tbody>
             {expenditures.map((expenditure, index) => (
               <tr key={index}>
-                <td>{expenditure.expenseDate}</td>
+                <td>{new Date(expenditure.expenseDate).toLocaleDateString()}</td>
                 <td>{expenditure.expenseDetail}</td>
-                <td>{expenditure.expenseAmount}</td>
+                <td>₹{expenditure.expenseAmount.toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
