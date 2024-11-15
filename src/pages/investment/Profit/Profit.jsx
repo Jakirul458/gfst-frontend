@@ -11,6 +11,7 @@ const Profit = () => {
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
   const [accountBalance, setAccountBalance] = useState('');
+  const [investmentAmount, setInvestmentAmount] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ const Profit = () => {
       if (response.data.success) {
         const newBalance = parseFloat(accountBalance) + parseFloat(profit); // Calculate new balance after profit calculation
 
-        alert('Profit calculation successful!');
+        alert('Profit transaction successful!');
         // Generate the print slip with updated balance
         printSlip(accountName, profit, newBalance, date);
 
@@ -35,6 +36,7 @@ const Profit = () => {
         setIsVerified(false);
         setAccountName('');
         setAccountBalance('');
+        setInvestmentAmount('');
       } else {
         setError(response.data.message);
       }
@@ -51,23 +53,26 @@ const Profit = () => {
         setIsVerified(true);
         setAccountName(response.data.data.name);
         setAccountBalance(response.data.data.balance);
+        setInvestmentAmount(response.data.data.investmentAmount)
         setError(null);
       } else {
         setIsVerified(false);
         setAccountName('');
         setAccountBalance('');
+        setInvestmentAmount('');
         setError('Investment account does not exist.');
       }
     } catch (err) {
       setIsVerified(false);
       setAccountName('');
       setAccountBalance('');
+      setInvestmentAmount('');
       setError('Error verifying account. Please try again.');
     }
   };
 
   // Function to generate the print slip
-  const printSlip = (consumerName, profitAmount, presentBalance, date) => {
+  const printSlip = (consumerName, profitAmount, investmentAmount, date) => {
     const slipContent = `
       <html>
       <head><title>Profit  Slip</title></head>
@@ -75,7 +80,7 @@ const Profit = () => {
         <h1>Youth Supportive Society</h1>
         <p>Consumer Name: <strong>${consumerName}</strong></p>
         <p>Profit Amount: <strong>₹ ${profitAmount}</strong></p>
-        <p>Available Balance: <strong>₹ ${presentBalance}</strong></p>
+        <p>Investmented Amount: <strong>₹ ${investmentAmount}</strong></p>
         <p>Date: <strong>${date}</strong></p>
         <script>
           window.print();
@@ -121,7 +126,7 @@ const Profit = () => {
                 Consumer Name: <strong>{accountName}</strong>
               </p>
               <p>
-                Present Balance: <strong>₹ {accountBalance}</strong>
+                Investmented Amount: <strong>₹ {investmentAmount}</strong>
               </p>
             </div>
 

@@ -68,14 +68,14 @@ const CloseInvestmentAcc = () => {
   };
 
   // Function to generate the print slip
-  const printSlip = (consumerName, closingBalance, date) => {
+  const printSlip = (consumerName, closeInvesment, date) => {
     const slipContent = `
       <html>
       <head><title>Investment Account Closure Slip</title></head>
       <body>
         <h1>Youth Supportive Society</h1>
         <p>Consumer Name: <strong>${consumerName}</strong></p>
-        <p>Closing Balance: <strong>₹ ${closingBalance}</strong></p>
+        <p>Closing Balance: <strong>₹ ${closeInvesment}</strong></p>
         <p>Date: <strong>${date}</strong></p>
         <script>
           window.print();
