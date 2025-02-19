@@ -67,7 +67,8 @@ function Dashboard() {
 
         <div className="card">
           <div className="card-title">Savings present amount</div>
-          <div className="card-content">₹{(totalSavingsBalance - totalLoanBalance)-investmentBalance}</div>
+          {/* <div className="card-content">₹{(totalSavingsBalance - totalLoanBalance)-investmentBalance}</div> */}
+          <div className="card-content">₹{totalSavingsBalance -((totalLoanBalance - totalEmi)+ investmentBalance)}</div>
         </div>
 
 {/*         <div className="card">
@@ -81,7 +82,7 @@ function Dashboard() {
         </div>
  */}
         <div className="card">
-          <div className="card-title">Total loan amount</div>
+          <div className="card-title">Total loan invested amount</div>
           <div className="card-content">₹{totalLoanBalance}</div>
         </div>
 

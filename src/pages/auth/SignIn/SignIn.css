@@ -333,6 +333,7 @@ h3 {
 .extra-links a {
   text-decoration: none;
   color: #007bff;
+  
   font-size: 14px;
   transition: color 0.3s ease;
 }
