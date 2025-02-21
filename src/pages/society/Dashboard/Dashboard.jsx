@@ -129,7 +129,7 @@
 import { useEffect, useState } from 'react';
 import api from '../../../api/index';
 import './Dashboard.css';
-import logo from '../../../assets/icons/logo.svg'
+// import logo from '../../../assets/icons/logo.svg'
 
 function Dashboard() {
   const [totalSavingsBalance, setTotalSavingsBalance] = useState(0);
@@ -177,7 +177,7 @@ function Dashboard() {
   return (
     <div className="dashboard-container">
       <div className="dashboard-header-container">
-        <img src={logo} alt="GFST Logo" className="dashboard-logo" />
+        {/* <img src={logo} alt="GFST Logo" className="dashboard-logo" /> */}
         <h1 className="dashboard-header">Golden Future Supportive Trust <br /> Audit</h1>
       </div>
       
