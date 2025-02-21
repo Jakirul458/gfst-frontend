@@ -54,7 +54,7 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserShield, faTachometerAlt, faInfoCircle, faEnvelope, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; 
 import './Navbar.css'; 
-import logo from '../../assets/icons/logo.svg'; // Import the logo
+import logo from '../../assets/icons/logo.svg';
 
 function Navbar({ handleLogout }) {
   return (

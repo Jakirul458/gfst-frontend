@@ -129,7 +129,7 @@
 import { useEffect, useState } from 'react';
 import api from '../../../api/index';
 import './Dashboard.css';
-import logo from '../../assets/icons/logo.svg';
+import logo from '../../../assets/icons/logo.svg'
 
 function Dashboard() {
   const [totalSavingsBalance, setTotalSavingsBalance] = useState(0);
