@@ -60,7 +60,7 @@ function Navbar({ handleLogout }) {
   return (
     <div className="navbar-container">
       <div className="navbar-brand">
-        <div className="heading">Youth Supportive Society</div>
+        <div className="heading">Golden Future Supportive Trust</div>
       </div>
 
       <div className="navbar-links">

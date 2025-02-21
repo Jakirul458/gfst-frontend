@@ -349,7 +349,7 @@ const SignIn = () => {
       <div className={`card ${loginType}`}>
         <img className="logo" src={Logo} alt="Logo" />
         <h2>Welcome, {loginType.charAt(0).toUpperCase() + loginType.slice(1)}!</h2>
-        <h3>Youth Supportive Society</h3>
+        <h3>Golden Future Supportive Trust</h3>
         <br />
         <form className="form" onSubmit={verifyUser}>
           <input

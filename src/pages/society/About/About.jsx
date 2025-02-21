@@ -4,7 +4,7 @@ function About() {
   return (
     <div className="about-container">
       <br />
-      <h1>Youth Supportive Trust</h1>
+      <h1>Golden Future Supportive Trust</h1>
       <h2>ভূমিকা</h2>
       <p>
      জুলুম নির্যাতনের বিবর্তনে কিছু মানুষ আজ অসহায়। তথাকথিত বিশ্বায়ন তাদেরকে করে তুলেছে মজলুম।

@@ -48,17 +48,17 @@ function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      <h1 className="dashboard-header">Youth Supportive Society <br /> Audit</h1>
+      <h1 className="dashboard-header">Golden Future Supportive Trust <br /> Audit</h1>
       {error && <div className="error-message">{error}</div>}
 
       <div className="cards-container">
       <div className="card">
           <div className="card-title"> Society total amount</div>
-          <div className="card-content">₹{totalSavingsBalance + profitBalance + donationBalance}</div>
+          <div className="card-content">₹{totalSavingsBalance + profitBalance + donationBalance} </div>
         </div>
         <div className="card">
           <div className="card-title">Society Present amount</div>
-          <div className="card-content">₹{(totalSavingsBalance + profitBalance + donationBalance) -expenditureBalance}</div>
+          <div className="card-content">₹{(totalSavingsBalance + profitBalance + donationBalance) - expenditureBalance}</div>
         </div>
         <div className="card">
           <div className="card-title"> Savings total amount</div>
