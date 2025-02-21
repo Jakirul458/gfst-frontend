@@ -135,8 +135,11 @@
 
 .navbar-logo {
   height: 40px; /* Adjust the height as needed */
-  margin-right: 10px; /* Space between logo and heading */
+  margin-right: 10px;
+  width: auto; /* Space between logo and heading */
 }
+
+
 
 
 

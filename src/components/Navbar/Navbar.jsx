@@ -49,17 +49,18 @@
 
 // export default Navbar;
 
-
 import React from 'react'; 
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserShield, faTachometerAlt, faInfoCircle, faEnvelope, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; // Import icons
-import './Navbar.css'; // Import the CSS file
+import { faUserShield, faTachometerAlt, faInfoCircle, faEnvelope, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; 
+import './Navbar.css'; 
+import logo from '../../assets/icons/logo.svg'; // Import the logo
 
 function Navbar({ handleLogout }) {
   return (
     <div className="navbar-container">
       <div className="navbar-brand">
+        <img src={logo} alt="GFST Logo" className="navbar-logo" />
         <div className="heading">Golden Future Supportive Trust</div>
       </div>
 
