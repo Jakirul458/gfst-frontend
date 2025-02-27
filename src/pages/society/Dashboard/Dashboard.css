@@ -32,7 +32,7 @@
 
 
 
-  
+/*   
 .dashboard-container {
   padding: 20px;
   background-color: #f9f9f9;
@@ -86,7 +86,9 @@
   font-size: 24px;
   color: #333;
   font-weight: bold;
-}
+} 
+
+
 
 
 @media (max-width: 768px) {
@@ -106,6 +108,95 @@
 
   .card-content {
     font-size: 20px; 
+  }
+}
+*/
+
+
+
+
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.dashboard-header-container {
+  display: flex;
+  flex-direction: column; /* Stack logo above the text */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-logo {
+  height: 180px; /* Slightly larger for better visibility */
+  width: auto;
+  margin-bottom: 10px; /* Space between logo and heading */
+}
+
+.dashboard-header {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: teal;
+}
+
+.error-message {
+  color: red;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+/* Grid Layout for Cards */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 15px;
+}
+
+/* Professional Card Style */
+.card {
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.card-content {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: teal;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .dashboard-header {
+    font-size: 1.5rem;
+  }
+  
+  .dashboard-logo {
+    height: 30px;
+  }
+
+  .cards-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 }
 
