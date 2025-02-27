@@ -1,9 +1,16 @@
-import React from 'react'
+const Logout = () => {
+  const navigate = useNavigate();
 
-function logout() {
-  return (
-    <div>logout</div>
-  )
-}
+  useEffect(() => {
+    // Remove authentication tokens or user session data
+    localStorage.removeItem("token");  // Example for JWT token
+    localStorage.removeItem("user");
 
-export default logout
+    // Redirect to login page after logout
+    navigate("/login");
+  }, [navigate]);
+
+  return null; // No UI required
+};
+
+export default Logout;
