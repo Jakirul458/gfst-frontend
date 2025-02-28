@@ -39,29 +39,35 @@ function AllAccounts() {
   };
 
   const handlePrint = () => {
+    const tableElement = document.getElementById('accounts-table').cloneNode(true);
+  
+    // Remove any unnecessary elements (like links)
+    const links = tableElement.querySelectorAll('a');
+    links.forEach(link => {
+      link.outerHTML = link.innerHTML; // Replace links with plain text
+    });
+  
     const printWindow = window.open('', '_blank');
-    const printContents = document.getElementById('accounts-table').outerHTML;
-    
     printWindow.document.write(`
       <html>
       <head>
         <title>List of All Savings Accounts</title>
         <style>
           table { width: 100%; border-collapse: collapse; }
-          th, td { border: 1px solid black; padding: 1px; text-align: center; }
+          th, td { border: 1px solid black; padding: 8px; text-align: center; }
           th { background-color: #f2f2f2; }
-            a { text-decoration: none; color: black; }
         </style>
       </head>
       <body>
-        ${printContents}
+        ${tableElement.outerHTML}
       </body>
       </html>
     `);
     printWindow.document.close();
     printWindow.print();
-    printWindow.close();
+    
   };
+  
 
   return (
     <>

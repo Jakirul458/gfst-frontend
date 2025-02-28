@@ -1,118 +1,117 @@
 
-// import React from 'react';
-// import './AdminPanel.css';
-// import { Outlet } from 'react-router-dom';
-
-// function AdminPanel() {
-//   return (
-//     // <div className="adminpanel-container">
-//     //   <div className="sidebar__container">
-//     //     <SideBar />
-//     //   </div>
-//     //   <div className="content__container">
-//     //     <Outlet />
-//     //   </div>
-//     // </div>
-//     <>
-   
-//     {/* <div>
-//       <SideBar />
-//     </div> */}
-//     </>
-//   );
-// }
-
-// export default AdminPanel;
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./AdminPanel.css";
 
-const AdminPanel = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [branches, setBranches] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+const BranchManagement = () => {
+  const [branchUsername, setBranchUsername] = useState("");
+  const [branchPassword, setBranchPassword] = useState("");
+  const [branchRegistry, setBranchRegistry] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
 
   useEffect(() => {
-    fetchBranches();
+    fetchBranchRegistry();
   }, []);
 
-  const fetchBranches = async () => {
-    setLoading(true);
+  const fetchBranchRegistry = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.get("/api/branch/register");
-      setBranches(Array.isArray(response.data) ? response.data : []);
+      setBranchRegistry(Array.isArray(response.data) ? response.data : []);
     } catch (err) {
-      setError("Failed to fetch branches");
-      setBranches([]);
+      setStatusMessage("Failed to fetch branch registry");
+      setBranchRegistry([]);
     }
-    setLoading(false);
+    setIsLoading(false);
   };
 
-  const handleSubmit = async (e) => {
+  const handleRegistrationSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setStatusMessage("");
 
-    if (username && password) {
+    if (branchUsername && branchPassword) {
       try {
-        const response = await axios.post("/api/branch/register", { username, password });
-        setBranches((prevBranches) => [...prevBranches, response.data]);
-        setUsername("");
-        setPassword("");
+        const response = await axios.post("/api/branch/register", { 
+          username: branchUsername, 
+          password: branchPassword 
+        });
+        setBranchRegistry((prevRegistry) => [...prevRegistry, response.data]);
+        setBranchUsername("");
+        setBranchPassword("");
       } catch (err) {
-        setError("Failed to create branch");
+        setStatusMessage("Failed to create branch credentials");
       }
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold mb-4 text-center">Create Branch ID</h2>
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="border p-2 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="border p-2 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
-        />
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition">
-          Submit
+    <div className="branch-management-container">
+      <h2 className="branch-management-title">Branch Registration Portal</h2>
+
+      {statusMessage && <p className="status-message-error">{statusMessage}</p>}
+
+      {/* Registration Form */}
+      <form onSubmit={handleRegistrationSubmit} className="branch-registration-form">
+        <div className="form-field-container">
+          <label htmlFor="branch-username" className="form-field-label">Branch Username</label>
+          <input
+            id="branch-username"
+            type="text"
+            placeholder="Enter branch username"
+            value={branchUsername}
+            onChange={(e) => setBranchUsername(e.target.value)}
+            className="form-field-input"
+            required
+          />
+        </div>
+
+        <div className="form-field-container">
+          <label htmlFor="branch-password" className="form-field-label">Branch Password</label>
+          <input
+            id="branch-password"
+            type="password"
+            placeholder="Enter branch password"
+            value={branchPassword}
+            onChange={(e) => setBranchPassword(e.target.value)}
+            className="form-field-input"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="registration-submit-button"
+        >
+          Register Branch
         </button>
       </form>
-      {loading ? (
-        <p className="text-center mt-4">Loading...</p>
+
+      {/* Loading & Branch Registry */}
+      {isLoading ? (
+        <p className="loading-indicator">Loading branch data...</p>
       ) : (
-        branches.length > 0 && (
-          <div className="mt-6">
-            <h2 className="text-xl font-bold mb-2">Branch List</h2>
-            <table className="w-full border-collapse border border-gray-300">
-              <thead>
-                <tr className="bg-gray-200">
-                  <th className="border px-4 py-2">ID</th>
-                  <th className="border px-4 py-2">Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                {branches.map((branch, index) => (
-                  <tr key={index} className="text-center">
-                    <td className="border px-4 py-2">{branch.id}</td>
-                    <td className="border px-4 py-2">{branch.username}</td>
+        branchRegistry.length > 0 && (
+          <div className="branch-registry-container">
+            <h2 className="branch-registry-title">Registered Branches</h2>
+            <div className="registry-table-container">
+              <table className="branch-registry-table">
+                <thead className="registry-table-header">
+                  <tr>
+                    <th className="registry-table-cell">Branch ID</th>
+                    <th className="registry-table-cell">Branch Username</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {branchRegistry.map((branch, index) => (
+                    <tr key={index} className="registry-table-row">
+                      <td className="registry-table-cell">{branch.id}</td>
+                      <td className="registry-table-cell">{branch.username}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )
       )}
@@ -120,4 +119,4 @@ const AdminPanel = () => {
   );
 };
 
-export default AdminPanel;
+export default BranchManagement;

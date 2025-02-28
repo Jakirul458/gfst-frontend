@@ -408,8 +408,8 @@ const SignIn = () => {
         <button className={loginType === "branch" ? "active" : ""} onClick={() => handleToggle("branch")}>
           Branch
         </button>
-        <button className={loginType === "central" ? "active" : ""} onClick={() => handleToggle("central")}>
-          Central
+        <button className={loginType === "central" ? "active" : ""} onClick={() => handleToggle("Admin")}>
+          Admin
         </button>
       </div>
 

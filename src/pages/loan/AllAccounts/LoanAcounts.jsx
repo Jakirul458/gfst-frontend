@@ -64,7 +64,7 @@ function LoanAccounts() {
     `);
     printWindow.document.close();
     printWindow.print();
-    printWindow.close();
+    
   };
 
   return (

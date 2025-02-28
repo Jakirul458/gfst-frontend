@@ -61,7 +61,7 @@ function InvestmentAccounts() {
     `);
     printWindow.document.close();
     printWindow.print();
-    printWindow.close();
+    
   };
 
   return (
