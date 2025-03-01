@@ -1,92 +1,177 @@
-
+/* Base styling for the sidebar */
 .sidebar {
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(0, 128, 128, 0.7); 
-  height: calc(100vh - 4rem);
-  padding: 11px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
-  position: relative; 
-}
-
-.sidebar::before {
-  content: '';
-  position: absolute;
-  top: 0;
+  width: 250px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1a2942 0%, #0f1d33 100%);
+  color: #e2e8f0;
+  transition: all 0.3s ease;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: url("..//../store/SidebarBackground.jpg") no-repeat center center; 
-  background-size: cover;
-  opacity: 0.1; 
-  z-index: 0; 
+  top: 0;
+  z-index: 100;
+  padding: 20px 0;
+  overflow-y: auto;
 }
 
-.sidebar .section {
-  margin-bottom: 20px;
+/* Section styling */
+.section {
   position: relative;
-  transition: all 0.3s ease; 
-  z-index: 1; /* Bring content above watermark */
+  padding: 0;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
-.sidebar .section h2 {
-  color: rgb(248, 248, 245);
-  margin-bottom: 10px;
-  text-align: left;
-  padding: 10px;
+/* Section header styling */
+.section h2 {
+  padding: 15px 20px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  border-left: 4px solid transparent;
+  transition: all 0.2s ease;
 }
 
-.sidebar .section h2:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Lighten on hover */
+.section h2 svg {
+  margin-right: 12px;
+  width: 18px;
+  height: 18px;
+  color: #64b5f6;
 }
 
+/* Hover effect for section headers */
+.section:hover h2 {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left: 4px solid #64b5f6;
+  color: white;
+}
+
+/* Expanded section styling */
+.section.expanded {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.section.expanded h2 {
+  border-left: 4px solid #64b5f6;
+  color: white;
+}
+
+/* Dropdown content styling */
 .dropdown-content {
-  display: none;
-  position: relative;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  z-index: 1;
-  padding: 10px 0;
+  background-color: rgba(15, 23, 42, 0.9);
+  border-radius: 0 0 4px 4px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
 }
 
 .section.expanded .dropdown-content {
-  display: block;
+  max-height: 400px;
+  opacity: 1;
+  padding: 10px 0;
 }
 
+/* Navigation link styling */
 .dropdown-content a {
-  color: white;
-  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  padding: 12px 20px 12px 45px;
+  color: #cbd5e1;
   text-decoration: none;
-  display: block;
-  transition: background-color 0.3s ease;
-}
-
-.dropdown-content a:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Lighten on hover */
+  font-size: 14px;
+  transition: all 0.2s ease;
+  border-left: 4px solid transparent;
 }
 
 .dropdown-content a svg {
-  margin-right: 8px;
+  margin-right: 10px;
+  font-size: 14px;
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+  transition: all 0.2s ease;
 }
 
-/* Custom scrollbar for vertical overflow */
-::-webkit-scrollbar {
-  width: 6px;
+/* Navigation link hover and active states */
+.dropdown-content a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-left: 4px solid #90caf9;
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-radius: 6px;
+.dropdown-content a:hover svg {
+  opacity: 1;
+  color: #90caf9;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: #555;
+.dropdown-content a.active {
+  background-color: rgba(100, 181, 246, 0.2);
+  color: white;
+  border-left: 4px solid #64b5f6;
 }
 
-::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
+.dropdown-content a.active svg {
+  color: #64b5f6;
+  opacity: 1;
+}
+
+/* Icon-specific colors for better visual distinction */
+.section:nth-child(1) h2 svg, 
+.section:nth-child(1).expanded .dropdown-content a.active svg {
+  color: #81c784; /* Green for Savings */
+}
+
+.section:nth-child(2) h2 svg,
+.section:nth-child(2).expanded .dropdown-content a.active svg {
+  color: #ff8a65; /* Orange for Loan */
+}
+
+.section:nth-child(3) h2 svg,
+.section:nth-child(3).expanded .dropdown-content a.active svg {
+  color: #64b5f6; /* Blue for Investment */
+}
+
+.section:nth-child(4) h2 svg,
+.section:nth-child(4).expanded .dropdown-content a.active svg {
+  color: #ba68c8; /* Purple for Society */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+    overflow: visible;
+  }
+  
+  .sidebar:hover {
+    width: 250px;
+  }
+  
+  .section h2 span {
+    display: none;
+  }
+  
+  .sidebar:hover .section h2 span {
+    display: inline;
+  }
+  
+  .section.expanded .dropdown-content {
+    position: absolute;
+    left: 60px;
+    top: 0;
+    width: 190px;
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar:hover .section.expanded .dropdown-content {
+    position: static;
+    box-shadow: none;
+    width: auto;
+  }
 }

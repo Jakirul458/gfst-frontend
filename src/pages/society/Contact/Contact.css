@@ -1,87 +1,69 @@
 .contact-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 80%;
-    margin: 20px auto;
-    padding: 10px;
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    text-align: center;
-  }
-  
-  .logo {
-    width: 150px;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  .contact-title {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    color: #009688;
-    font-weight: bold;
-  }
-  
-  .contact-description {
-    font-size: 1.2rem;
-    line-height: 1.5;
-    color: #555;
-    text-align: center;
-    margin-bottom: 15px;
-    max-width: 800px;
-  }
-  
-  .contact-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    font-size: 1.1rem;
-    color: #222;
-  }
-  
-  .contact-link:hover {
-    color: #009688;
-  }
-  
-  .contact-icon {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .contact-phone {
-    font-size: 1.1rem;
-    color: #444;
-  }
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    font-size: 1.1rem;
-    color: #222;
-  }
-  
-  .contact-link:hover {
-    color: #009688;
-  }
-  
-  .contact-icon {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .gmail-text {
-    color: blue;  /* Makes Gmail text blue */
-    font-weight: bold;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 80%;
+  margin: 60px auto 20px auto; /* Increased top margin to push it down */
+  padding: 40px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  text-align: center;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+  margin-bottom: 15px; /* Slightly increased margin to separate it from the title */
+}
+
+.contact-title {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #009688;
+  font-weight: bold;
+}
+
+.contact-description {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #555;
+  text-align: center;
+  margin-bottom: 15px;
+  max-width: 800px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.contact-link:hover {
+  color: #009688;
+}
+
+.contact-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.contact-phone {
+  font-size: 1.1rem;
+  color: #444;
+}
+
+.gmail-text {
+  color: blue;
+  font-weight: bold;
+}

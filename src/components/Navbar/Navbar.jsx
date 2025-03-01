@@ -1,5 +1,4 @@
 
-
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,13 +9,18 @@ import logo from "../../assets/icons/logo.svg";
 function Navbar() {
   const navigate = useNavigate();
 
+  // const handleLogout = () => {
+  //   localStorage.removeItem("authToken");
+  //   sessionStorage.clear();
+  //   navigate("/signin");
+  //   window.location.reload();
+  // };
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     sessionStorage.clear();
-    navigate("/signin");
-    window.location.reload();
+    navigate("/login", { replace: true });
   };
-
+  
   return (
     <div className="navbar-container">
       <div className="navbar-brand">

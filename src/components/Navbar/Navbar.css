@@ -1,87 +1,171 @@
-
+/* Navbar container styling */
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px; /* Adjusted padding for smaller screens */
-  background-color: teal;
-  color: #fff;
-  height: 4rem;
+  background: linear-gradient(90deg, #1a2942 0%, #2c3e50 100%);
+  color: #ffffff;
+  padding: 0 2rem;
+  height: 70px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 250px; /* Adjust based on sidebar width */
+  z-index: 99;
 }
 
-.navbar-brand .heading {
-  font-size: 1.6rem; /* Responsive font size */
-  color: #f1c40f; 
-}
-
-.navbar-links {
-  display: flex; /* Ensure links are displayed in a row */
-  align-items: center;
-  gap: 20px;
-}
-
-.nav-link {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1rem; /* Responsive font size */
-  padding: 10px; 
-  transition: background-color 0.3s ease;
-  cursor: pointer; 
-}
-
-.nav-link:hover {
-  background-color: rgb(17, 36, 36);
-}
-
-.logout-button {
-  background: none;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  font: inherit;
-  margin: 0;
-  padding: 10px;
-  font-size: 1rem; /* Responsive font size */
-  transition: background-color 0.3s ease;
-}
-
-.logout-button:hover {
-  background-color: rgb(17, 36, 36);
-}
-
-/* Media Queries for Responsive Design */
-@media (max-width: 768px) {
-  .navbar-container {
-    flex-direction: column; /* Stack items on small screens */
-    padding: 10px; /* Less padding on mobile */
-  }
-
-  .navbar-brand .heading {
-    font-size: 1.4rem; /* Slightly smaller on mobile */
-  }
-
-  .navbar-links {
-    flex-wrap: wrap; /* Allow wrapping of links */
-    justify-content: center; /* Center the links */
-    gap: 10px; /* Adjust gap for mobile */
-  }
-
-  .nav-link, .logout-button {
-    font-size: 0.9rem; /* Smaller font size on mobile */
-    padding: 8px; /* Smaller padding on mobile */
-  }
-}
-
+/* Brand section with logo and heading */
 .navbar-brand {
   display: flex;
-  align-items: center; /* Align logo and heading vertically */
+  align-items: center;
 }
 
 .navbar-logo {
-  height: 40px; /* Adjust the height as needed */
-  margin-right: 10px; /* Space between logo and heading */
+  height: 40px;
+  margin-right: 15px;
+  transition: transform 0.3s ease;
 }
 
+.navbar-logo:hover {
+  transform: scale(1.05);
+}
 
+.heading {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
 
+/* Navigation links container */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
 
+/* Individual nav link styling */
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  color: #e2e8f0;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.nav-link svg {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+/* Hover effect for links */
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* Active link styling */
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+/* Animated underline effect for links */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #64b5f6;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 80%;
+}
+
+/* Logout button styling */
+.logout-button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  margin-left: 10px;
+  color: #e2e8f0;
+}
+
+.logout-button:hover {
+  background-color: rgba(231, 76, 60, 0.2);
+  border-color: rgba(231, 76, 60, 0.3);
+  color: #ff8a80;
+}
+
+.logout-button:hover::after {
+  background-color: #ff8a80;
+}
+
+.logout-button svg {
+  color: #ff8a80;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1024px) {
+  .navbar-container {
+    padding: 0 1rem;
+  }
+  
+  .heading {
+    font-size: 1.1rem;
+  }
+  
+  .nav-link {
+    padding: 8px 12px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-container {
+    left: 60px; /* Adjust based on collapsed sidebar width */
+  }
+  
+  .heading {
+    display: none;
+  }
+  
+  .nav-link span {
+    display: none;
+  }
+  
+  .nav-link {
+    padding: 8px 12px;
+  }
+  
+  .nav-link svg {
+    margin-right: 0;
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar-container {
+    justify-content: flex-end;
+  }
+  
+  .navbar-brand {
+    display: none;
+  }
+  
+  .navbar-links {
+    width: 100%;
+    justify-content: space-around;
+  }
+}
