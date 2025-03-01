@@ -231,7 +231,7 @@ const Deposit = () => {
       <html>
       <head><title>Deposit Slip</title></head>
       <body>
-        <h1>Youth Supportive Society</h1>
+        <h1>Golden Futute Supportive Trust</h1>
         <p>Consumer Name: <strong>${consumerName}</strong></p>
         <p>Deposit Amount: <strong>₹ ${depositAmount}</strong></p>
         <p>Available Balance: <strong>₹ ${presentBalance}</strong></p>

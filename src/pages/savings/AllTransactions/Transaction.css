@@ -14,30 +14,21 @@ h1 {
   width: 50%;
   margin: 0 auto;
   display: block;
-  text-align: center;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 16px;
 }
 
-.form-control.mb-2, .form-control {
-  margin-bottom: 10px;
-}
-
-input::placeholder {
-  color: #888;
-}
-
 .date-filter-container {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 20px; /* Space below date filters */
+  margin-bottom: 20px;
 }
 
 .date-input {
-  width: 150px; /* Adjust as needed */
+  width: 150px;
   padding: 10px;
   font-size: 14px;
   border-radius: 5px;
@@ -49,7 +40,7 @@ input::placeholder {
 }
 
 .table {
-  width: 100%; /* Full width */
+  width: 100%;
   border-collapse: collapse;
   background-color: #fff;
   border-radius: 8px;
@@ -96,25 +87,13 @@ tbody tr:hover {
 .print-btn:hover {
   background-color: #0056b3;
 }
-a {
-  text-decoration: none;
-  color: blue;
-}
-
-a:hover {
-  text-decoration: none; 
-}
 
 @media (max-width: 768px) {
   .search-bar, .form-control {
       width: 80%;
   }
 
-  .table {
-      width: 100%;
-  }
-
   .date-input {
-      width: 100%; /* Make date inputs full width on small screens */
+      width: 100%;
   }
 }

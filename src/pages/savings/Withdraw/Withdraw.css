@@ -1,85 +1,73 @@
-/* In withdraw.css */
-
-/* Wrapper for centering and giving margin to the form */
-.form-wrapper {
-  margin-top: 100px; /* Adjust this value to push the form lower */
+/* Wrapper for centering the form */
+.withdraw-wrapper {
+  margin-top: 100px;
   display: flex;
   justify-content: center;
-  
+  align-items: center;
 }
 
 /* Container for the withdraw form */
 .withdraw-container {
   width: 100%;
-  max-width: 500px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Style for the form */
-.withdraw-form {
-  width: 100%;
+  max-width: 450px;
   padding: 20px;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-/* Title of the form */
-.form-title {
-  text-align: center;
+/* Form title */
+.withdraw-title {
   font-size: 24px;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 
-/* Error message styling */
-.error-message {
+/* Error message */
+.withdraw-error {
   color: red;
   font-size: 14px;
   text-align: center;
+  margin-bottom: 10px;
 }
 
-/* Grouping of form elements */
-.form-group {
+/* Form group */
+.withdraw-group {
   margin-bottom: 15px;
+  text-align: left;
 }
 
-/* Form input fields styling */
-.form-control {
+/* Label */
+.withdraw-label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Input field */
+.withdraw-input {
   width: 100%;
   padding: 10px;
-  margin-top: 5px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
+  text-align: center;
 }
 
-/* Button styling */
-.btn {
-  padding: 10px 20px;
-  background-color: #4CAF50;
+/* Verify button */
+.withdraw-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
   font-size: 16px;
-}
-
-.btn:hover {
-  background-color: #45a049;
-}
-
-/* Verify account button */
-.verify-btn {
+  cursor: pointer;
   margin-top: 10px;
 }
 
-/* Verified account information */
-.verified-info {
-  margin-top: 20px;
-  background-color: #f1f1f1;
-  padding: 10px;
-  border-radius: 5px;
+.withdraw-btn:hover {
+  background-color: #0056b3;
 }

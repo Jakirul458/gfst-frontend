@@ -13,6 +13,7 @@
   right: 0;
   left: 250px; /* Adjust based on sidebar width */
   z-index: 99;
+  transition: all 0.3s ease;
 }
 
 /* Brand section with logo and heading */
@@ -38,11 +39,21 @@
   letter-spacing: 0.5px;
 }
 
+/* Mobile menu toggle button - hidden by default on desktop */
+.menu-toggle {
+  display: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 100;
+}
+
 /* Navigation links container */
 .navbar-links {
   display: flex;
   align-items: center;
   gap: 5px;
+  transition: all 0.3s ease;
 }
 
 /* Individual nav link styling */
@@ -117,7 +128,7 @@
   color: #ff8a80;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments for large tablets */
 @media screen and (max-width: 1024px) {
   .navbar-container {
     padding: 0 1rem;
@@ -132,9 +143,10 @@
   }
 }
 
+/* Responsive adjustments for tablets */
 @media screen and (max-width: 768px) {
   .navbar-container {
-    left: 60px; /* Adjust based on collapsed sidebar width */
+    left: 70px; /* Adjust based on collapsed sidebar width */
   }
   
   .heading {
@@ -147,6 +159,7 @@
   
   .nav-link {
     padding: 8px 12px;
+    justify-content: center;
   }
   
   .nav-link svg {
@@ -155,17 +168,109 @@
   }
 }
 
-@media screen and (max-width: 480px) {
+/* Responsive adjustments for mobile devices */
+@media screen and (max-width: 576px) {
   .navbar-container {
-    justify-content: flex-end;
+    left: 0;
+    padding: 0 1rem;
+    height: 60px;
+  }
+  
+  .menu-toggle {
+    display: block;
   }
   
   .navbar-brand {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .navbar-logo {
+    height: 32px;
+    margin-right: 8px;
+  }
+  
+  .heading {
+    display: block;
+    font-size: 1rem;
+  }
+  
+  /* Mobile menu styling */
+  .navbar-links {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: #1a2942;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .navbar-links.show {
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+    padding: 10px 0;
+  }
+  
+  .nav-link {
+    padding: 12px 20px;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    justify-content: flex-start;
+  }
+  
+  .nav-link span {
+    display: inline-block;
+  }
+  
+  .nav-link svg {
+    margin-right: 10px;
+  }
+  
+  .nav-link::after {
     display: none;
   }
   
-  .navbar-links {
-    width: 100%;
-    justify-content: space-around;
+  .logout-button {
+    margin: 10px 15px;
+    border-radius: 4px;
+    justify-content: center;
+  }
+}
+
+/* Very small screens */
+@media screen and (max-width: 380px) {
+  .heading {
+    display: none;
+  }
+}
+
+/* For landscape mobile orientation */
+@media screen and (max-height: 480px) and (orientation: landscape) {
+  .navbar-container {
+    height: 50px;
+  }
+  
+  .navbar-links.show {
+    max-height: calc(100vh - 50px);
+    overflow-y: auto;
+  }
+  
+  .nav-link {
+    padding: 8px 16px;
+  }
+}
+
+/* When sidebar is hidden on mobile */
+@media screen and (max-width: 576px) {
+  body.sidebar-hidden .navbar-container {
+    left: 0;
   }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../../api/index';
-import './SearchAccount.css'; 
+import './SearchAccount.css';
 
 const SearchAccount = () => {
   const [accountNo, setAccountNo] = useState('');
@@ -16,7 +16,6 @@ const SearchAccount = () => {
     try {
       const response = await api.get(`/api/savings/${accountNo}`);
       if (response.data && response.data.data) {
-        // If the account exists, navigate to the account profile page
         navigate(`/app/savings/account/${accountNo}`);
       } else {
         setError('Account not found.');
@@ -30,22 +29,28 @@ const SearchAccount = () => {
   };
 
   return (
-    <div className="search-account-container">
-      <h1>Search for a Savings Account</h1>
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Enter Account Number"
-          value={accountNo}
-          onChange={(e) => setAccountNo(e.target.value)}
-          className="form-control"
-        />
-        <button onClick={handleSearch} className="btn btn-primary" disabled={loading}>
+    <div className="search-wrapper">
+      <div className="search-container">
+        <h2 className="search-title">Search Savings Account</h2>
+
+        {error && <p className="search-error">{error}</p>}
+
+        <div className="search-group">
+          <label htmlFor="account-number" className="search-label">Account Number</label>
+          <input
+            type="text"
+            id="account-number"
+            className="search-input"
+            placeholder="Enter savings account number"
+            value={accountNo}
+            onChange={(e) => setAccountNo(e.target.value)}
+          />
+        </div>
+
+        <button type="button" onClick={handleSearch} className="search-btn" disabled={loading}>
           {loading ? 'Searching...' : 'Search'}
         </button>
       </div>
-      
-      {error && <p className="error-text">{error}</p>}
     </div>
   );
 };

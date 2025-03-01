@@ -78,11 +78,15 @@
 import React from 'react'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './Route/Routing'
+import { ToastContainer } from "react-toastify";
 import './App.css'
 
 const App = () => {
   return (
+    <>
+    <ToastContainer />
     <RouterProvider router={router} />
+    </>
   )
 }
 

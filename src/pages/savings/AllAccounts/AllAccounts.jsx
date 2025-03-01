@@ -40,18 +40,18 @@ function AllAccounts() {
 
   const handlePrint = () => {
     const tableElement = document.getElementById('accounts-table').cloneNode(true);
-  
+
     // Remove any unnecessary elements (like links)
     const links = tableElement.querySelectorAll('a');
     links.forEach(link => {
       link.outerHTML = link.innerHTML; // Replace links with plain text
     });
-  
+
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
       <html>
       <head>
-        <title>List of All Savings Accounts</title>
+        <title>List of All Savings Accounts of the Golden Future Supportive Trust.</title>
         <style>
           table { width: 100%; border-collapse: collapse; }
           th, td { border: 1px solid black; padding: 8px; text-align: center; }
@@ -65,13 +65,10 @@ function AllAccounts() {
     `);
     printWindow.document.close();
     printWindow.print();
-    
   };
-  
 
   return (
-    <>
-     
+    <div className="all-accounts-container">
       <h1 className="mb-4">List of Savings Accounts</h1>
 
       <input
@@ -119,7 +116,7 @@ function AllAccounts() {
       <div className="print-btn-container">
         <button type="button" className="print-btn" onClick={handlePrint}>Print</button>
       </div>
-    </>
+    </div>
   );
 }
 
