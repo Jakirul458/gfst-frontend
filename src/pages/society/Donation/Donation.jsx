@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingHeart, faDonate, faPrint } from '@fortawesome/free-solid-svg-icons';
-import api from '../../../api/index'; // Import your API instance
-import './Donation.css'; // Import your custom styles
+import api from '../../../api/index'; // Import API instance
+import './Donation.css'; // Import styles
 
 const Donation = () => {
   const [donationAmount, setDonationAmount] = useState('');
@@ -12,7 +12,7 @@ const Donation = () => {
   const [donationDate, setDonationDate] = useState('');
   const [donationSubmitted, setDonationSubmitted] = useState(false);
   const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(''); // Success message state
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleDonationSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ const Donation = () => {
 
       if (response.data.success) {
         setDonationSubmitted(true);
-        setSuccessMessage('Donation successfully submitted!'); // Show success message
+        setSuccessMessage('Donation successfully submitted!');
 
         // Reset form fields after successful submission
         setDonorName('');
@@ -35,15 +35,15 @@ const Donation = () => {
         setDonationDate('');
         setAddress('');
         setMobileNo('');
-        setError(null); // Reset any errors
+        setError(null);
 
-        // Hide the success message and reopen the form after 3 seconds
+        // Hide success message after 3 seconds
         setTimeout(() => {
-          setDonationSubmitted(false); // Show the form again
-          setSuccessMessage(''); // Hide the success message
+          setDonationSubmitted(false);
+          setSuccessMessage('');
         }, 3000);
       } else {
-        setError(response.data.message);
+        setError(response.data.message || 'Failed to submit donation.');
       }
     } catch (err) {
       setError('An error occurred while submitting the donation. Please try again.');
@@ -58,9 +58,8 @@ const Donation = () => {
     <div className="donation-section">
       <h2><FontAwesomeIcon icon={faDonate} /> Donation</h2>
 
-      {/* Donation form */}
       {!donationSubmitted && (
-        <form onSubmit={handleDonationSubmit} className="expense-form">
+        <form onSubmit={handleDonationSubmit} className="donation-form">
           {error && <p className="error-message">{error}</p>}
 
           <div className="form-group">
@@ -82,7 +81,7 @@ const Donation = () => {
             />
           </div>
           <div className="form-group">
-            <label>Amount:</label>
+            <label>Amount (₹):</label>
             <input
               type="number"
               value={donationAmount}
@@ -114,13 +113,9 @@ const Donation = () => {
         </form>
       )}
 
-      {/* Show highlighted success message */}
-      {successMessage && (
-        <p className="success-message highlighted">{successMessage}</p> // Highlighted success message
-      )}
+      {successMessage && <p className="success-message">{successMessage}</p>}
 
-      {/* Donation slip and print option */}
-      {/* {donationSubmitted && (
+      {donationSubmitted && (
         <div className="donation-slip">
           <h3>Donation Receipt</h3>
           <p><strong>Donor Name:</strong> {donorName}</p>
@@ -128,9 +123,11 @@ const Donation = () => {
           <p><strong>Date:</strong> {donationDate}</p>
           <p><strong>Donor Address:</strong> {address}</p>
           <p><strong>Mobile Number:</strong> {mobileNo}</p>
-          <button onClick={handlePrint}><FontAwesomeIcon icon={faPrint} /> Print Slip</button>
+          <button onClick={handlePrint} className="print-button">
+            <FontAwesomeIcon icon={faPrint} /> Print Slip
+          </button>
         </div>
-      )} */}
+      )}
     </div>
   );
 };

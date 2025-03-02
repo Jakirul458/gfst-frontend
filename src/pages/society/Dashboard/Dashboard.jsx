@@ -194,19 +194,19 @@ function Dashboard() {
           <div className="card-content">₹{(totalSavingsBalance + profitBalance + donationBalance) - expenditureBalance}</div>
         </div>
         <div className="card">
-          <div className="card-title">Savings Total Amount</div>
+          <div className="card-title"> Total Savings Amount</div>
           <div className="card-content">₹{totalSavingsBalance}</div>
         </div>
         <div className="card">
-          <div className="card-title">Savings Present Amount</div>
+          <div className="card-title">Present Savings  Amount</div>
           <div className="card-content">₹{totalSavingsBalance - ((totalLoanBalance - totalEmi) + investmentBalance)}</div>
         </div>
         <div className="card">
-          <div className="card-title">Total Loan Invested Amount</div>
+          <div className="card-title">Total Loan  Amount</div>
           <div className="card-content">₹{totalLoanBalance}</div>
         </div>
         <div className="card">
-          <div className="card-title">Collected Total Loan Amount</div>
+          <div className="card-title">Collected Total EMI Amount</div>
           <div className="card-content">₹{totalEmi}</div>
         </div>
         <div className="card">
@@ -214,7 +214,7 @@ function Dashboard() {
           <div className="card-content">₹{totalLoanBalance - totalEmi}</div>
         </div>
         <div className="card">
-          <div className="card-title">Investment Total Amount</div>
+          <div className="card-title">Investment  Amount</div>
           <div className="card-content">₹{investmentBalance}</div>
         </div>
         <div className="card">

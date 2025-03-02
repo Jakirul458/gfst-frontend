@@ -1,37 +1,21 @@
-.success-message {
-  font-size: 1.2em;
-  color: #155724; /* Green color for success */
-  background-color: #d4edda; /* Light green background */
-  padding: 10px;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
-.highlighted {
-  font-weight: bold;
-  border: 2px solid #28a745; /* Dark green border */
-  box-shadow: 0 0 10px rgba(40, 167, 69, 0.5); /* Subtle shadow */
-}
 /* General styles */
-
-
 .expenditure-section {
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto;
-  padding: 20px;
-  background-color: #f4f4f9;
+  padding: 100px 20px 20px; /* Increased top padding to prevent navbar overlap */
+  background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   font-family: 'Arial', sans-serif;
 }
 
-.title {
+.expenditure-section h2 {
   text-align: center;
-  color: #2c3e50;
+  color: #c0392b;
   margin-bottom: 20px;
-  font-size: 1.8em;
 }
 
+/* Form Styles */
 .expense-form {
   display: flex;
   flex-direction: column;
@@ -42,51 +26,95 @@
 }
 
 .form-group label {
-  font-size: 1em;
-  font-weight: bold;
-  color: #34495e;
-  margin-bottom: 5px;
   display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .form-group input {
   width: 100%;
-  padding: 10px;
-  font-size: 1em;
-  border: 1px solid #ccc;
+  padding: 8px;
+  border: 1px solid #ddd;
   border-radius: 5px;
 }
 
+/* Submit button */
 .submit-button {
-  background-color: #2980b9;
+  background-color: #c0392b;
   color: white;
-  padding: 10px 15px;
-  font-size: 1.2em;
+  padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 16px;
 }
 
 .submit-button:hover {
+  background-color: #a83227;
+}
+
+/* Error Message */
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Success Message */
+.success-message {
+  color: green;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Expenditure Slip */
+.expenditure-slip {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.expenditure-slip h3 {
+  color: #c0392b;
+}
+
+.expenditure-slip p {
+  margin: 5px 0;
+}
+
+/* Print Button */
+.print-button {
   background-color: #3498db;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
-.submit-button svg {
-  margin-right: 8px;
+.print-button:hover {
+  background-color: #2980b9;
 }
 
-/* Responsive design */
+/* Responsive Styles */
 @media (max-width: 768px) {
   .expenditure-section {
+    padding: 120px 15px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .expenditure-section {
+    padding: 130px 10px 10px;
+  }
+
+  .expenditure-slip {
     padding: 15px;
-  }
-
-  .title {
-    font-size: 1.5em;
-  }
-
-  .submit-button {
-    font-size: 1em;
   }
 }

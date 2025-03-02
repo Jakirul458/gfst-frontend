@@ -198,7 +198,6 @@
 
 
 
-
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoneyBillWave, faFileInvoiceDollar } from '@fortawesome/free-solid-svg-icons';
@@ -218,24 +217,22 @@ const Expenditure = () => {
 
     const newExpense = {
       expenseDetail,
-      expenseAmount: parseFloat(expenseAmount), // Ensure the amount is a number
+      expenseAmount: parseFloat(expenseAmount),
       expenseDate,
     };
 
     try {
-      const response = await api.post('/api/expenditure', newExpense); // Pass newExpense data
+      const response = await api.post('/api/expenditure', newExpense);
       
       if (response.data.success) {
-        setExpenses([...expenses, response.data.data]); // Use the response data
+        setExpenses([...expenses, response.data.data]);
         setSuccessMessage('Expenditure submitted successfully!');
 
-        // Clear form inputs after submission
         setExpenseDetail('');
         setExpenseAmount('');
         setExpenseDate('');
         setError(null);
 
-        // Clear success message after a few seconds
         setTimeout(() => setSuccessMessage(''), 3000);
       } else {
         setError(response.data.message);
@@ -251,8 +248,6 @@ const Expenditure = () => {
       
       <form onSubmit={handleExpenseSubmit} className="expense-form">
         {error && <p className="error-message">{error}</p>}
-        
-        {/* Display the success message with a highlighted class */}
         {successMessage && <p className="success-message highlighted">{successMessage}</p>}
 
         <div className="form-group">

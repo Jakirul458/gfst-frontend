@@ -2,7 +2,7 @@
 .donor-list-section {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 100px 20px 20px; /* Increased top padding to prevent navbar overlap */
   background-color: #f4f4f9;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -87,7 +87,7 @@
 
 @media (max-width: 480px) {
   .donor-list-section {
-    padding: 10px;
+    padding: 120px 10px 10px; /* Further increased padding for small screens */
   }
 
   .donor-table th, .donor-table td {

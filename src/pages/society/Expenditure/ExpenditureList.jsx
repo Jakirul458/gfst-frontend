@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../../api/index';
-import './ExpenditureList.css'; 
+import api from '../../../api/index'; // Import API instance
+import './ExpenditureList.css'; // Import styles
 
 const ExpenditureList = () => {
   const [expenditures, setExpenditures] = useState([]);
@@ -10,13 +10,13 @@ const ExpenditureList = () => {
     const fetchExpenditures = async () => {
       try {
         const response = await api.get('/api/expenditure');
-        console.log('response', response);     
-        setExpenditures(response.data);
+        console.log('response', response);
+
         if (response.data.success) {
-          setExpenditures(response.data.data); 
-          setError(response.data.message);
+          setExpenditures(response.data.data);
+          setError(null);
         } else {
-          setError(response.data.message );
+          setError(response.data.message || 'Failed to load expenditures.');
         }
       } catch (err) {
         setError('Error fetching expenditure list. Please try again.');
@@ -29,7 +29,7 @@ const ExpenditureList = () => {
   return (
     <div className="expenditure-list-section">
       <h2>Expenditure List</h2>
-      {error && <p className="error-message">{error}</p>} {/* Display any error message */}
+      {error && <p className="error-message">{error}</p>}
       {expenditures.length === 0 ? (
         <p>No expenditures found.</p>
       ) : (

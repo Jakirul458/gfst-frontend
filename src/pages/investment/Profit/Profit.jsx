@@ -13,37 +13,58 @@ const Profit = () => {
   const [accountBalance, setAccountBalance] = useState('');
   const [investmentAmount, setInvestmentAmount] = useState('');
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await api.post('/api/transaction/profit/', {
+  //       accountNo: account,
+  //       amount: profit,
+  //     });
+
+  //     if (response.data.success) {
+  //       const newBalance = parseFloat(accountBalance) + parseFloat(profit); // Calculate new balance after profit calculation
+
+  //       alert('Profit transaction successful!');
+  //       // Generate the print slip with updated balance
+  //       printSlip(accountName, profit, newBalance, date);
+
+  //       // Clear form fields after successful submission
+  //       setAccount('');
+  //       setDate(new Date().toLocaleDateString());
+  //       setProfit('');
+  //       setError(null);
+  //       setIsVerified(false);
+  //       setAccountName('');
+  //       setAccountBalance('');
+  //       setInvestmentAmount('');
+  //     } else {
+  //       setError(response.data.message);
+  //     }
+  //   } catch (err) {
+  //     setError('An error occurred during the profit calculation.');
+  //   }
+  // };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post('/api/transaction/profit/', {
-        accountNo: account,
-        amount: profit,
-      });
+        const response = await api.post('/api/transaction/profit/', {
+            accountNo: account,
+            amount: parseFloat(profit) // Ensure amount is a number
+        });
 
-      if (response.data.success) {
-        const newBalance = parseFloat(accountBalance) + parseFloat(profit); // Calculate new balance after profit calculation
-
-        alert('Profit transaction successful!');
-        // Generate the print slip with updated balance
-        printSlip(accountName, profit, newBalance, date);
-
-        // Clear form fields after successful submission
-        setAccount('');
-        setDate(new Date().toLocaleDateString());
-        setProfit('');
-        setError(null);
-        setIsVerified(false);
-        setAccountName('');
-        setAccountBalance('');
-        setInvestmentAmount('');
-      } else {
-        setError(response.data.message);
-      }
+        if (response.data.success) {
+            alert('Profit transaction successful!');
+            setProfit(''); // Reset input field
+        } else {
+            setError(response.data.message);
+        }
     } catch (err) {
-      setError('An error occurred during the profit calculation.');
+        setError('An error occurred during the profit calculation.');
     }
-  };
+};
+
 
   const handleVerify = async () => {
     try {
