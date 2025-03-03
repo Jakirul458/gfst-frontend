@@ -218,7 +218,7 @@ function Dashboard() {
           <div className="card-content">₹{investmentBalance}</div>
         </div>
         <div className="card">
-          <div className="card-title">Profit Amount</div>
+          <div className="card-title">Profit from Investment</div>
           <div className="card-content">₹{profitBalance}</div>
         </div>
         <div className="card">
