@@ -4,7 +4,14 @@ import './DonorList.css'; // Import the updated styles
 
 const DonorList = () => {
   const [donors, setDonors] = useState([]);
+  const [filteredDonors, setFilteredDonors] = useState([]);
   const [error, setError] = useState(null);
+  
+  const today = new Date().toISOString().split('T')[0];
+  const last31Days = new Date(new Date().setDate(new Date().getDate() - 31)).toISOString().split('T')[0];
+  
+  const [startDate, setStartDate] = useState(last31Days);
+  const [endDate, setEndDate] = useState(today);
 
   useEffect(() => {
     const fetchDonors = async () => {
@@ -13,6 +20,7 @@ const DonorList = () => {
         console.log('response', response);
         if (response.data.success) {
           setDonors(response.data.data);
+          setFilteredDonors(response.data.data);
           setError(null);
         } else {
           setError(response.data.message || 'Failed to load donations.');
@@ -25,11 +33,42 @@ const DonorList = () => {
     fetchDonors();
   }, []);
 
+  useEffect(() => {
+    let filtered = donors;
+    if (startDate && endDate) {
+      console.log("Filtering donations between:", startDate, "and", endDate);
+      filtered = filtered.filter((donor) => {
+        if (!donor.donationDate) return false;
+        const donorDate = new Date(donor.donationDate).getTime();
+        const start = new Date(startDate).setHours(0, 0, 0, 0);
+        const end = new Date(endDate).setHours(23, 59, 59, 999);
+        return donorDate >= start && donorDate <= end;
+      });
+    }
+    setFilteredDonors(filtered);
+  }, [startDate, endDate, donors]);
+
   return (
     <div className="donor-list-section">
       <h2>Donor List</h2>
       {error && <p className="error-message">{error}</p>}
-      {donors.length === 0 ? (
+      
+      <div className="date-filter-container mb-4">
+        <input
+          type="date"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+          className="form-control date-input"
+        />
+        <input
+          type="date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+          className="form-control date-input"
+        />
+      </div>
+      
+      {filteredDonors.length === 0 ? (
         <p>No donors found.</p>
       ) : (
         <table className="donor-table">
@@ -43,7 +82,7 @@ const DonorList = () => {
             </tr>
           </thead>
           <tbody>
-            {donors.map((donor, index) => (
+            {filteredDonors.map((donor, index) => (
               <tr key={index}>
                 <td>{donor.donorName}</td>
                 <td>{donor.donorAddress}</td>

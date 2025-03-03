@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from '../../../api/index.js'
 import "./AdminPanel.css";
 
 const BranchManagement = () => {
@@ -10,21 +9,23 @@ const BranchManagement = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
 
-  useEffect(() => {
-    fetchBranchRegistry();
-  }, []);
 
-  const fetchBranchRegistry = async () => {
-    setIsLoading(true);
-    try {
-      const response = await axios.get("/api/branch/register");
-      setBranchRegistry(Array.isArray(response.data) ? response.data : []);
-    } catch (err) {
-      setStatusMessage("Failed to fetch branch registry");
-      setBranchRegistry([]);
-    }
-    setIsLoading(false);
-  };
+  // useEffect(() => {
+  //   fetchBranchRegistry();
+  // }, []);
+
+  // const fetchBranchRegistry = async () => {
+  //   setIsLoading(true);
+  //   try {
+      
+  //     const response = await api.get("/api/branch/register");
+  //     setBranchRegistry(Array.isArray(response.data) ? response.data : []);
+  //   } catch (err) {
+  //     setStatusMessage("Failed to fetch branch registry");
+  //     setBranchRegistry([]);
+  //   }
+  //   setIsLoading(false);
+  // };
 
   const handleRegistrationSubmit = async (e) => {
     e.preventDefault();
@@ -32,9 +33,9 @@ const BranchManagement = () => {
 
     if (branchUsername && branchPassword) {
       try {
-        const response = await axios.post("/api/branch/register", { 
-          username: branchUsername, 
-          password: branchPassword 
+        const response = await api.post("/api/branch/register", {
+          username: branchUsername,
+          password: branchPassword,
         });
         setBranchRegistry((prevRegistry) => [...prevRegistry, response.data]);
         setBranchUsername("");
@@ -45,76 +46,64 @@ const BranchManagement = () => {
     }
   };
 
+
   return (
     <div className="branch-management-container">
       <h2 className="branch-management-title">Branch Registration Portal</h2>
-
       {statusMessage && <p className="status-message-error">{statusMessage}</p>}
 
-      {/* Registration Form */}
       <form onSubmit={handleRegistrationSubmit} className="branch-registration-form">
-        <div className="form-field-container">
-          <label htmlFor="branch-username" className="form-field-label">Branch Username</label>
+        <div className="form-group">
+          <label htmlFor="branch-username">Branch Username</label>
           <input
             id="branch-username"
             type="text"
-            placeholder="Enter branch username"
             value={branchUsername}
             onChange={(e) => setBranchUsername(e.target.value)}
-            className="form-field-input"
             required
           />
         </div>
 
-        <div className="form-field-container">
-          <label htmlFor="branch-password" className="form-field-label">Branch Password</label>
+        <div className="form-group">
+          <label htmlFor="branch-password">Branch Password</label>
           <input
             id="branch-password"
             type="password"
-            placeholder="Enter branch password"
             value={branchPassword}
             onChange={(e) => setBranchPassword(e.target.value)}
-            className="form-field-input"
             required
           />
         </div>
 
-        <button
-          type="submit"
-          className="registration-submit-button"
-        >
-          Register Branch
-        </button>
+        <button type="submit" className="submit-button">Register Branch</button>
       </form>
 
-      {/* Loading & Branch Registry */}
       {isLoading ? (
-        <p className="loading-indicator">Loading branch data...</p>
+        <p className="loading-text">Loading branch data...</p>
       ) : (
         branchRegistry.length > 0 && (
           <div className="branch-registry-container">
             <h2 className="branch-registry-title">Registered Branches</h2>
-            <div className="registry-table-container">
-              <table className="branch-registry-table">
-                <thead className="registry-table-header">
-                  <tr>
-                    <th className="registry-table-cell">Branch ID</th>
-                    <th className="registry-table-cell">Branch Username</th>
+            <table className="branch-registry-table">
+              <thead>
+                <tr>
+                  <th>Branch ID</th>
+                  <th>Branch Username</th>
+                </tr>
+              </thead>
+              <tbody>
+                {branchRegistry.map((branch, index) => (
+                  <tr key={index}>
+                    <td>{branch.id}</td>
+                    <td>{branch.username}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {branchRegistry.map((branch, index) => (
-                    <tr key={index} className="registry-table-row">
-                      <td className="registry-table-cell">{branch.id}</td>
-                      <td className="registry-table-cell">{branch.username}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         )
       )}
+      <h3>branch id create hoche but fetch kore show hochhe na</h3>
     </div>
   );
 };

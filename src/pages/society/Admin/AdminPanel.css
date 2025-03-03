@@ -1,153 +1,89 @@
-
 .branch-management-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid #eaedf2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
 }
 
 .branch-management-title {
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: #2c3e50;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid #f0f2f5;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 .status-message-error {
-  color: #e74c3c;
-  text-align: center;
-  font-size: 0.875rem;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  background-color: rgba(231, 76, 60, 0.1);
-  border-radius: 0.25rem;
+  color: red;
+  font-weight: bold;
 }
 
 .branch-registration-form {
-  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-}
-
-.form-field-container {
-  margin-bottom: 0.5rem;
-}
-
-.form-field-label {
-  display: block;
-  font-weight: 500;
-  font-size: 0.95rem;
-  color: #374151;
-  margin-bottom: 0.5rem;
-}
-
-.form-field-input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
 }
 
-.form-field-input:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
 }
 
-.form-field-input::placeholder {
-  color: #9ca3af;
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-.registration-submit-button {
-  margin-top: 0.5rem;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  background-color: #2563eb;
+.form-group input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.submit-button {
+  background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  font-size: 1rem;
+  padding: 10px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
-.registration-submit-button:hover {
-  background-color: #1d4ed8;
-}
-
-.registration-submit-button:active {
-  transform: translateY(1px);
-}
-
-.loading-indicator {
-  text-align: center;
-  color: #6b7280;
-  font-style: italic;
-  padding: 1rem;
+.submit-button:hover {
+  background-color: #0056b3;
 }
 
 .branch-registry-container {
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #f0f2f5;
+  margin-top: 20px;
+  width: 100%;
 }
 
 .branch-registry-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 1rem;
-}
-
-.registry-table-container {
-  overflow-x: auto;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .branch-registry-table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.5rem;
-  overflow: hidden;
+  border-collapse: collapse;
 }
 
-.registry-table-header {
-  background-color: #f9fafb;
+.branch-registry-table th, .branch-registry-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
 }
 
-.registry-table-header th {
-  font-weight: 600;
-  text-align: left;
+.branch-registry-table th {
+  background-color: #007bff;
+  color: white;
 }
 
-.registry-table-cell {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e5e7eb;
-  color: #4b5563;
-}
-
-.registry-table-row {
-  transition: background-color 0.1s ease;
-}
-
-.registry-table-row:hover {
-  background-color: #f9fafb;
-}
-
-.registry-table-row:last-child .registry-table-cell {
-  border-bottom: none;
+.loading-text {
+  font-weight: bold;
 }

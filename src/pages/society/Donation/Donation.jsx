@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandHoldingHeart, faDonate, faPrint } from '@fortawesome/free-solid-svg-icons';
 import api from '../../../api/index'; // Import API instance
 import './Donation.css'; // Import styles
+import logo from '../../../assets/icons/logo.svg'; // Ensure the correct path
 
 const Donation = () => {
   const [donationAmount, setDonationAmount] = useState('');
@@ -28,18 +29,10 @@ const Donation = () => {
       if (response.data.success) {
         setDonationSubmitted(true);
         setSuccessMessage('Donation successfully submitted!');
-
-        // Reset form fields after successful submission
-        setDonorName('');
-        setDonationAmount('');
-        setDonationDate('');
-        setAddress('');
-        setMobileNo('');
         setError(null);
 
         // Hide success message after 3 seconds
         setTimeout(() => {
-          setDonationSubmitted(false);
           setSuccessMessage('');
         }, 3000);
       } else {
@@ -51,7 +44,51 @@ const Donation = () => {
   };
 
   const handlePrint = () => {
-    window.print();
+    const printWindow = window.open('', '_blank');
+    const printContents = `
+      <html>
+      <head>
+        <title>Donation Receipt</title>
+        <style>
+          body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+          .receipt-container { border: 2px solid #000; padding: 20px; width: 400px; margin: auto; border-radius: 8px; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); }
+          h2 { margin-bottom: 5px; }
+          p { margin: 5px 0; font-size: 16px; }
+          .bold { font-weight: bold; }
+          .logo { max-width: 100px; margin-bottom: 10px; }
+          .footer { margin-top: 15px; padding-top: 10px; border-top: 1px solid #000; font-size: 14px; }
+          .signature { margin-top: 20px; text-align: left; font-size: 16px; }
+        </style>
+      </head>
+      <body>
+        <div class="receipt-container">
+          <img src="${logo}" alt="Trust Logo" class="logo" />
+          <h2>Golden Future Supportive Trust</h2>
+          <h3>Donation Receipt</h3>          
+          <h3>Thank you for helping us. </h3>
+          <p><span class="bold">Donor Name:</span> ${donorName}</p>
+          <p><span class="bold">Donation Amount:</span> ₹${donationAmount}</p>
+          <p><span class="bold">Date:</span> ${donationDate}</p>
+          <p><span class="bold">Donor Address:</span> ${address}</p>
+          <p><span class="bold">Mobile Number:</span> ${mobileNo}</p>
+          <div class="footer">
+            <p><span class="bold">Contact Details</span> </p>
+            <p>Email: gfcsmsd@gmail.com</p>
+            <p>Phone:+91 7029121433</p>
+            <p>Address: Vill-Mukundabag, P.O-Kiriteswari, P.S-Jiaganj, Pin-742104, Dist-Murshidabad</p>
+          </div>
+          <br/>
+          <br/>
+          <div class="signature">
+            <p><span class="bold">Authorized Signature:</span> ____________________</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+    printWindow.document.write(printContents);
+    printWindow.document.close();
+    printWindow.print();
   };
 
   return (
@@ -117,15 +154,7 @@ const Donation = () => {
 
       {donationSubmitted && (
         <div className="donation-slip">
-          <h3>Donation Receipt</h3>
-          <p><strong>Donor Name:</strong> {donorName}</p>
-          <p><strong>Donation Amount:</strong> ₹{donationAmount}</p>
-          <p><strong>Date:</strong> {donationDate}</p>
-          <p><strong>Donor Address:</strong> {address}</p>
-          <p><strong>Mobile Number:</strong> {mobileNo}</p>
-          <button onClick={handlePrint} className="print-button">
-            <FontAwesomeIcon icon={faPrint} /> Print Slip
-          </button>
+          <button onClick={handlePrint} className="print-button"><FontAwesomeIcon icon={faPrint} /> Print Slip </button>
         </div>
       )}
     </div>
