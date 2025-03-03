@@ -271,6 +271,7 @@ import api from "../../../api";
 import Logo from "../../../assets/icons/logo.svg";
 import "./SignIn.css";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -311,12 +312,18 @@ const SignIn = () => {
     setIsLoading(false);
   };
   
+  
 
   const verifyBranch = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await api.post("/api/branch/login", { username, password });
+      const res = await api.post("/api/branch/login", {
+        username,
+        password
+      });
+    //  console.log("Branch Login Response:", res.data);
+     console.log(res);
       if (res.data.success) {
         localStorage.setItem("userType", "branch");
         localStorage.setItem("username", username);
@@ -333,7 +340,6 @@ const SignIn = () => {
     }
     setIsLoading(false);
   };
-  
   
 
 
@@ -514,27 +520,27 @@ export default SignIn;
 //     setIsLoading(false);
 //   };
   
-//   const verifyBranch = async (e) => {
-//     e.preventDefault();
-//     setIsLoading(true);
-//     try {
-//       const res = await api.post("/api/branch/login", { username, password });
-//       if (res.data.success) {
-//         localStorage.setItem("userType", "branch");
-//         localStorage.setItem("username", username);
-//         toast.success("Login Successful!", { position: "top-center", autoClose: 2000 });
-//         navigate("/app/society/dashboard");
-//       } else {
-//         toast.error("Invalid Username & Password", { position: "top-center", autoClose: 3000 });
-//         setError("Invalid Username & Password");
-//       }
-//     } catch (error) {
-//       console.error("Login Error:", error);
-//       toast.error("Server error. Please try again later.", { position: "top-center", autoClose: 3000 });
-//       setError("Server error. Please try again later.");
-//     }
-//     setIsLoading(false);
-//   };
+  // const verifyBranch = async (e) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+  //   try {
+  //     const res = await api.post("/api/branch/login", { username, password });
+  //     if (res.data.success) {
+  //       localStorage.setItem("userType", "branch");
+  //       localStorage.setItem("username", username);
+  //       toast.success("Login Successful!", { position: "top-center", autoClose: 2000 });
+  //       navigate("/app/society/dashboard");
+  //     } else {
+  //       toast.error("Invalid Username & Password", { position: "top-center", autoClose: 3000 });
+  //       setError("Invalid Username & Password");
+  //     }
+  //   } catch (error) {
+  //     console.error("Login Error:", error);
+  //     toast.error("Server error. Please try again later.", { position: "top-center", autoClose: 3000 });
+  //     setError("Server error. Please try again later.");
+  //   }
+  //   setIsLoading(false);
+  // };
   
 //   // Function to handle API requests with timeout and retry logic
 //   const safeApiRequest = async (requestFn, maxRetries = 1, timeoutMs = 10000) => {

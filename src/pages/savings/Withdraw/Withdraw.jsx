@@ -378,7 +378,7 @@ const Withdraw = () => {
         remarks,
       });
       if (response.data.success) {
-        const newBalance = parseFloat(accountBalance) + parseFloat(withdraw); // Calculate new balance after withdraw
+        const newBalance = parseFloat(accountBalance) - parseFloat(withdraw); // Calculate new balance after withdraw
 
         alert('Transaction successful!');
         // Generate the print slip with updated balance
@@ -430,7 +430,7 @@ const Withdraw = () => {
       <html>
       <head><title>Withdraw Slip</title></head>
       <body>
-        <h1>Golden Futute Supportive Trust</h1>
+        <h1>Golden Future Supportive Trust</h1>
         <p>Consumer Name: <strong>${consumerName}</strong></p>
         <p>Withdraw Amount: <strong>₹ ${withdrawAmount}</strong></p>
         <p>Available Balance: <strong>₹ ${presentBalance}</strong></p>
