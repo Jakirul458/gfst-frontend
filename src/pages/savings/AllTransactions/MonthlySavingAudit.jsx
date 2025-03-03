@@ -18,7 +18,7 @@ function MonthlySavingAudit() {
     const fetchUsers = async () => {
       try {
         const response = await api.get('/api/transaction/all/savings');
-        console.log('Full API Response:', response.data);
+        // console.log('Full API Response:', response.data);
         if (response.data && Array.isArray(response.data.data)) {
           setUsers(response.data.data);
           setFilteredUsers(response.data.data);
