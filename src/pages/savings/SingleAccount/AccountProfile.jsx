@@ -179,11 +179,11 @@
 
 //   const handlePrint = () => {
 //     const accountProfile = document.getElementById('account-profile').cloneNode(true);
-  
+
 //     // Remove buttons before printing
 //     const buttons = accountProfile.querySelectorAll('.print-btn, .update-btn, .delete-btn');
 //     buttons.forEach(button => button.remove());
-  
+
 //     const printWindow = window.open('', '_blank');
 //     printWindow.document.write(`
 //       <html>
@@ -203,7 +203,7 @@
 //     printWindow.document.close();
 //     printWindow.print();
 //   };
-  
+
 
 //   const handleDelete = () => navigate(`/app/savings/account/delete/${accountNo}`);
 //   const handleUpdate = () => navigate(`/app/savings/account/update/${accountNo}`);
@@ -248,7 +248,7 @@
 //           )) : <tr><td colSpan="5">No transactions available</td></tr>}
 //         </tbody>
 //       </table>
-      
+
 //       <div className="action-buttons">
 //         <button onClick={handlePrint} className="print-btn">Print</button>
 //         <button onClick={handleUpdate} className="update-btn">Update</button>
@@ -311,11 +311,11 @@ function AccountProfile() {
 
   const handlePrint = () => {
     const accountProfile = document.getElementById('account-profile').cloneNode(true);
-  
+
     // Remove buttons before printing
     const buttons = accountProfile.querySelectorAll('.print-btn, .update-btn, .delete-btn');
     buttons.forEach(button => button.remove());
-  
+
     const printWindow = window.open('', '_blank');
     printWindow.document.write(`
       <html>
@@ -352,7 +352,7 @@ function AccountProfile() {
         <p>Mobile: <strong>{accountDetails.mobileNo}</strong></p>
         <p>Aadhar: <strong>{accountDetails.AadharNo}</strong></p>
         <p>Address: <strong>{accountDetails.Address}</strong></p>
-        <p>Date of Birth: <strong>{formatMongoDate(accountDetails.dob)}</strong></p> 
+        <p>Date of Birth: <strong>{formatMongoDate(accountDetails.dob)}</strong></p>
         <p>Available Balance: ₹<strong>{accountDetails.balance}</strong></p>
         <br />
         <h3>Transaction History</h3>
@@ -373,14 +373,20 @@ function AccountProfile() {
             <tr key={transaction._id}>
               <td>{formatMongoDate(transaction.createdAt)}</td>
               <td>{transaction.transactionId}</td>
-              <td>{transaction.typeOfTransaction === 'deposit' ? transaction.amount : 0}</td>
-              <td>{transaction.typeOfTransaction === 'withdraw' ? transaction.amount : 0}</td>
+           
+              <td>
+                {transaction.typeOfTransaction === 'deposit' ? transaction.amount : ""}
+              </td>
+              <td>
+                {transaction.typeOfTransaction === 'withdraw' ? transaction.amount : ""}
+              </td>
+
               <td>{transaction.remarks}</td>
             </tr>
           )) : <tr><td colSpan="5">No transactions available</td></tr>}
         </tbody>
       </table>
-      
+
       <div className="action-buttons">
         <button onClick={handlePrint} className="print-btn">Print</button>
         <button onClick={handleUpdate} className="update-btn">Update</button>

@@ -226,8 +226,8 @@ function InvestmentAccProfile() {
           <tr>
             <th>Date</th>
             <th>Transaction ID</th>
-            <th>Profit</th>
             <th>Investment Amount</th>
+            <th>Profit</th>            
             <th>Investment Return</th>
             <th>Remarks</th>
           </tr>
@@ -236,10 +236,10 @@ function InvestmentAccProfile() {
           {transactions.length > 0 ? transactions.map((transaction) => (
             <tr key={transaction._id}>
               <td>{transaction.date}</td>
-              <td>{transaction.transactionId}</td>
-              <td>{transaction.typeOfTransaction === 'profit' ? transaction.amount : 0}</td>
-              <td>{transaction.typeOfTransaction === 'investment' ? transaction.amount : 0}</td>
-              <td>{transaction.typeOfTransaction === 'closeinvestment' ? transaction.amount : 0}</td>
+              <td>{transaction.transactionId}</td>             
+              <td>{transaction.typeOfTransaction === 'investment' ? transaction.amount : ""}</td>
+              <td>{transaction.typeOfTransaction === 'profit' ? transaction.amount : ""}</td>
+              <td>{transaction.typeOfTransaction === 'closeinvestment' ? transaction.amount : ""}</td>
               <td>{transaction.remarks}</td>
             </tr>
           )) : <tr><td colSpan="6">No transactions available</td></tr>}

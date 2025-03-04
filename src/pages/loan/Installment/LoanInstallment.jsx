@@ -1,7 +1,8 @@
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import api from '../../../api';
 import './LoanInstalment.css';
+import logo from '../../../assets/icons/logo.svg';
 
 const LoanInstallment = () => {
   const [account, setAccount] = useState('');
@@ -11,7 +12,7 @@ const LoanInstallment = () => {
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
   const [loanAmount, setLoanAmount] = useState('');
-  const [remarks, setRemarks] = useState('loantransaction'); // Default to 'loantransaction'
+  const [remarks, setRemarks] = useState('loantransaction');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,7 +48,6 @@ const LoanInstallment = () => {
   const handleVerify = async () => {
     try {
       const response = await api.get(`/api/loan/${account}`);
-
       if (response.data.success) {
         setIsVerified(true);
         setAccountName(response.data.data.name);
@@ -67,27 +67,50 @@ const LoanInstallment = () => {
     }
   };
 
-  // Function to generate the print slip
   const printSlip = (consumerName, paymentAmount, remainingLoanAmount, date) => {
     const slipContent = `
       <html>
-      <head><title>EMI Payment Slip</title></head>
+      <head>
+        <title>EMI Payment Slip</title>
+        <style>
+          body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+          .receipt-container { border: 2px solid #000; padding: 20px; width: 400px; margin: auto; border-radius: 8px; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); }
+          h2 { margin-bottom: 5px; }
+          p { margin: 5px 0; font-size: 16px; }
+          .bold { font-weight: bold; }
+          .logo { max-width: 100px; margin-bottom: 10px; }
+          .footer { margin-top: 15px; padding-top: 10px; border-top: 1px solid #000; font-size: 14px; }
+          .signature { margin-top: 20px; text-align: left; font-size: 16px; }
+        </style>
+      </head>
       <body>
-        <h1>Youth Supportive Society</h1>
-        <p>Consumer Name: <strong>${consumerName}</strong></p>
-        <p>EMI Payment Amount: <strong>₹ ${paymentAmount}</strong></p>
-        <p>Remaining Loan Amount: <strong>₹ ${remainingLoanAmount}</strong></p>
-        <p>Date: <strong>${date}</strong></p>
-        <script>
-          window.print();
-        </script>
+        <div class="receipt-container">
+          <img src="${logo}" alt="Trust Logo" class="logo" />
+          <h2>Golden Fututure Supportive Trust</h2>
+          <h3>Loan EMI Payment Slip</h3>
+          <p><span class="bold">Consumer Name:</span> ${consumerName}</p>
+          <p><span class="bold">EMI Payment Amount:</span> ₹${paymentAmount}</p>
+          <p><span class="bold">Remaining Loan Amount:</span> ₹${remainingLoanAmount}</p>
+          <p><span class="bold">Date:</span> ${date}</p>
+          <div class="footer">
+            <p><span class="bold">Contact Details</span></p>
+            <p>Email: gfcsmsd@gmail.com</p>
+            <p>Phone: +91 7029121433</p>
+            <p>Address: Vill-Mukundabag, P.O-Kiriteswari, P.S-Jiaganj, Pin-742104, Dist-Murshidabad</p>
+          </div>
+          <br/><br/>
+          <div class="signature">
+            <p><span class="bold">Authorized Signature:</span> ____________________</p>
+          </div>
+        </div>
+        <script>window.print();</script>
       </body>
       </html>
     `;
     
     const newWindow = window.open('', '_blank', 'width=600,height=400');
     newWindow.document.write(slipContent);
-    newWindow.document.close(); // Close document to make the print window available
+    newWindow.document.close();
   };
 
   return (
@@ -106,24 +129,14 @@ const LoanInstallment = () => {
             value={account}
             onChange={(e) => setAccount(e.target.value)}
           />
-          <button
-            type="button"
-            onClick={handleVerify}
-            className="btn verify-btn"
-          >
-            Verify Account
-          </button>
+          <button type="button" onClick={handleVerify} className="btn verify-btn">Verify Account</button>
         </div>
 
         {isVerified && (
           <>
             <div className="verified-info">
-              <p>
-                Consumer Name: <strong>{accountName}</strong>
-              </p>
-              <p>
-                Due Loan Amount: <strong>₹ {loanAmount}</strong>
-              </p>
+              <p>Consumer Name: <strong>{accountName}</strong></p>
+              <p>Due Loan Amount: <strong>₹ {loanAmount}</strong></p>
             </div>
 
             <div className="form-group">
@@ -138,9 +151,7 @@ const LoanInstallment = () => {
               />
             </div>
 
-            <button type="submit" className="btn submit-btn">
-              Submit EMI Payment
-            </button>
+            <button type="submit" className="btn submit-btn">Submit EMI Payment</button>
           </>
         )}
       </form>
