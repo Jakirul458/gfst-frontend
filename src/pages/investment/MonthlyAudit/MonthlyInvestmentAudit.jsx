@@ -173,31 +173,30 @@
 
 
 
+
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../../api';
 import { formatMongoDate } from '../../../util/FormatDate';
-import './MonthlyInvestmentAudit.css'; // Add CSS file for styling
+import './MonthlyInvestmentAudit.css';
 
 function MonthlyInvestmentAudit() {
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Calculate default date range (last 31 days)
+  // Default date range (last 31 days)
   const today = new Date().toISOString().split('T')[0];
   const last31Days = new Date(new Date().setDate(new Date().getDate() - 31)).toISOString().split('T')[0];
-
   const [startDate, setStartDate] = useState(last31Days);
   const [endDate, setEndDate] = useState(today);
-  const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await api.get('/api/transaction/all/investment');
-        console.log('API Response:', response.data.data);
         setUsers(response.data.data);
-        setFilteredUsers(response.data.data);
+        setFilteredUsers(response.data.data); // Ensure initial display
       } catch (err) {
         console.error('Error fetching users:', err);
       }
@@ -208,48 +207,36 @@ function MonthlyInvestmentAudit() {
   useEffect(() => {
     let filtered = users;
 
-    // Filter by search query
+    // Filter by search query (accountNo, transactionId, remarks)
     if (searchQuery) {
-      filtered = filtered.filter((user) =>
+      filtered = filtered.filter(user =>
         (user.accountNo && user.accountNo.toString().toLowerCase().includes(searchQuery.toLowerCase())) ||
         (user.transactionId && user.transactionId.toString().toLowerCase().includes(searchQuery.toLowerCase())) ||
         (user.remarks && user.remarks.toLowerCase().includes(searchQuery.toLowerCase()))
       );
     }
 
+    // Filter by date range
+    if (startDate && endDate) {
+      filtered = filtered.filter(user => {
+        const userDate = new Date(user.createdAt).setHours(0, 0, 0, 0);
+        const start = new Date(startDate).setHours(0, 0, 0, 0);
+        const end = new Date(endDate).setHours(23, 59, 59, 999);
+        return userDate >= start && userDate <= end;
+      });
+    }
+
     setFilteredUsers(filtered);
   }, [searchQuery, startDate, endDate, users]);
 
   const handlePrint = () => {
-    const printWindow = window.open('', '_blank');
-    const printContents = document.getElementById('accounts-table').outerHTML;
-    printWindow.document.write(`
-      <html>
-      <head>
-        <title>List of Monthly Investment Transactions</title>
-        <style>
-          body { font-family: Arial, sans-serif; }
-          table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-          th, td { border: 1px solid black; padding: 6px; text-align: center; }
-          th { background-color: #f4f4f4; }
-          a { text-decoration: none; color: black; }
-        </style>
-      </head>
-      <body>
-        <h2>List of Monthly Investment Transactions</h2>
-        ${printContents}
-      </body>
-      </html>
-    `);
-    printWindow.document.close();
-    printWindow.print();
+    window.print();
   };
 
   return (
     <div className="audit-container">
-      <h1 className="title">Investment Transactions</h1>
+      <h1 className="title">List of Investment Transactions</h1>
 
-      {/* Search & Filters */}
       <div className="filter-container">
         <input
           type="text"
@@ -258,28 +245,18 @@ function MonthlyInvestmentAudit() {
           onChange={(e) => setSearchQuery(e.target.value)}
           className="form-control search-input"
         />
+        
         <div className="date-filters">
-          <input
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-            className="form-control"
-          />
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-            className="form-control"
-          />
+          <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="form-control" />
+          <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="form-control" />
         </div>
       </div>
 
-      {/* Table */}
-      <div className="table-responsive">
-        <table className="table table-bordered table-hover" id="accounts-table">
-          <thead className="thead-dark">
+      <div id="accounts-table" className="table-responsive">
+        <table className="table table-bordered table-hover">
+          <thead>
             <tr>
-              <th>#</th>
+              <th>Serial No</th>
               <th>Account No</th>
               <th>Transaction ID</th>
               <th>Investment Taken</th>
@@ -290,38 +267,199 @@ function MonthlyInvestmentAudit() {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((user, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td><Link to={`/app/investment/account/${user.accountNo}`}>{user.accountNo}</Link></td>
-                <td>{user.transactionId}</td>
-                <td>{user.typeOfTransaction === 'investment' ? user.amount : ""}</td>
-                <td>{user.typeOfTransaction === 'profit' ? user.amount : ""}</td>
-                <td>{user.typeOfTransaction === 'closeinvestment' ? user.amount : ""}</td>
-                {/* <td>{user.typeOfTransaction === 'closeinvestment' ? user.amount : ""}</td> */}
-                {/* <td>{user.typeOfTransaction && user.typeOfTransaction.toLowerCase() === 'closeinvestment' ? user.amount : ""}</td> */}
-
-    
-                {/* <td>
-                  {user.typeOfTransaction && user.typeOfTransaction.toLowerCase().includes('closeinvestment')
-                    ? user.amount
-                    : ""}
-                </td> */}
-
-                <td>{user.remarks}</td>
-                <td>{formatMongoDate(user.createdAt)}</td>
+            {filteredUsers.length > 0 ? (
+              filteredUsers.map((user, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td><Link to={`/app/investment/account/${user.accountNo}`}>{user.accountNo}</Link></td>
+                  <td>{user.transactionId}</td>
+                  <td>{user.typeOfTransaction === 'investment' ? user.amount : ""}</td>
+                  <td>{user.typeOfTransaction === 'profit' ? user.amount : ""}</td>
+                  <td>{user.typeOfTransaction === 'closeinvestment' ? user.amount : ""}</td>
+                  <td>{user.remarks}</td>
+                  <td>{formatMongoDate(user.createdAt)}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="8" className="text-center">No transactions found</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
 
-      {/* Print Button */}
       <div className="print-btn-container">
-        <button type="button" className="btn print-btn" onClick={handlePrint}>Print</button>
+        <button type="button" className="print-btn" onClick={handlePrint}>Print</button>
       </div>
     </div>
   );
 }
 
 export default MonthlyInvestmentAudit;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import { Link } from 'react-router-dom';
+// import api from '../../../api';
+// import { formatMongoDate } from '../../../util/FormatDate';
+// import './MonthlyInvestmentAudit.css'; // Add CSS file for styling
+
+// function MonthlyInvestmentAudit() {
+//   const [users, setUsers] = useState([]);
+//   const [searchQuery, setSearchQuery] = useState('');
+
+//   // Calculate default date range (last 31 days)
+//   const today = new Date().toISOString().split('T')[0];
+//   const last31Days = new Date(new Date().setDate(new Date().getDate() - 31)).toISOString().split('T')[0];
+
+//   const [startDate, setStartDate] = useState(last31Days);
+//   const [endDate, setEndDate] = useState(today);
+//   const [filteredUsers, setFilteredUsers] = useState([]);
+
+//   useEffect(() => {
+//     const fetchUsers = async () => {
+//       try {
+//         const response = await api.get('/api/transaction/all/investment');
+//         console.log('API Response:', response.data.data);
+//         setUsers(response.data.data);
+//         setFilteredUsers(response.data.data);
+//       } catch (err) {
+//         console.error('Error fetching users:', err);
+//       }
+//     };
+//     fetchUsers();
+//   }, []);
+
+//   useEffect(() => {
+//     let filtered = users;
+
+//     // Filter by search query
+//     if (searchQuery) {
+//       filtered = filtered.filter((user) =>
+//         (user.accountNo && user.accountNo.toString().toLowerCase().includes(searchQuery.toLowerCase())) ||
+//         (user.transactionId && user.transactionId.toString().toLowerCase().includes(searchQuery.toLowerCase())) ||
+//         (user.remarks && user.remarks.toLowerCase().includes(searchQuery.toLowerCase()))
+//       );
+//     }
+
+//     setFilteredUsers(filtered);
+//   }, [searchQuery, startDate, endDate, users]);
+
+//   const handlePrint = () => {
+//     const printWindow = window.open('', '_blank');
+//     const printContents = document.getElementById('accounts-table').outerHTML;
+//     printWindow.document.write(`
+//       <html>
+//       <head>
+//         <title>List of Monthly Investment Transactions</title>
+//         <style>
+//           body { font-family: Arial, sans-serif; }
+//           table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+//           th, td { border: 1px solid black; padding: 6px; text-align: center; }
+//           th { background-color: #f4f4f4; }
+//           a { text-decoration: none; color: black; }
+//         </style>
+//       </head>
+//       <body>
+//         <h2>List of Monthly Investment Transactions</h2>
+//         ${printContents}
+//       </body>
+//       </html>
+//     `);
+//     printWindow.document.close();
+//     printWindow.print();
+//   };
+
+//   return (
+//     <div className="audit-container">
+//       <h1 className="title">Investment Transactions</h1>
+
+//       {/* Search & Filters */}
+//       <div className="filter-container">
+//         <input
+//           type="text"
+//           placeholder="Search by Account No / Transaction ID / Remarks"
+//           value={searchQuery}
+//           onChange={(e) => setSearchQuery(e.target.value)}
+//           className="form-control search-input"
+//         />
+//         <div className="date-filters">
+//           <input
+//             type="date"
+//             value={startDate}
+//             onChange={(e) => setStartDate(e.target.value)}
+//             className="form-control"
+//           />
+//           <input
+//             type="date"
+//             value={endDate}
+//             onChange={(e) => setEndDate(e.target.value)}
+//             className="form-control"
+//           />
+//         </div>
+//       </div>
+
+//       {/* Table */}
+//       <div className="table-responsive">
+//         <table className="table table-bordered table-hover" id="accounts-table">
+//           <thead className="thead-dark">
+//             <tr>
+//               <th>#</th>
+//               <th>Account No</th>
+//               <th>Transaction ID</th>
+//               <th>Investment Taken</th>
+//               <th>Profit</th>
+//               <th>Investment Return</th>
+//               <th>Remarks</th>
+//               <th>Date</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {filteredUsers.map((user, index) => (
+//               <tr key={index}>
+//                 <td>{index + 1}</td>
+//                 <td><Link to={`/app/investment/account/${user.accountNo}`}>{user.accountNo}</Link></td>
+//                 <td>{user.transactionId}</td>
+//                 <td>{user.typeOfTransaction === 'investment' ? user.amount : ""}</td>
+//                 <td>{user.typeOfTransaction === 'profit' ? user.amount : ""}</td>
+//                 <td>{user.typeOfTransaction === 'closeinvestment' ? user.amount : ""}</td>
+//                 {/* <td>{user.typeOfTransaction === 'closeinvestment' ? user.amount : ""}</td> */}
+//                 {/* <td>{user.typeOfTransaction && user.typeOfTransaction.toLowerCase() === 'closeinvestment' ? user.amount : ""}</td> */}
+
+    
+//                 {/* <td>
+//                   {user.typeOfTransaction && user.typeOfTransaction.toLowerCase().includes('closeinvestment')
+//                     ? user.amount
+//                     : ""}
+//                 </td> */}
+
+//                 <td>{user.remarks}</td>
+//                 <td>{formatMongoDate(user.createdAt)}</td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </table>
+//       </div>
+
+//       {/* Print Button */}
+//       <div className="print-btn-container">
+//         <button type="button" className="btn print-btn" onClick={handlePrint}>Print</button>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default MonthlyInvestmentAudit;

@@ -138,6 +138,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../../api';
 import './Profile.css';
+import { formatMongoDate } from '../../../util/FormatDate';
 
 function InvestmentAccProfile() {
   const { accountNo } = useParams();
@@ -235,7 +236,8 @@ function InvestmentAccProfile() {
         <tbody>
           {transactions.length > 0 ? transactions.map((transaction) => (
             <tr key={transaction._id}>
-              <td>{transaction.date}</td>
+              {/* <td>{transaction.date}</td> */}
+              <td>{formatMongoDate(transaction.createdAt)}</td>
               <td>{transaction.transactionId}</td>             
               <td>{transaction.typeOfTransaction === 'investment' ? transaction.amount : ""}</td>
               <td>{transaction.typeOfTransaction === 'profit' ? transaction.amount : ""}</td>

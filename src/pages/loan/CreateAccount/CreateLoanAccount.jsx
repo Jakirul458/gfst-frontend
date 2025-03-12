@@ -262,6 +262,12 @@ const CreateLoanAccount = () => {
       setError('Aadhar number must be exactly 12 digits.');
       return;
     }
+    
+    const loanAmountNum = parseFloat(loanAmount);
+    if (loanAmountNum <= 0) {
+      setError("Loan amount must be greater than zero.");
+      return;
+    }
   
     api.post('/api/loan/create-account', { date, AadharNo, loanAmount, name, Address, email, mobileNo })
       .then(result => {

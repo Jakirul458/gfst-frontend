@@ -363,20 +363,21 @@ const CreateSavingAccount = () => {
           <h2>Golden Future Supportive Trust</h2>
           <h3>Saving Account Created</h3>
           
-           <p><span class="bold">Consumer Account No:</span> </p>
+          <p><span class="bold">Consumer Account No:</span> </p>
           <p><span class="bold">Consumer Name:</span> ${consumerName}</p>
           <p><span class="bold">Aadhar No:</span> ${AadharNo}</p>
+          <p><span class="bold">Email:</span> ${email}</p>
           <p><span class="bold">Mobile No:</span> ${mobileNo}</p>
           <p><span class="bold">Address:</span> ${Address}</p>
           <p><span class="bold">Date of Birth:</span> ${dob}</p>
-          <p><span class="bold">Date:</span> ${date}</p>
-          <p><span class="bold">Email:</span> ${email}</p>
+          <p><span class="bold">Account created:</span> ${date}</p>
+          
 
           <div class="footer">
             <p><span class="bold">Contact Details</span></p>
             <p>Email: gfcsmsd@gmail.com</p>
             <p>Phone: +91 7029121433</p>
-            <p>Address: Vill-Mukundabag, P.O-Kiriteswari, P.S-Jiaganj, Pin-742104, Dist-Murshidabad</p>
+            <p>Address: Vill-Mukundabag, P.O-Kiriteswari, P.S-Jiaganj, Dist-Murshidabad<, Pin-742104 /p>
           </div>
           <br/>
           <div class="signature">

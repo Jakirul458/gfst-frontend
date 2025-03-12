@@ -1,97 +1,80 @@
-  
-  h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 30px;
-  }
-  
-  .search-bar, .form-control {
-    width: 100%;
-    margin: 0 auto;
-    display: block;
-    text-align: center;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-  }
-  
-  .form-control.mb-2, .form-control {
-    margin-bottom: 10px;
-  }
-  
-  input::placeholder {
-    color: #888;
-  }
-  
-  .date-filter-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px; /* Space below date filters */
-  }
-  
-  .date-input {
-    width: 150px; /* Adjust as needed */
-    padding: 10px;
-    font-size: 14px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  #accounts-table {
-    margin-top: 30px;
-  }
-  
-  .table {
-    width: 100%; /* Full width */
-    border-collapse: collapse;
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  thead {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  th, td {
-    text-align: center;
-    padding: 12px;
-    border: 1px solid #ddd;
-  }
-  
-  tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  tbody tr:hover {
-    background-color: #e9ecef;
-    cursor: pointer;
-  }
-  
-  a {
-    text-decoration: none;
-    color: blue;
-  }
-  
-  a:hover {
-    text-decoration: none; 
-  }
-  
-  @media (max-width: 768px) {
-    .search-bar, .form-control {
-        width: 80%;
-    }
-  
-    .table {
-        width: 100%;
-    }
-  
-    .date-input {
-        width: 100%; /* Make date inputs full width on small screens */
-    }
-  }
-  
+.audit-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 80px 20px 20px; /* Added top padding */
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 250px;
+}
+
+.date-filters {
+  display: flex;
+  gap: 10px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+}
+
+td a {
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.print-btn-container {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.print-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.print-btn:hover {
+  background-color: #218838;
+}

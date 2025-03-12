@@ -14,7 +14,6 @@
   margin-bottom: 20px;
 }
 
-
 .filter-container {
   display: flex;
   flex-wrap: wrap;
@@ -75,6 +74,37 @@ td a {
   border-radius: 5px;
 }
 
-.print-btn:hover {
-  background-color: #218838;
+/* Add responsive design for smaller screens */
+@media (max-width: 768px) {
+  .filter-container {
+    flex-direction: column;
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  .date-filters {
+    width: 100%;
+  }
+  
+  .print-btn-container {
+    text-align: center;
+  }
+}
+
+/* Print styles */
+@media print {
+  .filter-container, .print-btn-container {
+    display: none;
+  }
+  
+  .audit-container {
+    box-shadow: none;
+    padding: 0;
+  }
+  
+  table {
+    font-size: 12px;
+  }
 }

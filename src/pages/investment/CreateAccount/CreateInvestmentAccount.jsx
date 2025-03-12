@@ -45,6 +45,12 @@ const CreateInvestmentAccount = () => {
      setError('Please enter a valid email address.');
      return;
    }
+   
+   const investmentAmountNum = parseFloat(investmentAmount);
+   if (investmentAmountNum <= 0) {
+     setError("Loan amount must be greater than zero.");
+     return;
+   }
 
     api.post('/api/investment/create-account', { date, name, email, mobileNo, AadharNo, Address, investmentAmount })
       .then(result => {

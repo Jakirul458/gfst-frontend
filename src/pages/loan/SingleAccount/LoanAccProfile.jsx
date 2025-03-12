@@ -106,7 +106,7 @@ function LoanAccProfile() {
             <tr key={transaction._id}>
               <td>{formatMongoDate(transaction.createdAt)}</td>
               <td>{transaction.transactionId}</td>
-             
+
               <td>
                 {transaction.typeOfTransaction && transaction.typeOfTransaction.toLowerCase() === 'emi'
                   ? transaction.amount

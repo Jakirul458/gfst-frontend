@@ -294,7 +294,12 @@ const SignIn = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await api.post("/api/admin/login", { username, password });
+         const res = await api.post("/api/admin/login", { username, password });
+
+      // const res = await axios.post("https://gfst-backend.onrender.com/api/admin/login", { username, password});
+
+      // const res = await axios.post("http://localhost:3001/api/admin/login", {username, password});  
+
       if (res.data.success) {
         localStorage.setItem("userType", "admin");
         localStorage.setItem("username", username);
@@ -312,17 +317,16 @@ const SignIn = () => {
     setIsLoading(false);
   };
   
-  
+ 
 
   const verifyBranch = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await api.post("/api/branch/login", {
-        username,
-        password
-      });
-    //  console.log("Branch Login Response:", res.data);
+      const res = await api.post("/api/branch/login", {username,password});
+      // const res = await axios.post("http://localhost:3001/api/branch/login", {username, password});  
+      
+     console.log("Branch Login Response:", res.data);
      console.log(res);
       if (res.data.success) {
         localStorage.setItem("userType", "branch");
@@ -352,6 +356,8 @@ const SignIn = () => {
       // Check in Savings Account
       try {
         response = await api.get(`/api/savings/${accountNo}`);
+        // response = await axios.get(`http://localhost:3001/api/savings/${accountNo}`); 
+
         if (response.data && response.data.data) {
           localStorage.setItem("userType", "consumer");
           localStorage.setItem("accountNo", accountNo);

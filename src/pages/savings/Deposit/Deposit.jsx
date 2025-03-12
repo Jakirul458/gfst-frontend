@@ -247,7 +247,8 @@ const Deposit = () => {
         <div class="receipt-container">
           <img src="${logo}" alt="Trust Logo" class="logo" />
           <h2>Golden Future Supportive Trust</h2>
-          <h3>Deposit Slip</h3>          
+          <h3>Deposit Slip</h3>  
+          <p><span class="bold">Consumer Account No:</span> </p>          
           <p><span class="bold">Consumer Name:</span> ${consumerName}</p>
           <p><span class="bold">Deposit Amount:</span> ₹${depositAmount}</p>
           <p><span class="bold">Available Balance:</span> ₹${presentBalance}</p>
