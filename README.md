@@ -8,13 +8,13 @@ This project enables seamless account management, transactions, loan processing,
 ## 📸 Some snapshorts of my project
 
 ### 🔹 Dashboard Overview  
-![Dashboard Overview](../gfst-frontend/src/assets/images/dashboard.png)  
+![Dashboard Overview](src/assets/images/dashboard.png)  
 
 ### 🔹 Profile with Transactions  
-![Profile with Transactions ](../gfst-frontend/src/assets/images/profileWithTransactions.png)  
+![Profile with Transactions ](src/assets/images/profileWithTransactions.png)  
 
 ### 🔹 Login Page 
-![Login Page](../gfst-frontend/src/assets/images/login.png)  
+![Login Page](src/assets/images/login.png)  
 
 ---
 
