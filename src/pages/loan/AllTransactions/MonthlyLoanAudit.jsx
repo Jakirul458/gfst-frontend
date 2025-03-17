@@ -253,8 +253,8 @@ function MonthlyLoanAudit() {
               <th>Serial No</th>
               <th>Account No</th>
               <th>Transaction ID</th>
-              <th>Deposit</th>
-              <th>Withdraw</th>
+              <th>EMI Collection</th>
+              <th>Loan Taken</th>
               <th>Remarks</th>
               <th>Date</th>
             </tr>
@@ -266,8 +266,8 @@ function MonthlyLoanAudit() {
                   <td>{index + 1}</td>
                   <td><Link to={`/app/loan/account/${user.accountNo}`}>{user.accountNo}</Link></td>
                   <td>{user.transactionId}</td>
-                  <td>{user.typeOfTransaction === 'emi' ? user.amount : 0}</td>
-                  <td>{user.typeOfTransaction === 'loan' ? user.amount : 0}</td>
+                  <td>{user.typeOfTransaction === 'emi' ? user.amount : ""}</td>
+                  <td>{user.typeOfTransaction === 'loan' ? user.amount : ""}</td>
                   <td>{user.remarks}</td>
                   <td>{formatMongoDate(user.createdAt)}</td>
                 </tr>

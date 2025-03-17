@@ -194,7 +194,8 @@ function MonthlyInvestmentAudit() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await api.get('/api/transaction/all/investment');
+        // const response = await api.get('/api/transaction/all/investment');
+        
         setUsers(response.data.data);
         setFilteredUsers(response.data.data); // Ensure initial display
       } catch (err) {
@@ -261,7 +262,7 @@ function MonthlyInvestmentAudit() {
               <th>Transaction ID</th>
               <th>Investment Taken</th>
               <th>Profit</th>
-              <th>Investment Return</th>
+              {/* <th>Investment Return</th> */}
               <th>Remarks</th>
               <th>Date</th>
             </tr>
@@ -275,7 +276,7 @@ function MonthlyInvestmentAudit() {
                   <td>{user.transactionId}</td>
                   <td>{user.typeOfTransaction === 'investment' ? user.amount : ""}</td>
                   <td>{user.typeOfTransaction === 'profit' ? user.amount : ""}</td>
-                  <td>{user.typeOfTransaction === 'closeinvestment' ? user.amount : ""}</td>
+                  {/* <td>{user.typeOfTransaction === 'closeinvestment' ? user.amount : ""}</td> */}
                   <td>{user.remarks}</td>
                   <td>{formatMongoDate(user.createdAt)}</td>
                 </tr>

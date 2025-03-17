@@ -264,14 +264,12 @@
 
 
 
-
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import api from "../../../api";
 import Logo from "../../../assets/icons/logo.svg";
 import "./SignIn.css";
 import { toast } from "react-toastify";
-import axios from "axios";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -294,11 +292,7 @@ const SignIn = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-         const res = await api.post("/api/admin/login", { username, password });
-
-      // const res = await axios.post("https://gfst-backend.onrender.com/api/admin/login", { username, password});
-
-      // const res = await axios.post("http://localhost:3001/api/admin/login", {username, password});  
+      const res = await api.post("/api/admin/login", { username, password });
 
       if (res.data.success) {
         localStorage.setItem("userType", "admin");
@@ -316,18 +310,13 @@ const SignIn = () => {
     }
     setIsLoading(false);
   };
-  
- 
 
   const verifyBranch = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await api.post("/api/branch/login", {username,password});
-      // const res = await axios.post("http://localhost:3001/api/branch/login", {username, password});  
-      
-     console.log("Branch Login Response:", res.data);
-     console.log(res);
+      const res = await api.post("/api/branch/login", { username, password });
+
       if (res.data.success) {
         localStorage.setItem("userType", "branch");
         localStorage.setItem("username", username);
@@ -344,67 +333,34 @@ const SignIn = () => {
     }
     setIsLoading(false);
   };
-  
 
-
-  const verifyConsumer = async () => {
+  const verifyConsumer = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
     setError("");
-    try {
-      let response;
-  
-      // Check in Savings Account
-      try {
-        response = await api.get(`/api/savings/${accountNo}`);
-        // response = await axios.get(`http://localhost:3001/api/savings/${accountNo}`); 
 
-        if (response.data && response.data.data) {
-          localStorage.setItem("userType", "consumer");
-          localStorage.setItem("accountNo", accountNo);
-          navigate(`/app/savings/account/${accountNo}`);
-          return;
-        }
-      } catch (err) {
-        console.warn("Savings account not found or error:", err);
+    try {
+      const res = await api.post("/api/savings/consumer-login", { accountNo, dob: password });
+
+
+      if (res.data.success) {
+        localStorage.setItem("userType", "consumer");
+        localStorage.setItem("accountNo", accountNo);
+        toast.success("Login Successful!", { position: "top-center", autoClose: 2000 });
+
+        navigate(`/app/savings/account/${accountNo}`);
+      } else {
+        toast.error("Invalid Account Number or Date of Birth", { position: "top-center", autoClose: 3000 });
+        setError("Invalid Account Number or Date of Birth");
       }
-  
-      // Check in Loan Account
-      try {
-        response = await api.get(`/api/loan/${accountNo}`);
-        if (response.data && response.data.data) {
-          localStorage.setItem("userType", "loan");
-          localStorage.setItem("accountNo", accountNo);
-          navigate(`/app/loan/account/${accountNo}`);
-          return;
-        }
-      } catch (err) {
-        console.warn("Loan account not found or error:", err);
-      }
-  
-      // Check in Investment Account
-      try {
-        response = await api.get(`/api/investment/${accountNo}`);
-        if (response.data && response.data.data) {
-          localStorage.setItem("userType", "investment");
-          localStorage.setItem("accountNo", accountNo);
-          navigate(`/app/investment/account/${accountNo}`);
-          return;
-        }
-      } catch (err) {
-        console.warn("Investment account not found or error:", err);
-      }
-  
-      // If no account found in any category
-      setError("Account not found.");
-  
     } catch (error) {
-      console.error("API Error:", error);
-      setError("Error fetching account details. Please check the account number.");
+      console.error("Login Error:", error);
+      toast.error("Server error. Please try again later.", { position: "top-center", autoClose: 3000 });
+      setError("Server error. Please try again later.");
     }
+
     setIsLoading(false);
   };
-  
-
 
   return (
     <div className="login-container">
@@ -420,7 +376,6 @@ const SignIn = () => {
         <button className={loginType === "admin" ? "active" : ""} onClick={() => handleToggle("admin")}>
           Admin
         </button>
-
       </div>
 
       <div className={`card ${loginType}`}>
@@ -430,7 +385,7 @@ const SignIn = () => {
         <br />
 
         {loginType === "consumer" ? (
-          <div className="search-bar">
+          <form className="form" onSubmit={verifyConsumer}>
             <input
               type="text"
               placeholder="Enter Account Number"
@@ -438,11 +393,18 @@ const SignIn = () => {
               onChange={(e) => setAccountNo(e.target.value)}
               required
             />
-            <button onClick={verifyConsumer} disabled={isLoading}>
-              {isLoading ? "Searching..." : "Submit"}
-            </button>
+            <input
+              type="password"
+              placeholder="Enter Date of Birth (DDMMYYYY)"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
             {error && <p className="error-text">{error}</p>}
-          </div>
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? "Verifying..." : "Sign In"}
+            </button>
+          </form>
         ) : (
           <form className="form" onSubmit={loginType === "branch" ? verifyBranch : verifyAdmin}>
             <input
@@ -469,6 +431,7 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
 
 
 

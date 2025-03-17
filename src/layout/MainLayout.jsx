@@ -60,6 +60,7 @@ const Layout = ({ children }) => {
             {/* <AdminPanel /> */}
             <div>
               <SideBar />
+           
             </div>
           </div>
 
@@ -67,6 +68,7 @@ const Layout = ({ children }) => {
 
         <div className='main__content'>
           <Outlet />
+          {/* <Footer /> */}
         </div>
 
       </div>

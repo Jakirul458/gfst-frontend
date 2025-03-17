@@ -87,6 +87,7 @@ function LoanAccProfile() {
         <p>Mobile: <strong>{accountDetails.mobileNo}</strong></p>
         <p>Aadhar: <strong>{accountDetails.AadharNo}</strong></p>
         <p>Address: <strong>{accountDetails.Address}</strong></p>
+        {/* <p>Loan Taken: <strong>{accountDetails.loan}</strong></p> */}
         <p>Remaining Loan Amount: ₹<strong>{accountDetails.loanAmount}</strong></p>
       </div>
       <br />

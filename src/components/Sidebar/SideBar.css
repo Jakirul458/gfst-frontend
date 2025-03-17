@@ -17,25 +17,17 @@
 
 /* Section styling */
 .section {
-  position: relative;
   padding: 0;
   margin-bottom: 5px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
 }
-
 /* Section header styling */
 .section h2 {
   padding: 15px 20px;
-  margin: 0;
   font-size: 16px;
-  font-weight: 500;
   color: #e2e8f0;
   display: flex;
   align-items: center;
   cursor: pointer;
-  border-left: 4px solid transparent;
-  transition: all 0.2s ease;
 }
 
 .section h2 svg {
@@ -64,14 +56,11 @@
 
 /* Dropdown content styling */
 .dropdown-content {
-  background-color: rgba(15, 23, 42, 0.9);
-  border-radius: 0 0 4px 4px;
-  overflow: hidden;
   max-height: 0;
   opacity: 0;
-  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
-
 .section.expanded .dropdown-content {
   max-height: 400px;
   opacity: 1;
@@ -312,6 +301,32 @@
     }
   }
 }
+
+
+/* Contact section at the bottom */
+.contact-section {
+  padding: 10px;
+  color: white;
+  background: #1a2942;
+  text-align: center;
+  margin-top: auto; /* Pushes contact section to the bottom */
+}
+
+.contact-section p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.contact-section .map-link, .contact-section .developer-link {
+  color: #4da8da;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact-section .map-link:hover, .contact-section .developer-link:hover {
+  text-decoration: underline;
+}
+
 
 /* Touch-friendly adjustments */
 @media (hover: none) {

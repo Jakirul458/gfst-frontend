@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +6,7 @@ import {
   faMoneyBillWave, faChartLine, faHandHoldingUsd, faChartPie, faUniversity,
   faUsers, faWindowClose, faBars
 } from "@fortawesome/free-solid-svg-icons";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import "./SideBar.css";
 
 const SideBar = () => {
@@ -16,7 +15,6 @@ const SideBar = () => {
 
   const handleMouseEnter = (section) => setOpenSection(section);
   const handleMouseLeave = () => setOpenSection(null);
-  
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
@@ -24,7 +22,7 @@ const SideBar = () => {
       <div className="menu-toggle" onClick={toggleMenu}>
         <FontAwesomeIcon icon={faBars} />
       </div>
-      
+
       <div className={`sidebar ${menuOpen ? 'active' : ''}`}>
         
         {/* Savings Account Section */}
@@ -106,6 +104,23 @@ const SideBar = () => {
               <NavLink to="/app/society/expenditure-list"><FontAwesomeIcon icon={faListAlt} /> Expenditure List</NavLink>
             </div>
           )}
+        </div>
+
+       
+        <div className="contact-section">
+       
+          <p>© 2025 Golden Future Supportive Trust. All Rights Reserved.</p>
+          <p>
+            Developed by:   
+            <a
+              href="https://jakirulsk.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="developer-link"
+            >
+              Jakirul Sk
+            </a>
+          </p>
         </div>
 
       </div>

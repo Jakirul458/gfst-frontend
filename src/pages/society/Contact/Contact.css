@@ -1,69 +1,131 @@
+/* General Styling */
 .contact-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 80%;
-  margin: 60px auto 20px auto; /* Increased top margin to push it down */
+  max-width: 90%;
+  margin: 80px auto 40px auto; /* More spacing for better visibility */
   padding: 40px;
   font-family: 'Arial', sans-serif;
   color: #333;
   text-align: center;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Logo Styling */
 .logo {
-  width: 150px;
+  width: 160px;
   height: auto;
-  margin-bottom: 15px; /* Slightly increased margin to separate it from the title */
+  margin-bottom: 20px;
 }
 
+/* Title and Description */
 .contact-title {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: #009688;
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  color: #00796b;
   font-weight: bold;
 }
 
 .contact-description {
   font-size: 1.2rem;
-  line-height: 1.5;
-  color: #555;
+  line-height: 1.6;
+  color: #444;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   max-width: 800px;
 }
 
+/* Contact Information */
 .contact-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  width: 100%;
+  max-width: 600px;
 }
 
+/* Contact Links */
 .contact-link {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   text-decoration: none;
   font-size: 1.1rem;
   color: #222;
+  background: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
 }
 
 .contact-link:hover {
-  color: #009688;
+  color: #00796b;
+  background: #e0f2f1;
+  transform: scale(1.05);
 }
 
 .contact-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.contact-phone {
-  font-size: 1.1rem;
-  color: #444;
+  width: 28px;
+  height: 28px;
 }
 
 .gmail-text {
-  color: blue;
+  color: #0073e6;
   font-weight: bold;
+}
+
+/* Contact Phone Numbers */
+.contact-phone {
+  font-size: 1.1rem;
+  color: #444;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.contact-phone:hover {
+  background: #e3f2fd;
+  transform: scale(1.05);
+}
+
+/* Footer Section */
+.contact-section {
+  width: 100%;
+  background: #1a2942;
+  color: white;
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: 40px;
+  border-radius: 10px;
+}
+
+.contact-section h4 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.contact-section p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.contact-section .map-link,
+.contact-section .developer-link {
+  color: #4da8da;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact-section .map-link:hover,
+.contact-section .developer-link:hover {
+  text-decoration: underline;
 }
