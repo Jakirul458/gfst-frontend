@@ -42,6 +42,7 @@ const SideBar = () => {
               <NavLink to="/app/savings/all"><FontAwesomeIcon icon={faListAlt} /> All Accounts</NavLink>
               <NavLink to="/app/savings/search-account"><FontAwesomeIcon icon={faSearch} /> Search Account</NavLink>
               <NavLink to="/app/savings/audit"><FontAwesomeIcon icon={faClipboardList} /> Savings Transaction</NavLink>
+              <NavLink to="/app/savings/money-transfer"><FontAwesomeIcon icon={faClipboardList} /> Money Transfer</NavLink>
             </div>
           )}
         </div>

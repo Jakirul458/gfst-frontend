@@ -15,6 +15,7 @@ import UpdateSavingsAcc from "../pages/savings/UpdateSavingsAccount/UpdateSaving
 import MonthlySavingAudit from "../pages/savings/AllTransactions/MonthlySavingAudit";
 import AccountProfile from '../pages/savings/SingleAccount/AccountProfile'
 import SearchAccount from "../pages/savings/SearchAccount/SearchAccount";
+import MoneyTransfer from "../pages/savings/MoneyTransfer/MoneyTransfer";
 //loan
 import CreateLoanAccount from "../pages/loan/CreateAccount/CreateLoanAccount";
 import LoanInstallment from "../pages/loan/Installment/LoanInstallment";
@@ -42,6 +43,7 @@ import Expenditure from "../pages/society/Expenditure/Expenditure";
 import DonorList from "../pages/society/Donation/DonorList";
 import ExpenditureList from "../pages/society/Expenditure/ExpenditureList";
 import CloseInvestmentAcc from "../pages/investment/CloseInvestmentAcc/CloseInvestmentAcc";
+
 
 
 export const router = createBrowserRouter([
@@ -148,6 +150,7 @@ export const router = createBrowserRouter([
           { path: "create", element: <CreateSavingAccount /> },
           { path: "deposit", element: <Deposit /> },
           { path: "withdraw", element: <Withdraw /> },
+          { path: "money-transfer", element: <MoneyTransfer /> },
           { path: "account/update/:accountNo", element: <UpdateSavingsAcc /> },
           { path: "account/delete/:accountNo", element: <DeleteSavingsAcc /> },
         ],
