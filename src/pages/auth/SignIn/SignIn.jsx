@@ -341,7 +341,7 @@ const SignIn = () => {
 
     try {
       const res = await api.post("/api/savings/consumer-login", { accountNo, dob: password });
-
+      
 
       if (res.data.success) {
         localStorage.setItem("userType", "consumer");
