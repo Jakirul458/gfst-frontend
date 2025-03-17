@@ -49,20 +49,23 @@ const MoneyTransfer = () => {
       setError("Error verifying receiver account.");
     }
   };
-
   const handleTransfer = async (e) => {
     e.preventDefault();
+  
     if (parseFloat(transferAmount) > parseFloat(senderBalance)) {
       setError("Insufficient balance.");
       return;
     }
+  
     try {
       const response = await api.post("/api/transaction/money-transfer", {
         fromAccount: senderAccount,
         toAccount: receiverAccount,
         amount: transferAmount,
       });
-
+  
+      console.log("Transfer Response:", response); // Debugging
+  
       if (response.data.success) {
         alert("Money transferred successfully!");
         setSenderAccount("");
@@ -75,12 +78,14 @@ const MoneyTransfer = () => {
         setReceiverName("");
         setError(null);
       } else {
-        setError(response.data.message);
+        setError(response.data.message || "Transaction failed.");
       }
     } catch (err) {
-      setError("Error processing transfer.");
+      console.error("Transfer Error:", err.response?.data || err.message); // Debugging
+      setError(err.response?.data?.message || "Error processing transfer.");
     }
   };
+  
 
   return (
     <div className="form-wrapper">
