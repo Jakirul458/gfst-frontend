@@ -1,4 +1,4 @@
-/* General Styling */
+
 .contact-container {
   display: flex;
   flex-direction: column;
@@ -15,14 +15,14 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Logo Styling */
+
 .logo {
   width: 160px;
   height: auto;
   margin-bottom: 20px;
 }
 
-/* Title and Description */
+
 .contact-title {
   font-size: 2.2rem;
   margin-bottom: 15px;
@@ -39,7 +39,7 @@
   max-width: 800px;
 }
 
-/* Contact Information */
+
 .contact-info {
   display: flex;
   flex-direction: column;
@@ -49,7 +49,7 @@
   max-width: 600px;
 }
 
-/* Contact Links */
+
 .contact-link {
   display: flex;
   align-items: center;
@@ -80,7 +80,6 @@
   font-weight: bold;
 }
 
-/* Contact Phone Numbers */
 .contact-phone {
   font-size: 1.1rem;
   color: #444;
@@ -96,7 +95,7 @@
   transform: scale(1.05);
 }
 
-/* Footer Section */
+
 .contact-section {
   width: 100%;
   background: #1a2942;
@@ -130,7 +129,7 @@
   text-decoration: underline;
 }
 
-/* Contact Form */
+
 .contact-form {
   background: white;
   padding: 30px;
@@ -185,5 +184,5 @@
 
 .call-icon {
   margin-right: 8px;
-  color: #25d366; /* WhatsApp green color */
+  color: #25d366; 
 }
