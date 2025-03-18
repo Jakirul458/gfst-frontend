@@ -24,14 +24,14 @@ const SideBar = () => {
       </div>
 
       <div className={`sidebar ${menuOpen ? 'active' : ''}`}>
-        
+
         {/* Savings Account Section */}
         <div className={`section ${openSection === "savings" ? "expanded" : ""}`}
-          onMouseEnter={() => handleMouseEnter("savings")} 
+          onMouseEnter={() => handleMouseEnter("savings")}
           onMouseLeave={handleMouseLeave}
         >
           <h2>
-            <FontAwesomeIcon icon={faUniversity} /> 
+            <FontAwesomeIcon icon={faUniversity} />
             <span>Savings</span>
           </h2>
           {openSection === "savings" && (
@@ -49,11 +49,11 @@ const SideBar = () => {
 
         {/* Loan Account Section */}
         <div className={`section ${openSection === "loan" ? "expanded" : ""}`}
-          onMouseEnter={() => handleMouseEnter("loan")} 
+          onMouseEnter={() => handleMouseEnter("loan")}
           onMouseLeave={handleMouseLeave}
         >
           <h2>
-            <FontAwesomeIcon icon={faHandHoldingUsd} /> 
+            <FontAwesomeIcon icon={faHandHoldingUsd} />
             <span>Loan</span>
           </h2>
           {openSection === "loan" && (
@@ -69,11 +69,11 @@ const SideBar = () => {
 
         {/* Investment Section */}
         <div className={`section ${openSection === "investment" ? "expanded" : ""}`}
-          onMouseEnter={() => handleMouseEnter("investment")} 
+          onMouseEnter={() => handleMouseEnter("investment")}
           onMouseLeave={handleMouseLeave}
         >
           <h2>
-            <FontAwesomeIcon icon={faChartPie} /> 
+            <FontAwesomeIcon icon={faChartPie} />
             <span>Investment</span>
           </h2>
           {openSection === "investment" && (
@@ -90,11 +90,11 @@ const SideBar = () => {
 
         {/* Society Section */}
         <div className={`section ${openSection === "society" ? "expanded" : ""}`}
-          onMouseEnter={() => handleMouseEnter("society")} 
+          onMouseEnter={() => handleMouseEnter("society")}
           onMouseLeave={handleMouseLeave}
         >
           <h2>
-            <FontAwesomeIcon icon={faUsers} /> 
+            <FontAwesomeIcon icon={faUsers} />
             <span>Society</span>
           </h2>
           {openSection === "society" && (
@@ -107,12 +107,12 @@ const SideBar = () => {
           )}
         </div>
 
-       
+
         <div className="contact-section">
-       
+
           <p>© 2025 Golden Future Supportive Trust. All Rights Reserved.</p>
           <p>
-            Developed by:   
+            Developed by:{"  "}
             <a
               href="https://jakirulsk.vercel.app/"
               target="_blank"
