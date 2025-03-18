@@ -79,7 +79,7 @@ function LoanAccProfile() {
 
   return (
     <div className="account-profile-container" id="account-profile">
-      <br />
+      <h1>Golden Future Supportive Trust</h1>     
       <div className="account-details">
         <p>Loan Account No: <strong>{accountDetails.accountNo}</strong></p>
         <p>Name: <strong>{accountDetails.name}</strong></p>
@@ -90,7 +90,6 @@ function LoanAccProfile() {
         {/* <p>Loan Taken: <strong>{accountDetails.loan}</strong></p> */}
         <p>Remaining Loan Amount: ₹<strong>{accountDetails.loanAmount}</strong></p>
       </div>
-      <br />
       <h3>Transaction History</h3>
       <table className="table table-bordered table-hover">
         <thead className="thead-dark">

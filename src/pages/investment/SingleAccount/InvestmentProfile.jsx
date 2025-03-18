@@ -208,7 +208,7 @@ function InvestmentAccProfile() {
 
   return (
     <div className="account-profile-container" id="account-profile">
-      <br />
+       <h1>Golden Future Supportive Trust</h1>
       <div className="account-details">
         <p>Investment Account No: <strong>{accountDetails.accountNo}</strong></p>
         <p>Name: <strong>{accountDetails.name}</strong></p>
@@ -217,11 +217,9 @@ function InvestmentAccProfile() {
         <p>Aadhar: <strong>{accountDetails.AadharNo}</strong></p>
         <p>Address: <strong>{accountDetails.Address}</strong></p>
         <p>Investment Amount: ₹<strong>{accountDetails.investmentAmount}</strong></p>
-        <p>Total Profit Return: ₹<strong>{accountDetails.profit}</strong></p>
-        <br />
-        <h3>Transaction History</h3>
+        <p>Total Profit Return: ₹<strong>{accountDetails.profit}</strong></p>       
       </div>
-
+      <h3>Transaction History</h3>
       <table className="table table-bordered table-hover">
         <thead className="thead-dark">
           <tr>

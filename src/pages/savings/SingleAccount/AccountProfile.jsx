@@ -76,7 +76,7 @@ function AccountProfile() {
 
   return (
     <div className="account-profile-container" id="account-profile">
-      <br />
+      <h1>Golden Future Supportive Trust</h1>      
       <div className="account-details">
         <p>Savings Account No: <strong>{accountDetails.accountNo}</strong></p>
         <p>Name: <strong>{accountDetails.name}</strong></p>
@@ -85,11 +85,9 @@ function AccountProfile() {
         <p>Aadhar: <strong>{accountDetails.AadharNo}</strong></p>
         <p>Address: <strong>{accountDetails.Address}</strong></p>
         <p>Date of Birth: <strong>{formatMongoDate(accountDetails.dob)}</strong></p>
-        <p>Available Balance: ₹<strong>{accountDetails.balance}</strong></p>
-        <br />
-        <h3>Transaction History</h3>
+        <p>Available Balance: ₹<strong>{accountDetails.balance}</strong></p>     
       </div>
-
+      <h3>Transaction History</h3>
       <table className="table table-bordered table-hover">
         <thead className="thead-dark">
           <tr>
