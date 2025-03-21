@@ -107,7 +107,7 @@ const Deposit = () => {
           <br/>
           <div class="signature">
             <p><span class="bold">Authorized Signature:</span> ____________________</p>
-          </div>
+          </div>          
         </div>
         <script>window.print();</script>
       </body>

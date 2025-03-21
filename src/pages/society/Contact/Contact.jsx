@@ -64,10 +64,11 @@ function Contact() {
     />
     <span className="gmail-text">gfcsmsd@gmail.com</span>
   </a>
-
-  {/* Contact Numbers with Call Icon */}
   <span className="contact-phone">
-    <FaPhoneAlt className="call-icon" /> Ayub Sk +91 7029121433
+    <FaPhoneAlt className="call-icon" /> +91 9733542533 (Sarifur Rahaman )
+  </span>
+  <span className="contact-phone">
+    <FaPhoneAlt className="call-icon" /> +91 7029121433 (Ayub Sk )
   </span>
 </div>
 

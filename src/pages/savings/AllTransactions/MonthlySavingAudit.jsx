@@ -19,6 +19,7 @@ function MonthlySavingAudit() {
     const fetchUsers = async () => {
       try {
         const response = await api.get('/api/transaction/all/savings');
+        console.log("Fetched Transactions:", response.data.data);
         if (response.data && Array.isArray(response.data.data)) {
           setUsers(response.data.data);
           setFilteredUsers(response.data.data);
@@ -34,14 +35,18 @@ function MonthlySavingAudit() {
 
   useEffect(() => {
     let filtered = users;
+
+    // Search filter
     if (searchQuery) {
       filtered = filtered.filter((user) =>
         (user.accountNo && user.accountNo.toString().toLowerCase().includes(searchQuery.toLowerCase())) ||
         (user.transactionId && user.transactionId.toString().toLowerCase().includes(searchQuery.toLowerCase())) ||
-        (user.remarks && user.remarks.toLowerCase().includes(searchQuery.toLowerCase()))
+        (user.remarks && user.remarks.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (user.typeOfTransaction && user.typeOfTransaction.toLowerCase().includes(searchQuery.toLowerCase()))
       );
     }
 
+    // Date filter
     if (startDate && endDate) {
       filtered = filtered.filter((user) => {
         if (!user.createdAt) return false;
@@ -54,6 +59,7 @@ function MonthlySavingAudit() {
 
     setFilteredUsers(filtered);
   }, [searchQuery, startDate, endDate, users]);
+
 
   const handlePrint = () => {
     const printWindow = window.open('', '_blank');
@@ -83,7 +89,7 @@ function MonthlySavingAudit() {
   return (
     <div className="audit-container">
       <h1 className="title">List of Savings Transactions</h1>
-      
+
       <div className="filter-container">
         <input
           type="text"
@@ -97,7 +103,7 @@ function MonthlySavingAudit() {
           <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="form-control" />
         </div>
       </div>
-      
+
       <div className="table-responsive">
         <table className="table table-bordered table-hover" id="accounts-table">
           <thead className="thead-dark">
@@ -118,8 +124,12 @@ function MonthlySavingAudit() {
                   <td>{index + 1}</td>
                   <td><Link to={`/app/savings/account/${user.accountNo || ''}`}>{user.accountNo || 'N/A'}</Link></td>
                   <td>{user.transactionId || 'N/A'}</td>
-                  <td>{user.typeOfTransaction === 'deposit' ? user.amount || 0 : ''}</td>
-                  <td>{user.typeOfTransaction === 'withdraw' ? user.amount || 0 : ''}</td>
+                  {/* <td>{user.typeOfTransaction === 'deposit' ? user.amount || 0 : ''}</td>
+                  <td>{user.typeOfTransaction === 'withdraw' ? user.amount || 0 : ''}</td> */}
+                  {/* <td>{user.typeOfTransaction === 'deposit' || user.typeOfTransaction === 'transfer_credit' ? user.amount : ""}</td>
+                  <td> {user.typeOfTransaction === 'withdraw' || user.typeOfTransaction === 'transfer_debit' ? user.amount : ""}</td> */}
+                  <td>{['deposit', 'transfer_credit'].includes(user.typeOfTransaction) ? user.amount || 0 : ""}</td>
+                  <td>{['withdraw', 'transfer_debit'].includes(user.typeOfTransaction) ? user.amount || 0 : ""}</td>
                   <td>{user.remarks || 'N/A'}</td>
                   <td>{user.createdAt ? formatMongoDate(user.createdAt) : 'N/A'}</td>
                 </tr>

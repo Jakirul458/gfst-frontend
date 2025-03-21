@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'; 
+import React, { useState } from 'react';
 import api from '../../../api/index';
 import './Withdraw.css';
 import logo from '../../../assets/icons/logo.svg';
@@ -107,7 +107,7 @@ const Withdraw = () => {
       </body>
       </html>
     `;
-    
+
     const newWindow = window.open('', '_blank', 'width=600,height=400');
     newWindow.document.write(slipContent);
     newWindow.document.close();

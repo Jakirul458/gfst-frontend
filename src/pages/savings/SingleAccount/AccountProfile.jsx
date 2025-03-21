@@ -103,12 +103,8 @@ function AccountProfile() {
             <tr key={transaction._id}>
               <td>{formatMongoDate(transaction.createdAt)}</td>
               <td>{transaction.transactionId}</td>
-              <td>
-                {transaction.typeOfTransaction === 'deposit' || transaction.typeOfTransaction === 'transfer_credit' ? transaction.amount : ""}
-              </td>
-              <td>
-                {transaction.typeOfTransaction === 'withdraw' || transaction.typeOfTransaction === 'transfer_debit' ? transaction.amount : ""}
-              </td>
+              <td>{transaction.typeOfTransaction === 'deposit' || transaction.typeOfTransaction === 'transfer_credit' ? transaction.amount : ""}</td>
+              <td> {transaction.typeOfTransaction === 'withdraw' || transaction.typeOfTransaction === 'transfer_debit' ? transaction.amount : ""}</td>
               <td>{transaction.remarks}</td>
             </tr>
           )) : <tr><td colSpan="5">No transactions available</td></tr>}
