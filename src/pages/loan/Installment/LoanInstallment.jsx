@@ -11,6 +11,7 @@ const LoanInstallment = () => {
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
   const [loanAmount, setLoanAmount] = useState('');
+  const [emiAmount, setEMIAmount] = useState(''); // ✅ Fixed: Added missing state
   const [remarks, setRemarks] = useState('emi');
 
   const handleSubmit = async (e) => {
@@ -47,6 +48,7 @@ const LoanInstallment = () => {
         setError(null);
         setIsVerified(false);
         setAccountName('');
+        setEMIAmount('');
         setLoanAmount('');
       } else {
         setError(response.data.message);
@@ -72,11 +74,13 @@ const LoanInstallment = () => {
       if (response.data.success) {
         setIsVerified(true);
         setAccountName(response.data.data.name);
+        setEMIAmount(response.data.data.emiAmount);
         setLoanAmount(response.data.data.loanAmount);
         setError(null);
       } else {
         setIsVerified(false);
         setAccountName('');
+        setEMIAmount('');
         setLoanAmount('');
         setError('Account does not exist.');
       }
@@ -84,6 +88,7 @@ const LoanInstallment = () => {
       console.error("Verification Error:", err);
       setIsVerified(false);
       setAccountName('');
+      setEMIAmount('');
       setLoanAmount('');
       setError('Error verifying account. Please try again.');
     }
@@ -158,7 +163,8 @@ const LoanInstallment = () => {
           <>
             <div className="verified-info">
               <p>Consumer Name: <strong>{accountName}</strong></p>
-              <p>Due Loan Amount: <strong>₹ {loanAmount}</strong></p>
+              <p>Remaining Loan Amount: <strong>₹ {loanAmount}</strong></p>
+              <p>EMI Amount: <strong>₹ {emiAmount}</strong></p>
             </div>
 
             <div className="form-group">

@@ -206,10 +206,10 @@ function Dashboard() {
           <div className="card-title">Remaining Loan Amount</div>
           <div className="card-content">₹{totalLoanBalance || 0}</div>
         </div>
-        <div className="card">
+        {/* <div className="card">
           <div className="card-title">Collected Loan Amount</div>
           <div className="card-content">₹{totalEmi || 0}</div>
-        </div>
+        </div> */}
         {/* <div className="card">
           <div className="card-title">Remaining Loan Amount</div>
           <div className="card-content">₹{(totalLoanBalance || 0) - (totalEmi || 0)}</div>
@@ -241,6 +241,10 @@ function Dashboard() {
         <div className="card">
           <div className="card-title"></div>
           <div className="card-content">Thank you</div>
+        </div> 
+        <div className="card">
+          <div className="card-title"></div>
+          <div className="card-content">GFST</div>
         </div> 
                    
       </div>
