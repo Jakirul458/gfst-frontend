@@ -20,8 +20,14 @@ function MonthlyLoanAudit() {
     const fetchUsers = async () => {
       try {
         const response = await api.get('/api/transaction/all/loan');
-        setUsers(response.data.data);
-        setFilteredUsers(response.data.data);
+        console.log('API Response:', response); // Add this to see the full response
+        
+        if (response.data && response.data.success && Array.isArray(response.data.data)) {
+          setUsers(response.data.data);
+          setFilteredUsers(response.data.data);
+        } else {
+          console.error('Invalid response format:', response.data);
+        }
       } catch (err) {
         console.error('Error fetching users:', err);
       }
