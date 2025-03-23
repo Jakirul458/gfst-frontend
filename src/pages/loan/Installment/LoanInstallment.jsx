@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import api from '../../../api';
 import './LoanInstalment.css';
@@ -6,33 +5,45 @@ import logo from '../../../assets/icons/logo.svg';
 
 const LoanInstallment = () => {
   const [account, setAccount] = useState('');
-  const [date, setDate] = useState(new Date().toLocaleDateString());
+  const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [deposit, setDeposit] = useState('');
   const [error, setError] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
   const [accountName, setAccountName] = useState('');
   const [loanAmount, setLoanAmount] = useState('');
-  const [remarks, setRemarks] = useState('loantransaction');
+  const [remarks, setRemarks] = useState('emi');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const depositAmount = parseFloat(deposit);
+    const remainingLoan = parseFloat(loanAmount) - depositAmount;
+
+    if (depositAmount <= 0) {
+      setError('Deposit amount must be greater than 0.');
+      return;
+    }
+
+    if (depositAmount > parseFloat(loanAmount)) {
+      setError('Deposit amount cannot exceed the loan balance.');
+      return;
+    }
+
     try {
       const response = await api.post('/api/transaction/emi', {
         accountNo: account,
-        amount: deposit,
+        amount: depositAmount,
         remarks,
       });
 
       if (response.data.success) {
-        const remainingLoanAmount = parseFloat(loanAmount) - parseFloat(deposit);
-
         alert('Transaction successful!');
-        printSlip(accountName, deposit, remainingLoanAmount, date);
+
+        printSlip(accountName, depositAmount, remainingLoan, date);
 
         setAccount('');
-        setDate(new Date().toLocaleDateString());
+        setDate(new Date().toISOString().split('T')[0]);
         setDeposit('');
-        setRemarks('loantransaction');
+        setRemarks('emi');
         setError(null);
         setIsVerified(false);
         setAccountName('');
@@ -41,11 +52,21 @@ const LoanInstallment = () => {
         setError(response.data.message);
       }
     } catch (err) {
-      setError('An error occurred during the transaction.');
+      console.error("Transaction Error:", err);
+      if (err.response) {
+        setError(err.response.data.message || 'Server error occurred.');
+      } else {
+        setError('Network error. Please try again later.');
+      }
     }
   };
 
   const handleVerify = async () => {
+    if (!account.trim()) {
+      setError('Please enter a valid account number.');
+      return;
+    }
+
     try {
       const response = await api.get(`/api/loan/${account}`);
       if (response.data.success) {
@@ -60,6 +81,7 @@ const LoanInstallment = () => {
         setError('Account does not exist.');
       }
     } catch (err) {
+      console.error("Verification Error:", err);
       setIsVerified(false);
       setAccountName('');
       setLoanAmount('');
@@ -85,8 +107,8 @@ const LoanInstallment = () => {
       </head>
       <body>
         <div class="receipt-container">
-          <img src="${logo}" alt="Trust Logo" class="logo" />
-          <h2>Golden Fututure Supportive Trust</h2>
+          <img src="${logo}" alt="Trust Logo" class="logo" onerror="this.style.display='none'" />
+          <h2>Golden Future Supportive Trust</h2>
           <h3>Loan EMI Payment Slip</h3>
           <p><span class="bold">Consumer Name:</span> ${consumerName}</p>
           <p><span class="bold">EMI Payment Amount:</span> ₹${paymentAmount}</p>
